@@ -1,7 +1,30 @@
 const fs = require("fs");
+const { title } = require("process");
 const jobs = JSON.parse(fs.readFileSync("jobs.json"));
 
 //ROUTE HANDLERS
+exports.checkID = (req, res, next, val) => {
+  const id = req.params.id * 1;
+  const job = jobs.find((el) => el._id === id);
+  if (!job) {
+    return res.status(404).json({
+      status: "fail",
+      message: "Invalid ID",
+    });
+  }
+  next();
+};
+
+exports.checkBody = (req, res, next) => {
+  const { title, Location } = req.body;
+  if (!title || !Location) {
+    return res.status(400).json({
+      status: "fail",
+      message: `Please add a valid title and location of the job`,
+    });
+  }
+  next();
+};
 exports.getAllJobs = (req, res) => {
   res.status(200).json({
     status: "success",
@@ -16,12 +39,7 @@ exports.getAllJobs = (req, res) => {
 exports.getJob = (req, res) => {
   const id = req.params.id * 1;
   const job = jobs.find((el) => el._id === id);
-  if (!job) {
-    return res.status(404).json({
-      status: "fail",
-      message: "Invalid ID",
-    });
-  }
+
   res.status(200).json({
     status: "success",
     requestMadeAt: req.requestTime,
@@ -48,12 +66,6 @@ exports.postAJob = (req, res) => {
 
 exports.updateJob = (req, res) => {
   const id = req.params.id * 1;
-  if (id > jobs.length) {
-    return res.status(404).json({
-      status: "fail",
-      message: "Invalid ID",
-    });
-  }
   const updatedJob = Object.assign({ _id: id }, req.body);
   jobs.splice(id - 1, 1, updatedJob);
   fs.writeFile("jobs.json", JSON.stringify(jobs), (err) => {
@@ -70,19 +82,14 @@ exports.updateJob = (req, res) => {
 exports.deleteJob = (req, res) => {
   const id = req.params.id * 1;
   const job = jobs.find((el) => el._id === id);
-  if (job) {
-    jobs.splice(job._id - 1, 1);
-    fs.writeFile("jobs.json", JSON.stringify(jobs), (err) => {
-      return res.status(204).json({
-        status: "success",
-        requestMadeAt: req.requestTime,
-        data: null,
-      });
+
+  jobs.splice(job._id - 1, 1);
+
+  fs.writeFile("jobs.json", JSON.stringify(jobs), (err) => {
+    return res.status(204).json({
+      status: "success",
+      requestMadeAt: req.requestTime,
+      data: null,
     });
-  } else {
-    res.status(404).json({
-      status: "fail",
-      message: "Invalid ID",
-    });
-  }
+  });
 };
