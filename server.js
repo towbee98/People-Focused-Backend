@@ -6,11 +6,13 @@ const DB = process.env.DATABASE.replace(
   "<password>",
   process.env.DATABASE_PASSWORD
 );
+//const DB = process.env.DATABASE_LOCAL;
 mongoose
   .connect(DB, {
     useNewUrlParser: true,
     useCreateIndex: true,
     useUnifiedTopology: true,
+    useFindAndModify: false,
   })
   .then(() => {
     console.log("Database Connected Successfully!!");

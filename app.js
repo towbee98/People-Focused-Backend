@@ -9,7 +9,8 @@ const app = express();
 if (process.env.NODE_ENV === "development") {
   app.use(morgan("dev"));
 }
-app.use(express.json());
+app.use(express.json()); //this middleware allow us to access req.body
+
 app.use((req, res, next) => {
   req.requestTime = new Date().toISOString();
   next();
