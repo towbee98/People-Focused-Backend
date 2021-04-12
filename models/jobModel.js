@@ -16,10 +16,12 @@ const jobSchema = new mongoose.Schema({
   location: {
     type: String,
     required: [true, "location cannot be empty"],
+    lowercase: true,
   },
   "work type": {
     type: String,
     required: [true, "Specify  the type of work"],
+    lowercase: true,
   },
   Industry: {
     type: String,
@@ -36,6 +38,7 @@ const jobSchema = new mongoose.Schema({
   "Minimum Qualification": {
     type: String,
     enum: ["SSCE", "OND", "HND", "DEGREE"],
+    uppercase: true,
   },
   "Experience Level": {
     type: String,

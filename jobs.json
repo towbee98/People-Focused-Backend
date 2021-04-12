@@ -1,79 +1,94 @@
 [
   {
-    "id": 1,
+    "Salary": {
+      "min": 70000,
+      "max": 120000
+    },
+    "Responsiblities": [],
+    "Requirements": [
+      "Ready and comfortable to work in a Sex Toy Store.",
+      "Proximity to the place of work is important.",
+      "Attending to customers online and in-store",
+      "Taking orders on all our social media profiles",
+      "Must be well grounded on social media (WhatsApp/Instagram/Facebook/Twitter)",
+      "Must be a fun-loving and jovial person",
+      "Must be bold and confident",
+      "Ability to multi-task"
+    ],
+    "Skillset": [],
+
     "title": "Customer Service Representative",
     "Employer": "Justerotics",
     "Company division": "Customer Service & Support",
     "location": "lagos",
     "work type": "Full time",
     "Industry": "healthcare",
-    "Salary": {
-      "min": 70000,
-      "max": 120000
-    },
     "Minimum Qualification": "OND",
     "Experience Level": "Entry level",
     "Experience Length": "No Experience/Less than 1 year",
     "Job Summary": "A customer care support at our lekki branch",
-    "Responsibilities": [],
+    "__v": 0
+  },
+  {
+    "Salary": "Confidential",
+    "Responsiblities": [],
     "Requirements": [
-      "Ready and comfortable to work in a Sex Toy Store.",
-      "Proximity to the place of work is important.",
-      "Attending to customers online and in-store",
-      "Taking orders on all our social media profiles",
+      "Must have existing relationships with retail outlets, supermarket chains, and luxury stores",
+      "B2B and B2C experience.",
+      "A minimum of 4 years experience in the FMCG market",
+      "Must be goal-oriented",
       "Must be well grounded on social media (WhatsApp/Instagram/Facebook/Twitter)",
       "Must be a fun-loving and jovial person",
       "Must be bold and confident",
       "Ability to multi-task"
     ],
-    "Skillset": []
-  },
-  {
-    "id": 2,
-    "title": "Customer Service Representativ",
+    "Skillset": [],
+
+    "title": "Cunstomer Service ",
     "Employer": "Justerotics",
     "Company division": "Customer Service & Support",
-    "location": "lagos",
-    "work type": "Full time",
-    "Industry": "healthcare",
-    "Salary": {
-      "min": 100000,
-      "max": 200000
-    },
-    "Minimum Qualification": "OND",
-    "Experience Level": "Entry level",
-    "Experience Length": "No Experience/Less than 1 year",
-    "Job Summary": "A customer care support at our lekki branch",
-    "Responsibilities": [],
+    "location": "Ibadan",
+    "work type": "Part time",
+    "Industry": "MIning, Energy & Metals",
+    "Minimum Qualification": "SSCE",
+    "Experience Level": "Senior",
+    "Experience Length": "6 year",
+    "Job Summary": "The position holder will be responsible for the Coordination with all stakeholders of the project within and outside the affiliate; Ensure preparation and dispatch of all periodic reports; Deliver the financial and non-financial ambitions of the project and Ensure preparation of presentations for governance meetings at 4C&D",
+    "__v": 0
+  },
+  {
+    "Salary": "Confidential",
+    "Responsiblities": [],
     "Requirements": [
-      "Ready and comfortable to work in a Sex Toy Store.",
-      "Proximity to the place of work is important.",
-      "Attending to customers online and in-store",
-      "Taking orders on all our social media profiles",
+      "Must have existing relationships with retail outlets, supermarket chains, and luxury stores",
+      "B2B and B2C experience.",
+      "A minimum of 4 years experience in the FMCG market",
+      "Must be goal-oriented",
       "Must be well grounded on social media (WhatsApp/Instagram/Facebook/Twitter)",
       "Must be a fun-loving and jovial person",
       "Must be bold and confident",
       "Ability to multi-task"
     ],
-    "Skillset": []
-  },
-  {
-    "id": 3,
-    "title": "Customer Service Representative",
+    "Skillset": [],
+
+    "title": "Cunstomer Service ",
     "Employer": "Justerotics",
     "Company division": "Customer Service & Support",
-    "location": "lagos",
-    "work type": "Full time",
-    "Industry": "healthcare",
+    "location": "Ibadan",
+    "work type": "Part time",
+    "Industry": "MIning, Energy & Metals",
+    "Minimum Qualification": "DEGREE",
+    "Experience Level": "Senior",
+    "Experience Length": "6 year",
+    "Job Summary": "The position holder will be responsible for the Coordination with all stakeholders of the project within and outside the affiliate; Ensure preparation and dispatch of all periodic reports; Deliver the financial and non-financial ambitions of the project and Ensure preparation of presentations for governance meetings at 4C&D",
+    "__v": 0
+  },
+  {
     "Salary": {
-      "min": 70000,
-      "max": 120000
+      "min": 170000,
+      "max": 220000
     },
-    "Minimum Qualification": "OND",
-    "Experience Level": "Entry level",
-    "Experience Length": "No Experience/Less than 1 year",
-    "Job Summary": "A customer care support at our lekki branch",
-    "Responsibilities": [],
+    "Responsiblities": [],
     "Requirements": [
       "Ready and comfortable to work in a Sex Toy Store.",
       "Proximity to the place of work is important.",
@@ -84,142 +99,23 @@
       "Must be bold and confident",
       "Ability to multi-task"
     ],
-    "Skillset": []
-  },
-  {
-    "id": 4,
+    "Skillset": [],
+
     "title": "Electrical Engineer",
     "Employer": "Justerotics",
     "Company division": "Power ",
     "location": "ibadan",
     "work type": "Full time",
     "Industry": "Telecoms",
-    "Salary": {
-      "min": 170000,
-      "max": 220000
-    },
     "Minimum Qualification": "HND",
     "Experience Level": "Entry level",
     "Experience Length": "No Experience/Less than 1 year",
     "Job Summary": "A customer care support at our lekki branch",
-    "Responsibilities": [],
-    "Requirements": [
-      "Ready and comfortable to work in a Sex Toy Store.",
-      "Proximity to the place of work is important.",
-      "Attending to customers online and in-store",
-      "Taking orders on all our social media profiles",
-      "Must be well grounded on social media (WhatsApp/Instagram/Facebook/Twitter)",
-      "Must be a fun-loving and jovial person",
-      "Must be bold and confident",
-      "Ability to multi-task"
-    ],
-    "Skillset": []
+    "__v": 0
   },
   {
-    "id": 5,
-    "title": "Customer Service Representative",
-    "Employer": "Justerotics",
-    "Company division": "Customer Service & Support",
-    "location": "lagos",
-    "work type": "Full time",
-    "Industry": "healthcare",
-    "Salary": {
-      "min": 70000,
-      "max": 120000
-    },
-    "Minimum Qualification": "OND",
-    "Experience Level": "Entry level",
-    "Experience Length": "No Experience/Less than 1 year",
-    "Job Summary": "A customer care support at our lekki branch",
-    "Responsibilities": [],
-    "Requirements": [
-      "Ready and comfortable to work in a Sex Toy Store.",
-      "Proximity to the place of work is important.",
-      "Attending to customers online and in-store",
-      "Taking orders on all our social media profiles",
-      "Must be well grounded on social media (WhatsApp/Instagram/Facebook/Twitter)",
-      "Must be a fun-loving and jovial person",
-      "Must be bold and confident",
-      "Ability to multi-task"
-    ],
-    "Skillset": []
-  },
-  {
-    "id": 6,
-    "title": "Customer Service Representative",
-    "Employer": "Justerotics",
-    "Company division": "Customer Service & Support",
-    "location": "lagos",
-    "work type": "Full time",
-    "Industry": "healthcare",
-    "Salary": {
-      "min": 70000,
-      "max": 120000
-    },
-    "Minimum Qualification": "OND",
-    "Experience Level": "Entry level",
-    "Experience Length": "No Experience/Less than 1 year",
-    "Job Summary": "A customer care support at our lekki branch",
-    "Responsibilities": [],
-    "Requirements": [
-      "Ready and comfortable to work in a Sex Toy Store.",
-      "Proximity to the place of work is important.",
-      "Attending to customers online and in-store",
-      "Taking orders on all our social media profiles",
-      "Must be well grounded on social media (WhatsApp/Instagram/Facebook/Twitter)",
-      "Must be a fun-loving and jovial person",
-      "Must be bold and confident",
-      "Ability to multi-task"
-    ],
-    "Skillset": []
-  },
-  {
-    "id": 7,
-    "title": "Customer Service Representative",
-    "Employer": "Justerotics",
-    "Company division": "Customer Service & Support",
-    "location": "lagos",
-    "work type": "Full time",
-    "Industry": "healthcare",
-    "Salary": {
-      "min": 70000,
-      "max": 120000
-    },
-    "Minimum Qualification": "OND",
-    "Experience Level": "Entry level",
-    "Experience Length": "No Experience/Less than 1 year",
-    "Job Summary": "A customer care support at our lekki branch",
-    "Responsibilities": [],
-    "Requirements": [
-      "Ready and comfortable to work in a Sex Toy Store.",
-      "Proximity to the place of work is important.",
-      "Attending to customers online and in-store",
-      "Taking orders on all our social media profiles",
-      "Must be well grounded on social media (WhatsApp/Instagram/Facebook/Twitter)",
-      "Must be a fun-loving and jovial person",
-      "Must be bold and confident",
-      "Ability to multi-task"
-    ],
-    "Skillset": []
-  },
-  {
-    "id": 8,
-    "title": "Senior Tech  Lead",
-    "Employer": "Anonymous",
-    "Company division": "Engineering & Technology",
-    "location": "lagos",
-    "work type": "Full time",
-    "Industry": "MIning, Energy & Metals",
     "Salary": "Confidential",
-    "Minimum Qualification": "DEGREE",
-    "Experience Level": "Senior",
-    "Experience Length": "6 year",
-    "Job Summary": "The position holder will be responsible for the Coordination with all stakeholders of the project within and outside the affiliate; Ensure preparation and dispatch of all periodic reports; Deliver the financial and non-financial ambitions of the project and Ensure preparation of presentations for governance meetings at 4C&D",
-    "Responsibilities": [
-      "Own the business relationship from prospecting to closing.",
-      "Serve as the key account contact with the stakeholders across small, medium-sized companies and corporates",
-      "Develop and execute a strategic plan to achieve sales targets and to expand the company’s agent network"
-    ],
+    "Responsiblities": [],
     "Requirements": [
       "Must have existing relationships with retail outlets, supermarket chains, and luxury stores",
       "B2B and B2C experience.",
@@ -230,26 +126,22 @@
       "Must be bold and confident",
       "Ability to multi-task"
     ],
-    "Skillset": []
-  },
-  {
-    "id": 10,
-    "title": "Senior Tech  Lead",
-    "Employer": "Anonymous",
-    "Company division": "Engineering & Technology",
-    "location": "lagos",
-    "work type": "Full time",
+    "Skillset": [],
+
+    "title": "Cunstomer Service ",
+    "Employer": "Justerotics",
+    "Company division": "Customer Service & Support",
+    "location": "Osun",
+    "work type": "Part time",
     "Industry": "MIning, Energy & Metals",
-    "Salary": "Confidential",
     "Minimum Qualification": "DEGREE",
     "Experience Level": "Senior",
     "Experience Length": "6 year",
     "Job Summary": "The position holder will be responsible for the Coordination with all stakeholders of the project within and outside the affiliate; Ensure preparation and dispatch of all periodic reports; Deliver the financial and non-financial ambitions of the project and Ensure preparation of presentations for governance meetings at 4C&D",
-    "Responsibilities": [
-      "Own the business relationship from prospecting to closing.",
-      "Serve as the key account contact with the stakeholders across small, medium-sized companies and corporates",
-      "Develop and execute a strategic plan to achieve sales targets and to expand the company’s agent network"
-    ],
+    "__v": 0
+  },
+  {
+    "Responsiblities": [],
     "Requirements": [
       "Must have existing relationships with retail outlets, supermarket chains, and luxury stores",
       "B2B and B2C experience.",
@@ -260,6 +152,101 @@
       "Must be bold and confident",
       "Ability to multi-task"
     ],
-    "Skillset": []
+    "Skillset": [],
+
+    "title": "Senior Tech  Lead",
+    "Employer": "Anonymous",
+    "Company division": "Engineering & Technology",
+    "location": "Abuja",
+    "work type": "Full time",
+    "Industry": "MIning, Energy & Metals",
+    "Minimum Qualification": "DEGREE",
+    "Experience Level": "Senior",
+    "Experience Length": "6 year",
+    "Job Summary": "The position holder will be responsible for the Coordination with all stakeholders of the project within and outside the affiliate; Ensure preparation and dispatch of all periodic reports; Deliver the financial and non-financial ambitions of the project and Ensure preparation of presentations for governance meetings at 4C&D",
+    "__v": 0
+  },
+  {
+    "Responsiblities": [],
+    "Requirements": [
+      "Must have existing relationships with retail outlets, supermarket chains, and luxury stores",
+      "B2B and B2C experience.",
+      "A minimum of 4 years experience in the FMCG market",
+      "Must be goal-oriented",
+      "Must be well grounded on social media (WhatsApp/Instagram/Facebook/Twitter)",
+      "Must be a fun-loving and jovial person",
+      "Must be bold and confident",
+      "Ability to multi-task"
+    ],
+    "Skillset": [],
+    "title": "Senior Tech  Lead",
+    "Employer": "Anonymous",
+    "Company division": "Engineering & Technology",
+    "location": "Osun",
+    "work type": "Full time",
+    "Industry": "MIning, Energy & Metals",
+    "Minimum Qualification": "DEGREE",
+    "Experience Level": "Senior",
+    "Experience Length": "6 year",
+    "Job Summary": "The position holder will be responsible for the Coordination with all stakeholders of the project within and outside the affiliate; Ensure preparation and dispatch of all periodic reports; Deliver the financial and non-financial ambitions of the project and Ensure preparation of presentations for governance meetings at 4C&D",
+    "__v": 0
+  },
+  {
+    "Salary": {
+      "min": 70000,
+      "max": 120000
+    },
+    "Responsiblities": [],
+    "Requirements": [
+      "Ready and comfortable to work in a Sex Toy Store.",
+      "Proximity to the place of work is important.",
+      "Attending to customers online and in-store",
+      "Taking orders on all our social media profiles",
+      "Must be well grounded on social media (WhatsApp/Instagram/Facebook/Twitter)",
+      "Must be a fun-loving and jovial person",
+      "Must be bold and confident",
+      "Ability to multi-task"
+    ],
+    "Skillset": [],
+    "title": "Customer Service Representative",
+    "Employer": "Justerotics",
+    "Company division": "Customer Service & Support",
+    "location": "lagos",
+    "work type": "Full time",
+    "Industry": "healthcare",
+    "Minimum Qualification": "OND",
+    "Experience Level": "Entry level",
+    "Experience Length": "No Experience/Less than 1 year",
+    "Job Summary": "A customer care support at our lekki branch",
+    "__v": 0
+  },
+  {
+    "Salary": {
+      "min": 70000,
+      "max": 120000
+    },
+    "Responsiblities": [],
+    "Requirements": [
+      "Ready and comfortable to work in a Sex Toy Store.",
+      "Proximity to the place of work is important.",
+      "Attending to customers online and in-store",
+      "Taking orders on all our social media profiles",
+      "Must be well grounded on social media (WhatsApp/Instagram/Facebook/Twitter)",
+      "Must be a fun-loving and jovial person",
+      "Must be bold and confident",
+      "Ability to multi-task"
+    ],
+    "Skillset": [],
+    "title": "Customer Service Representative",
+    "Employer": "Justerotics",
+    "Company division": "Customer Service & Support",
+    "location": "Ibadan",
+    "work type": "Full time",
+    "Industry": "healthcare",
+    "Minimum Qualification": "OND",
+    "Experience Level": "Entry level",
+    "Experience Length": "No Experience/Less than 1 year",
+    "Job Summary": "A customer care support at our lekki branch",
+    "__v": 0
   }
 ]

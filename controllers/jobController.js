@@ -1,4 +1,3 @@
-const fs = require("fs");
 const { title } = require("process");
 const Jobs = require("./../models/jobModel");
 
@@ -6,13 +5,29 @@ const Jobs = require("./../models/jobModel");
 
 exports.getAllJobs = async (req, res) => {
   try {
-    const allJobs = await Jobs.find();
+    //Build Query
+    //1.)Filtering
+    const queryObj = { ...req.query };
+    const excludedFields = ["page", "sort", "limit", "fields"];
+    excludedFields.forEach((el) => delete queryObj[el]);
+    console.log(queryObj, req.query);
+    //2.)Advanced Filtering
+    let queryStr = JSON.stringify(queryObj);
+    queryStr = JSON.parse(
+      queryStr.replace(/gte|gt|lt|lte/g, function (str) {
+        return `$${str}`;
+      })
+    );
+    console.log(queryStr);
+    //Execute the query
+    const query = Jobs.find(queryStr);
+    const job = await query;
     res.status(200).json({
       status: "success",
       requestMadeAt: req.requestTime,
-      result: allJobs.length,
+      result: job.length,
       data: {
-        allJobs,
+        job,
       },
     });
   } catch (err) {
