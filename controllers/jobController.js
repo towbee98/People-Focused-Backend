@@ -6,21 +6,37 @@ const Jobs = require("./../models/jobModel");
 exports.getAllJobs = async (req, res) => {
   try {
     //Build Query
-    //1.)Filtering
+    //1a.)Filtering
     const queryObj = { ...req.query };
     const excludedFields = ["page", "sort", "limit", "fields"];
     excludedFields.forEach((el) => delete queryObj[el]);
-    console.log(queryObj, req.query);
-    //2.)Advanced Filtering
+
+    //1b.)Advanced Filtering
     let queryStr = JSON.stringify(queryObj);
     queryStr = JSON.parse(
-      queryStr.replace(/gte|gt|lt|lte/g, function (str) {
+      queryStr.replace(/gte|gt|lt|lte/g, (str) => {
         return `$${str}`;
       })
     );
-    console.log(queryStr);
     //Execute the query
-    const query = Jobs.find(queryStr);
+    let query = Jobs.find(queryStr);
+
+    //2.)Sorting
+    if (req.query.sort) {
+      const sortStr = req.query.sort.split(",").join(" ");
+      query = query.sort(sortStr);
+    } else {
+      query.sort("-createdAt");
+    }
+    //3.)Limit fields
+    if (req.query.fields) {
+      const field = req.query.fields.split(",").join(" ");
+      query = query.select(field);
+    } else {
+      query = query.select("-__v");
+    }
+    //4.)Pagination
+
     const job = await query;
     res.status(200).json({
       status: "success",

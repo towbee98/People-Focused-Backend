@@ -2,7 +2,7 @@
   {
     "Salary": {
       "min": 70000,
-      "max": 120000
+      "max": 200000
     },
     "Responsiblities": [],
     "Requirements": [
@@ -30,7 +30,10 @@
     "__v": 0
   },
   {
-    "Salary": "Confidential",
+    "Salary": {
+      "min": 70000,
+      "max": 120000
+    },
     "Responsiblities": [],
     "Requirements": [
       "Must have existing relationships with retail outlets, supermarket chains, and luxury stores",
@@ -86,7 +89,7 @@
   {
     "Salary": {
       "min": 170000,
-      "max": 220000
+      "max": 250000
     },
     "Responsiblities": [],
     "Requirements": [
@@ -114,7 +117,10 @@
     "__v": 0
   },
   {
-    "Salary": "Confidential",
+    "Salary": {
+      "min": 80000,
+      "max": 250000
+    },
     "Responsiblities": [],
     "Requirements": [
       "Must have existing relationships with retail outlets, supermarket chains, and luxury stores",
@@ -141,6 +147,10 @@
     "__v": 0
   },
   {
+    "Salary": {
+      "min": 100000,
+      "max": 220000
+    },
     "Responsiblities": [],
     "Requirements": [
       "Must have existing relationships with retail outlets, supermarket chains, and luxury stores",
@@ -167,6 +177,10 @@
     "__v": 0
   },
   {
+    "Salary": {
+      "min": 250000,
+      "max": 400000
+    },
     "Responsiblities": [],
     "Requirements": [
       "Must have existing relationships with retail outlets, supermarket chains, and luxury stores",
@@ -193,8 +207,8 @@
   },
   {
     "Salary": {
-      "min": 70000,
-      "max": 120000
+      "min": 270000,
+      "max": 420000
     },
     "Responsiblities": [],
     "Requirements": [
@@ -222,8 +236,8 @@
   },
   {
     "Salary": {
-      "min": 70000,
-      "max": 120000
+      "min": 200000,
+      "max": 400000
     },
     "Responsiblities": [],
     "Requirements": [
