@@ -1,43 +1,25 @@
 const { title } = require("process");
 const Jobs = require("./../models/jobModel");
+const APIFEATURES = require("./../utils/apiFeatures");
+//
 
 //ROUTE HANDLERS
-
+exports.aliasTopJobs = async (req, res, next) => {
+  req.query.limit = "5";
+  req.query.sort = "createdAt,-Salary.max";
+  req.query.page = "1";
+  next();
+};
 exports.getAllJobs = async (req, res) => {
   try {
-    //Build Query
-    //1a.)Filtering
-    const queryObj = { ...req.query };
-    const excludedFields = ["page", "sort", "limit", "fields"];
-    excludedFields.forEach((el) => delete queryObj[el]);
-
-    //1b.)Advanced Filtering
-    let queryStr = JSON.stringify(queryObj);
-    queryStr = JSON.parse(
-      queryStr.replace(/gte|gt|lt|lte/g, (str) => {
-        return `$${str}`;
-      })
-    );
     //Execute the query
-    let query = Jobs.find(queryStr);
+    const features = new APIFEATURES(Jobs.find(), req.query)
+      .filter()
+      .sort()
+      .limitFields()
+      .paginate();
 
-    //2.)Sorting
-    if (req.query.sort) {
-      const sortStr = req.query.sort.split(",").join(" ");
-      query = query.sort(sortStr);
-    } else {
-      query.sort("-createdAt");
-    }
-    //3.)Limit fields
-    if (req.query.fields) {
-      const field = req.query.fields.split(",").join(" ");
-      query = query.select(field);
-    } else {
-      query = query.select("-__v");
-    }
-    //4.)Pagination
-
-    const job = await query;
+    const job = await features.query;
     res.status(200).json({
       status: "success",
       requestMadeAt: req.requestTime,
@@ -123,3 +105,5 @@ exports.deleteJob = async (req, res) => {
     });
   }
 };
+
+exports.getJobStats = async (req, res) => {};
