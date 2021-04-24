@@ -8,7 +8,7 @@ router
   .route("/latest-top-paying-jobs")
   .get(jobController.aliasTopJobs, jobController.getAllJobs);
 
-router.route("stats").get(jobController.getJobStats);
+router.route("/JobStats").get(jobController.getJobStats);
 router.route("/").get(jobController.getAllJobs).post(jobController.postAJob);
 router
   .route("/:id")

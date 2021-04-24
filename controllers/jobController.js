@@ -106,4 +106,29 @@ exports.deleteJob = async (req, res) => {
   }
 };
 
-exports.getJobStats = async (req, res) => {};
+exports.getJobStats = async (req, res) => {
+  try {
+    const stats = await Jobs.aggregate([
+      {
+        $match: { "Salary.min": { $gte: 70000 } },
+      },
+      {
+        $group: {
+          _id: { $toUpper: "$location" },
+          // _id: "$title",
+          numJobs: { $sum: 1 },
+          highestPaidJob: { $max: "$Salary.max" },
+          lowestpaidJob: { $min: "$Salary.min" },
+        },
+      },
+      { $sort: { highestPaidJob: 1 } },
+    ]);
+
+    res.status(200).json({
+      status: "success",
+      data: {
+        stats,
+      },
+    });
+  } catch (error) {}
+};
