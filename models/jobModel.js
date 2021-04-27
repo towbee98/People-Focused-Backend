@@ -1,11 +1,12 @@
 const mongoose = require("mongoose");
-
+const slugify = require("slugify");
 const jobSchema = new mongoose.Schema(
   {
     title: {
       type: String,
       required: [true, "Job Title cannot be empty"],
     },
+    slug: String,
     Employer: {
       type: String,
       required: [true, "Employer name cannot be empty"],
@@ -67,6 +68,26 @@ const jobSchema = new mongoose.Schema(
   }
   // { timestamps: true }
 );
+
+//DOCUMENT MIDDLEWARE
+jobSchema.pre("save", function (next) {
+  this.slug = slugify(this.title, { lower: false });
+  next();
+});
+jobSchema.post("save", function (next) {
+  console.log(this);
+  next();
+});
+//QUERY MIDDLEWARE
+jobSchema.pre(/^find/, function (next) {
+  this.start = Date.now();
+  next();
+});
+jobSchema.post(/^find/, function (docs, next) {
+  console.log(`Query took us ${Date.now() - this.start} milliseconds`);
+  next();
+});
+//AGGREGATE MIDDLEWARE
 
 const Jobs = mongoose.model("Jobs", jobSchema);
 

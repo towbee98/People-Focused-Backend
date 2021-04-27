@@ -130,5 +130,10 @@ exports.getJobStats = async (req, res) => {
         stats,
       },
     });
-  } catch (error) {}
+  } catch (error) {
+    res.status(404).json({
+      status: "fail",
+      message: error,
+    });
+  }
 };
