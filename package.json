@@ -5,7 +5,7 @@
   "main": "server.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start:prod": "SET NODE_ENV=production& node server.js",
+    "start:prod": "SET NODE_ENV=production& nodemon server.js",
     "start": "nodemon server.js"
   },
   "author": "Oladele Tobiloba",
@@ -15,6 +15,7 @@
     "express": "^4.17.1",
     "mongoose": "^5.12.3",
     "morgan": "^1.10.0",
+    "prompt-sync": "^4.2.0",
     "slugify": "^1.5.0"
   },
   "devDependencies": {
