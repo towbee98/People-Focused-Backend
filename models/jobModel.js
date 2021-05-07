@@ -35,13 +35,6 @@ const jobSchema = new mongoose.Schema(
       },
       max: {
         type: Number,
-        validate: {
-          validator: function (value) {
-            return value > this.Salary.min;
-          },
-          message:
-            "the maximum salary cannot be smaller than the minimum salary",
-        },
       },
     },
     "Minimum Qualification": {
@@ -76,31 +69,29 @@ const jobSchema = new mongoose.Schema(
   // { timestamps: true }
 );
 
+jobSchema.index({ title: 1, Employer: 1 }, { unique: true });
+
 //DOCUMENT MIDDLEWARE
 jobSchema.pre("save", function (next) {
   this.slug = slugify(this.title, { lower: false });
   next();
 });
 jobSchema.post("save", function (docs, next) {
-  //console.log(this);
+  console.log(this);
   next();
 });
+
 //QUERY MIDDLEWARE
 jobSchema.pre(/^find/, function (next) {
   this.start = Date.now();
   next();
 });
+
 jobSchema.post(/^find/, function (docs, next) {
   console.log(`Query took us ${Date.now() - this.start} milliseconds`);
   next();
 });
-
 //AGGREGATE MIDDLEWARE
-//jobSchema.aggregate();
-// jobSchema.pre("aggregate", function (next) {
-//   console.log(this);
-//   next();
-// });
 
 const Jobs = mongoose.model("Jobs", jobSchema);
 
