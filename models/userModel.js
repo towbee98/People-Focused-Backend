@@ -1,5 +1,6 @@
 const mongoose = require("mongoose");
 const validator = require("validator");
+const bcrypt = require("bcrypt");
 //const slugify= require("slugify");
 const userSchema = new mongoose.Schema({
   firstname: {
@@ -41,11 +42,22 @@ const userSchema = new mongoose.Schema({
   },
   role: {
     type: String,
-    default: "user",
-    enum: ["admin", "user", "superAdmin"],
+    default: "jobSeeker",
+    enum: ["admin", "jobSeeker", "Employer", "superAdmin"],
+    select: "false",
   },
 });
 
-const User = new Model("User", userSchema);
+userSchema.pre("save", async function (next) {
+  //Check if password was modified
+  if (!this.isModified("password")) return next();
+
+  //encrypt the password using a salt of 12
+  this.password = await bcrypt.hash(this.password, 12);
+  this.passwordConfirm = undefined;
+  next();
+});
+
+const User = mongoose.model("User", userSchema);
 
 module.exports = User;
