@@ -44,7 +44,7 @@ const userSchema = new mongoose.Schema({
     type: String,
     default: "jobSeeker",
     enum: ["admin", "jobSeeker", "Employer", "superAdmin"],
-    select: "false",
+    // select: false,
   },
 });
 
@@ -58,6 +58,12 @@ userSchema.pre("save", async function (next) {
   next();
 });
 
+userSchema.methods.checkPassword = async function (
+  originalPassword,
+  userPassword
+) {
+  return await bcrypt.compare(userPassword, originalPassword);
+};
 const User = mongoose.model("User", userSchema);
 
 module.exports = User;
