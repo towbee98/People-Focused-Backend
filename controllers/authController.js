@@ -51,13 +51,26 @@ exports.login = catchAsync(async (req, res, next) => {
 
 exports.protect = catchAsync(async (req, res, next) => {
   //Check if the token exists
+  let token;
+  console.log(req.headers);
   if (
     req.headers.authorization &&
     req.headers.authorization.startsWith("Bearer")
   ) {
-    const token = req.headers.authorization.split(" ")[1];
+    token = req.headers.authorization.split(" ")[1];
   }
+  console.log(token);
+  if (!token) {
+    return next(
+      new AppError("You are not logged in , Please log in to proceed", 401)
+    );
+  }
+
   //Verify the token
-  jwt.verify(token);
+  // const verifiedToken = await jwt.verify(token, process.env.SECRET_KEY, {
+  //   maxAge: "8h",
+  // });
+  // //
+  // if (!verifiedToken) return next(new AppError("Unauthorized user ", 401))
   next();
 });
