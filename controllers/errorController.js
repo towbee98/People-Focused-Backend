@@ -7,11 +7,14 @@ const handleCastErrorDB = (err) => {
   return new AppError(message, 400);
 };
 
+//Handles jwt errors
+const handleJWTError = (err) => {
+  return new AppError(`${err.message} , Please login again`, 401);
+};
+
 //handles duplicate error
 const handleDuplicateErrorDB = (err) => {
-  const extractedDuplicateValue = err.message.match(
-    /([""'])(?:(?=(\\?))\2.)*?\1/g
-  );
+  const extractedDuplicateValue = err.message.match(/([""'])(?:(?=(\\?))\2.)*?\1/g);
   //console.log(quotedValue);
   const message = `Duplicate field value(s): ${extractedDuplicateValue}, Try using another value(s)`;
   return new AppError(message, 400);
@@ -35,7 +38,7 @@ const sendErrorDev = (err, res) => {
 const sendErrorProd = (err, res) => {
   if (err.isOperational) {
     res.status(err.statusCode).json({
-      status: err.statusCode,
+      status: err.status,
       message: err.message,
     });
   } else {
@@ -53,7 +56,7 @@ module.exports = (err, req, res, next) => {
 
   if (process.env.NODE_ENV === "production") {
     let error = { ...err };
-
+    //console.log(err.name);
     if (err.name === "CastError") {
       error = handleCastErrorDB(error);
     }
@@ -65,7 +68,9 @@ module.exports = (err, req, res, next) => {
       //console.log(error.errors);
       error = handleValidationErrorDB(error);
     }
-
+    if (err.name === "JsonWebTokenError") {
+      error = handleJWTError(error);
+    }
     sendErrorProd(error, res);
   } else if (process.env.NODE_ENV === "development") {
     sendErrorDev(err, res);

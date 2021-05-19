@@ -1,7 +1,10 @@
+const { promisify } = require("util");
+const jwt = require("jsonwebtoken");
+
 const User = require("./../models/userModel");
 const catchAsync = require("./../utils/catchAsync");
-const jwt = require("jsonwebtoken");
 const AppError = require("./../utils/appErrors");
+//const { compareSync } = require("bcrypt");
 
 //This function generates a token for a logged in user
 const signToken = (id) => {
@@ -52,14 +55,10 @@ exports.login = catchAsync(async (req, res, next) => {
 exports.protect = catchAsync(async (req, res, next) => {
   //Check if the token exists
   let token;
-  console.log(req.headers);
-  if (
-    req.headers.authorization &&
-    req.headers.authorization.startsWith("Bearer")
-  ) {
+  if (req.headers.authorization && req.headers.authorization.startsWith("Bearer")) {
     token = req.headers.authorization.split(" ")[1];
   }
-  console.log(token);
+
   if (!token) {
     return next(
       new AppError("You are not logged in , Please log in to proceed", 401)
@@ -67,10 +66,18 @@ exports.protect = catchAsync(async (req, res, next) => {
   }
 
   //Verify the token
-  // const verifiedToken = await jwt.verify(token, process.env.SECRET_KEY, {
-  //   maxAge: "8h",
-  // });
-  // //
-  // if (!verifiedToken) return next(new AppError("Unauthorized user ", 401))
+  const verifiedToken = await promisify(jwt.verify)(token, process.env.SECRET_KEY);
+
+  //Check if the user still exists
+  const validUser = await User.findById(verifiedToken.id);
+
+  if (!validUser) {
+    return next(
+      new AppError("The user belonging to this token no longer exists", 401)
+    );
+  }
+
+  //Check if the password was changed after token was issued
+  validUser.changedPasswordAfter(verifiedToken.iat);
   next();
 });

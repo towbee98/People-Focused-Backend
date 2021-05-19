@@ -46,6 +46,7 @@ const userSchema = new mongoose.Schema({
     enum: ["admin", "jobSeeker", "Employer", "superAdmin"],
     // select: false,
   },
+  passwordChangedAt: Date,
 });
 
 userSchema.pre("save", async function (next) {
@@ -58,12 +59,17 @@ userSchema.pre("save", async function (next) {
   next();
 });
 
-userSchema.methods.checkPassword = async function (
-  originalPassword,
-  userPassword
-) {
+userSchema.methods.checkPassword = async function (originalPassword, userPassword) {
   return await bcrypt.compare(userPassword, originalPassword);
 };
+
+userSchema.methods.changedPasswordAfter = function (JwtTimeStamp) {
+  if (this.passwordChangedAt) {
+    console.log(this.passwordChangedAt, JwtTimeStamp);
+  }
+  return false;
+};
+
 const User = mongoose.model("User", userSchema);
 
 module.exports = User;
