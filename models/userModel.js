@@ -65,7 +65,8 @@ userSchema.methods.checkPassword = async function (originalPassword, userPasswor
 
 userSchema.methods.changedPasswordAfter = function (JwtTimeStamp) {
   if (this.passwordChangedAt) {
-    console.log(this.passwordChangedAt, JwtTimeStamp);
+    const changedTimeStamp = this.passwordChangedAt.getTime() / 1000;
+    console.log(changedTimeStamp, JwtTimeStamp);
   }
   return false;
 };
