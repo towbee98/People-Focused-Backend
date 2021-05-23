@@ -13,12 +13,20 @@ router.route("/JobStats").get(jobController.getJobStats);
 router
   .route("/")
   .get(jobController.getAllJobs)
-  .post(authController.protect, jobController.postAJob);
+  .post(
+    authController.protect,
+    authController.restrictUserTo("admin", "Employer", "superAdmin"),
+    jobController.postAJob
+  );
 
 router
   .route("/:id")
   .get(jobController.getJob)
   .patch(jobController.updateJob)
-  .delete(jobController.deleteJob);
+  .delete(
+    authController.protect,
+    authController.restrictUserTo("admin", "Employer", "superAdmin"),
+    jobController.deleteJob
+  );
 
 module.exports = router;

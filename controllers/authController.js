@@ -20,7 +20,8 @@ exports.signUp = catchAsync(async (req, res) => {
     email: req.body.email,
     password: req.body.password,
     passwordConfirm: req.body.passwordConfirm,
-    passwordChangedAt:req.body.passwordChangedAt
+    passwordChangedAt: req.body.passwordChangedAt,
+    role: req.body.role,
   });
   const token = await signToken(newUser._id);
   res.status(201).json({
@@ -79,6 +80,28 @@ exports.protect = catchAsync(async (req, res, next) => {
   }
 
   //Check if the password was changed after token was issued
-  validUser.changedPasswordAfter(verifiedToken.iat);
+  const checkTokenValidity = validUser.changedPasswordAfter(verifiedToken.iat);
+
+  if (checkTokenValidity) {
+    return next(
+      new AppError("Password was changed recently , Please login again", 401)
+    );
+  }
+
+  //Grant access to the protected route
+  req.user = validUser;
   next();
 });
+
+exports.restrictUserTo = (...roles) => {
+  return (req, res, next) => {
+    if (!roles.includes(req.user.role)) {
+      return next(
+        new AppError("Sorry you are not allowed to access this route", 403)
+      );
+    }
+    next();
+  };
+};
+
+exports.forgotPassword = (req, res, next) => {};

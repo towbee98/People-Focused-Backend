@@ -42,8 +42,9 @@ const userSchema = new mongoose.Schema({
   },
   role: {
     type: String,
-    default: "jobSeeker",
     enum: ["admin", "jobSeeker", "Employer", "superAdmin"],
+    default: "jobSeeker",
+
     // select: false,
   },
   passwordChangedAt: Date,
@@ -59,16 +60,18 @@ userSchema.pre("save", async function (next) {
   next();
 });
 
+//This methods check if a password is valid
 userSchema.methods.checkPassword = async function (originalPassword, userPassword) {
   return await bcrypt.compare(userPassword, originalPassword);
 };
 
+//this method checks if a user has changed his login credentials after JWt was issued
 userSchema.methods.changedPasswordAfter = function (JwtTimeStamp) {
   if (this.passwordChangedAt) {
     const changedTimeStamp = parseInt(this.passwordChangedAt.getTime() / 1000, 10);
-    console.log(changedTimeStamp, JwtTimeStamp);
     return JwtTimeStamp < changedTimeStamp;
   }
+  //Return this if the no password was changed after JWT was issued
   return false;
 };
 
