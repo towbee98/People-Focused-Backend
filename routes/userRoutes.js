@@ -7,7 +7,15 @@ router.route("/signup").post(authController.signUp);
 router.route("/login").post(authController.login);
 
 router.route("/forgotPassword").post(authController.forgotPassword);
-router.route("/").get(userController.getAllUsers).post(userController.createUser);
+router.route("/resetPassword/:token").patch(authController.resetPassword);
+router
+  .route("/")
+  .get(
+    authController.protect,
+    authController.restrictUserTo("admin", "superAdmin"),
+    userController.getAllUsers
+  )
+  .post(userController.createUser);
 router
   .route("/:id")
   .get(userController.getUser)
