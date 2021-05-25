@@ -57,6 +57,7 @@ exports.login = catchAsync(async (req, res, next) => {
 
 exports.protect = catchAsync(async (req, res, next) => {
   //Check if the token exists
+  //console.log(req);
   let token;
   if (
     req.headers.authorization &&
@@ -117,9 +118,9 @@ exports.forgotPassword = catchAsync(async (req, res, next) => {
   }
   //Generate a random token
   const resetToken = await user.createPasswordResetToken();
-  console.log(resetToken);
+  // console.log(resetToken);
   await user.save({ validateBeforeSave: false });
-  //Send to the user email
+  //Send token to the user email
 
   const resetUrl = `${req.protocol}://${req.get(
     "host"
@@ -156,7 +157,7 @@ exports.forgotPassword = catchAsync(async (req, res, next) => {
 
 exports.resetPassword = catchAsync(async (req, res, next) => {
   //1.) Get the user based on token
-  const hashedToken = crypto
+  const hashedToken = await crypto
     .createHash("sha256")
     .update(req.params.token)
     .digest("hex");
@@ -167,9 +168,9 @@ exports.resetPassword = catchAsync(async (req, res, next) => {
   });
   //2.) check if the user exists and if token is valid before assigning the new password
   if (!user) {
-    return next(new AppError("Sorry User not found ", 404));
+    return next(new AppError("Sorry User not found or Token has expired ", 404));
   }
-
+  //Update password ,passwordConfirm and passwordResetToken and passwordResetExpires
   user.password = req.body.password;
   user.passwordConfirm = req.body.passwordConfirm;
   user.passwordResetToken = undefined;
@@ -180,6 +181,7 @@ exports.resetPassword = catchAsync(async (req, res, next) => {
 
   //4.) Log the user in ,send the JWT
   const token = await signToken(user._id);
+
   //send token to client if no error
   res.status(200).json({
     status: "success",

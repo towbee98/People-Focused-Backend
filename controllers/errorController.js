@@ -14,7 +14,9 @@ const handleJWTError = (err) => {
 
 //handles duplicate error
 const handleDuplicateErrorDB = (err) => {
-  const extractedDuplicateValue = err.message.match(/([""'])(?:(?=(\\?))\2.)*?\1/g);
+  const extractedDuplicateValue = err.message.match(
+    /([""'])(?:(?=(\\?))\2.)*?\1/g
+  );
   //console.log(quotedValue);
   const message = `Duplicate field value(s): ${extractedDuplicateValue}, Try using another value(s)`;
   return new AppError(message, 400);

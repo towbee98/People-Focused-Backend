@@ -63,6 +63,14 @@ userSchema.pre("save", async function (next) {
   next();
 });
 
+userSchema.pre("save", async function (next) {
+  //Check if password was modified
+  if (!this.isModified("password") || this.isNew) return next();
+
+  this.passwordChangedAt = Date.now() - 1000;
+  console.log(this.passwordChangedAt);
+  next();
+});
 //This methods check if a password is valid
 userSchema.methods.checkPassword = async function (
   originalPassword,
@@ -77,19 +85,19 @@ userSchema.methods.changedPasswordAfter = function (JwtTimeStamp) {
     const changedTimeStamp = parseInt(this.passwordChangedAt.getTime() / 1000, 10);
     return JwtTimeStamp < changedTimeStamp;
   }
-  //Return this if the no password was changed after JWT was issued
+  //Return this if no password was changed after JWT was issued
   return false;
 };
 
 userSchema.methods.createPasswordResetToken = async function () {
-  //genrate a token to send to the user
+  //generate a token to send to the user
   const resetToken = await crypto.randomBytes(32).toString("hex");
-
   //Encrypt the token before storing in the database
   this.passwordResetToken = await crypto
     .createHash("sha256")
     .update(resetToken)
     .digest("hex");
+  //Make the password reset token valid for 10 mins
   this.passwordResetExpires = Date.now() + 10 * 60 * 1000;
   return resetToken;
 };
