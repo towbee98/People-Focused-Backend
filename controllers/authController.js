@@ -6,6 +6,7 @@ const User = require("./../models/userModel");
 const catchAsync = require("./../utils/catchAsync");
 const AppError = require("./../utils/appErrors");
 const sendEmail = require("./../utils/email");
+const { countDocuments } = require("./../models/userModel");
 
 //This function generates a token for a logged in user
 const signToken = (id) => {
@@ -14,6 +15,23 @@ const signToken = (id) => {
   });
 };
 
+const SendToken = async (user, statusCode, res) => {
+  const token = await signToken(user._id);
+  if (statusCode === 201) {
+    res.status(statusCode).json({
+      status: "success",
+      token,
+      data: {
+        user,
+      },
+    });
+  } else {
+    res.status(statusCode).json({
+      status: "success",
+      token,
+    });
+  }
+};
 exports.signUp = catchAsync(async (req, res) => {
   const newUser = await User.create({
     firstname: req.body.firstname,
@@ -24,14 +42,7 @@ exports.signUp = catchAsync(async (req, res) => {
     passwordChangedAt: req.body.passwordChangedAt,
     role: req.body.role,
   });
-  const token = await signToken(newUser._id);
-  res.status(201).json({
-    status: "success",
-    token,
-    data: {
-      user: newUser,
-    },
-  });
+  SendToken(newUser, 201, res);
 });
 
 exports.login = catchAsync(async (req, res, next) => {
@@ -46,18 +57,11 @@ exports.login = catchAsync(async (req, res, next) => {
   if (!user || !user.checkPassword(password, user.password)) {
     return next(new AppError("Incorrect email or password", 401));
   }
-
-  const token = await signToken(user._id);
-  //send token to client if no error
-  res.status(200).json({
-    status: "success",
-    token,
-  });
+  SendToken(user, 200, res);
 });
 
 exports.protect = catchAsync(async (req, res, next) => {
   //Check if the token exists
-  //console.log(req);
   let token;
   if (
     req.headers.authorization &&
@@ -121,7 +125,6 @@ exports.forgotPassword = catchAsync(async (req, res, next) => {
   // console.log(resetToken);
   await user.save({ validateBeforeSave: false });
   //Send token to the user email
-
   const resetUrl = `${req.protocol}://${req.get(
     "host"
   )}/api/v1/users/resetPassword/${resetToken}`;
@@ -133,6 +136,7 @@ exports.forgotPassword = catchAsync(async (req, res, next) => {
 
   const subject = `Reset Password Instruction for your PeopleFocused Account(Valid for 10 mins)`;
 
+  //Send the mail containing the password reset token  to the user specified email
   try {
     await sendEmail({
       email: user.email,
@@ -145,7 +149,6 @@ exports.forgotPassword = catchAsync(async (req, res, next) => {
       message: "Password Reset token sent to email",
     });
   } catch (err) {
-    console.log(err);
     user.passwordResetToken = undefined;
     user.passwordResetExpires = undefined;
     await user.save({ validateBeforeSave: false });
@@ -180,11 +183,23 @@ exports.resetPassword = catchAsync(async (req, res, next) => {
   //3.)Update the passwordChangedAt property
 
   //4.) Log the user in ,send the JWT
-  const token = await signToken(user._id);
+  SendToken(user, 200, res);
+});
 
-  //send token to client if no error
-  res.status(200).json({
-    status: "success",
-    token,
-  });
+exports.updatePassword = catchAsync(async (req, res, next) => {
+  //get the user from the database
+  user = await User.findById(req.user._id).select("+password");
+  if (!user) return next(new AppError("User not found", 404));
+  //check if posted current password is correct
+  const validPassword = await user.checkPassword(
+    user.password,
+    req.body.oldPassword
+  );
+  if (!validPassword) return next(new AppError("Unauthorized ", 403));
+  //Update the password
+  user.password = req.body.newPassword;
+  user.passwordConfirm = req.body.newPasswordConfirm;
+  await user.save();
+  //Log the user in again
+  SendToken(user, 200, res);
 });
