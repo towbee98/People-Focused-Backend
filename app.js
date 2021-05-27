@@ -39,7 +39,18 @@ app.use(mongoSanitize());
 app.use(xss());
 
 //Data Sanitization against Parameter Pollution
-app.use(hpp({ whitelist: ["sort", "location"] }));
+app.use(
+  hpp({
+    whitelist: [
+      "sort",
+      "location",
+      "Minimum Qualification",
+      "Industry",
+      "Salary.min",
+      "Salary.max",
+    ],
+  })
+);
 
 //Test Middleware
 app.use((req, res, next) => {
