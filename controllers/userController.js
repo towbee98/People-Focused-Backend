@@ -2,10 +2,11 @@ const User = require("./../models/userModel");
 const catchAsync = require("./../utils/catchAsync");
 const AppError = require("./../utils/appErrors");
 
-const filterBody = (obj, ...parameter) => {
+//Function to filter a request body
+const filterBody = (obj, ...params) => {
   const newObj = {};
   Object.keys(obj).forEach((el) => {
-    if (parameter.includes(el)) {
+    if (params.includes(el)) {
       newObj[el] = obj[el];
     }
   });
@@ -56,7 +57,8 @@ exports.updateMe = catchAsync(async (req, res, next) => {
   }
   //Remove unwanted fields that are not allowed to be updated
   filteredObj = filterBody(req.body, "firstname", "lastName", "email");
-  console.log(filteredObj);
+
+  //Update the user
   const updatedUser = await User.findByIdAndUpdate(req.user._id, filteredObj, {
     new: true,
     runValidators: true,
@@ -67,5 +69,20 @@ exports.updateMe = catchAsync(async (req, res, next) => {
     data: {
       user: updatedUser,
     },
+  });
+});
+
+exports.deleteMe = catchAsync(async (req, res, next) => {
+  const user = await User.findByIdAndUpdate(
+    req.user._id,
+    { active: false },
+    {
+      new: true,
+      runValidators: true,
+    }
+  );
+  res.status(204).json({
+    status: "success",
+    data: null,
   });
 });

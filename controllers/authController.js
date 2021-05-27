@@ -17,6 +17,16 @@ const signToken = (id) => {
 
 const SendToken = async (user, statusCode, res) => {
   const token = await signToken(user._id);
+
+  const cookieOptions = {
+    expires: new Date(Date.now() + 4 * 60 * 60 * 1000),
+    httpOnly: true,
+  };
+
+  if (process.env.NODE_ENV === "production") cookieOptions.secure = true;
+
+  res.cookie("jwt", token, cookieOptions);
+
   if (statusCode === 201) {
     res.status(statusCode).json({
       status: "success",
@@ -42,6 +52,7 @@ exports.signUp = catchAsync(async (req, res) => {
     passwordChangedAt: req.body.passwordChangedAt,
     role: req.body.role,
   });
+  newUser.password = undefined;
   SendToken(newUser, 201, res);
 });
 

@@ -51,6 +51,10 @@ const userSchema = new mongoose.Schema({
   passwordChangedAt: Date,
   passwordResetToken: String,
   passwordResetExpires: Date,
+  active: {
+    type: Boolean,
+    default: true,
+  },
 });
 
 userSchema.pre("save", async function (next) {
@@ -69,6 +73,11 @@ userSchema.pre("save", async function (next) {
 
   this.passwordChangedAt = Date.now() - 1000;
   console.log(this.passwordChangedAt);
+  next();
+});
+
+userSchema.pre(/^find/, async function (next) {
+  this.find({ active: { $ne: false } });
   next();
 });
 //This methods check if a password is valid
