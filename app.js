@@ -42,7 +42,6 @@ app.use(xss());
 app.use(
   hpp({
     whitelist: [
-      "sort",
       "location",
       "Minimum Qualification",
       "Industry",

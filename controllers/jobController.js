@@ -1,9 +1,9 @@
 const { title } = require("process");
 const Jobs = require("./../models/jobModel");
+//const Application = require("./../models/applicationsModel");
 const APIFEATURES = require("./../utils/apiFeatures");
 const catchAsync = require("./../utils/catchAsync");
 const AppError = require("./../utils/appErrors");
-//
 
 //ROUTE HANDLERS
 exports.aliasTopJobs = async (req, res, next) => {

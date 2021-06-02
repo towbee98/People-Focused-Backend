@@ -1,6 +1,7 @@
 const express = require("express");
 const jobController = require("../controllers/jobController");
 const authController = require("../controllers/authController");
+const applicationController = require("./../controllers/applicationController");
 const router = express.Router();
 
 //router.param("id", jobController.checkID);
@@ -19,6 +20,15 @@ router
     jobController.postAJob
   );
 
+router.route("/apply/:jobID").post(applicationController.Apply);
+
+router
+  .route("/applications/:jobID")
+  .get(
+    authController.protect,
+    authController.restrictUserTo("admin", "Employer", "superAdmin"),
+    applicationController.getApplications
+  );
 router
   .route("/:id")
   .get(jobController.getJob)

@@ -7,27 +7,50 @@ const jobSchema = new mongoose.Schema(
       required: [true, "Job Title cannot be empty"],
     },
     slug: String,
-    Employer: {
-      type: String,
-      required: [true, "Employer name cannot be empty"],
-    },
-    "Company division": {
-      type: String,
-      required: [true, "Specify the part of the company the job is "],
+    organisation: {
+      name: {
+        type: String,
+        required: [true, "Enter the name ofd the organisation"],
+      },
+      description: {
+        type: String,
+        required: [true, "Enter the description of the organisation"],
+      },
+      website: {
+        type: String,
+      },
     },
     location: {
-      type: String,
-      required: [true, "location cannot be empty"],
-      lowercase: true,
+      address: {
+        type: String,
+        required: [true, "Enter the address of the job"],
+      },
+      city: {
+        type: String,
+        required: [true, "Enter the city"],
+      },
+      State: {
+        type: String,
+        required: [true, "Enter the state"],
+      },
+      Country: {
+        type: String,
+        default: "NIgeria",
+      },
     },
     "work type": {
       type: String,
       required: [true, "Specify  the type of work"],
       lowercase: true,
     },
-    Industry: {
-      type: String,
-      required: [true, "Specify the industry the company belongs to"],
+    Category: {
+      name: {
+        type: String,
+        required: [true, "Specify the category the company belongs to"],
+      },
+      description: {
+        type: "String",
+      },
     },
     Salary: {
       min: {
@@ -64,6 +87,15 @@ const jobSchema = new mongoose.Schema(
       type: Date,
       default: Date.now(),
       select: false,
+    },
+    Deadline: {
+      type: Date,
+      validate: {
+        validator: function (value) {
+          return this.createdAt < value;
+        },
+        message: "Deadline cannot come before the day job was posted",
+      },
     },
   }
   // { timestamps: true }
