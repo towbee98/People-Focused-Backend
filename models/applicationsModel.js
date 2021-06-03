@@ -1,3 +1,4 @@
+const { application } = require("express");
 const mongoose = require("mongoose");
 const validator = require("validator");
 
@@ -26,6 +27,7 @@ const applicationSchema = new mongoose.Schema({
     required: true,
   },
 });
+applicationSchema.index({ email: 1, Job: 1 }, { unique: true });
 
 const Application = mongoose.model("Application", applicationSchema);
 

@@ -21,13 +21,13 @@ exports.getAllJobs = catchAsync(async (req, res, next) => {
     .limitFields()
     .paginate();
 
-  const job = await features.query;
+  const jobs = await features.query;
   res.status(200).json({
     status: "success",
     requestMadeAt: req.requestTime,
-    result: job.length,
+    result: jobs.length,
     data: {
-      job,
+      jobs,
     },
   });
 });
@@ -49,8 +49,8 @@ exports.getJob = catchAsync(async (req, res, next) => {
 
 exports.postAJob = catchAsync(async (req, res, next) => {
   //console.log(req.body);
+  req.body.user = req.user._id;
   const newJob = await Jobs.create(req.body);
-  console.log(newJob);
   res.status(201).json({
     status: "success",
     data: {

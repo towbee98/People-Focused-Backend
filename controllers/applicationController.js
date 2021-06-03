@@ -30,13 +30,18 @@ exports.Apply = catchAsync(async (req, res, next) => {
   });
 });
 
+//Get all applications for a particular job
 exports.getApplications = catchAsync(async (req, res, next) => {
-  console.log(req.params.jobID);
-  const applications = await Application.findOne({ Job: req.params.jobID });
-  console.log(applications);
+  //Get all the applications
+  const applications = await Application.find({ Job: req.params.jobID }).select(
+    "-__v -Job"
+  );
+
   if (!applications) return next(new AppError("The job does not exist", 404));
+
   res.status(200).json({
     status: "success",
+    result: applications.length,
     data: {
       applications,
     },
