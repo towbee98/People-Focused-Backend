@@ -5,6 +5,7 @@ const applicationController = require("./../controllers/applicationController");
 const router = express.Router();
 
 //router.param("id", jobController.checkID);
+
 router
   .route("/latest-top-paying-jobs")
   .get(jobController.aliasTopJobs, jobController.getAllJobs);

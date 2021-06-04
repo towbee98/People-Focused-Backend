@@ -1,8 +1,10 @@
 [
   {
-    "Salary": {
-      "min": 170000,
-      "max": 300000
+    "location": {
+      "Country": "Nigeria",
+      "address": "4 Segun maru street Aboidun bero ,magodo isheri ",
+      "city": "Lagos",
+      "State": "Lagos"
     },
     "Responsiblities": [],
     "Requirements": [
@@ -16,30 +18,28 @@
       "Ability to multi-task"
     ],
     "Skillset": [],
-
-    "title": "Customer Service Representative",
+    "createdAt": "2021-06-03",
+    "title": "A Software Developer",
     "organisation": {
       "name": "Delanor",
       "description": "A software development company"
     },
-    "location": {
-      "address": "4 Segun maru street Aboidun bero ,magodo isheri ",
-      "city": "Lagos",
-      "State": "Lagos",
-      "Country": "Nigeria"
-    },
+    "Salary": { "min": 570000, "max": 3000000 },
     "work type": "full time",
     "Category": { "name": "Information Technology", "description": "" },
-    "Minimum Qualification": "Computer science or related",
+    "Minimum Qualification": "DEGREE",
     "Experience Level": "Senior",
     "Experience Length": "3",
     "Job Summary": "A customer care support at our lekki branch",
-    "Deadline": "2021-06-10"
+    "Deadline": "2021-06-10",
+    "user": "60a9cc00932f7f0ffcb77a43"
   },
   {
-    "Salary": {
-      "min": 70000,
-      "max": 200000
+    "location": {
+      "Country": "Nigeria",
+      "address": "4 Segun maru street Aboidun bero ,magodo isheri ",
+      "city": "Lagos",
+      "State": "Lagos"
     },
     "Responsiblities": [],
     "Requirements": [
@@ -53,24 +53,182 @@
       "Ability to multi-task"
     ],
     "Skillset": [],
-
-    "title": "Customer Service Representative",
+    "createdAt": "2021-06-03",
+    "title": "A frontend Developer",
     "organisation": {
-      "name": "OT Creatives",
-      "description": "A digital based company for businesses and individuals"
+      "name": "Delanor",
+      "description": "A software development company"
     },
-    "location": {
-      "address": "4 Hope Rd, Alakia Ibadan Oyo State,Nigeria",
-      "city": "Ibadan",
-      "State": "Oyo",
-      "Country": "Nigeria"
-    },
+    "Salary": { "min": 50000, "max": 300000 },
     "work type": "full time",
-    "Category": { "name": "Hospitality And Tourism", "description": "" },
-    "Minimum Qualification": "OND",
-    "Experience Level": "Entry level",
-    "Experience Length": "No Experience/Less than 1 year",
+    "Category": { "name": "Information Technology" },
+    "Minimum Qualification": "DEGREE",
+    "Experience Level": "Mid-level",
+    "Experience Length": "3",
     "Job Summary": "A customer care support at our lekki branch",
-    "Deadline": "2021-06-20"
+    "user": "60a9cc00932f7f0ffcb77a43"
+  },
+  {
+    "location": {
+      "Country": "Nigeria",
+      "address": "21 Adegbayi , Lagos Ibadan Expressway",
+      "city": "Ibadan",
+      "State": "Oyo"
+    },
+    "Responsiblities": [],
+    "Requirements": [
+      "Ready and comfortable to work in a Sex Toy Store.",
+      "Proximity to the place of work is important.",
+      "Attending to customers online and in-store",
+      "Taking orders on all our social media profiles",
+      "Must be well grounded on social media (WhatsApp/Instagram/Facebook/Twitter)",
+      "Must be a fun-loving and jovial person",
+      "Must be bold and confident",
+      "Ability to multi-task"
+    ],
+    "Skillset": [
+      "Nodejs",
+      "Java",
+      "GraphQl",
+      "MicroServices",
+      "Familiar with software development lifecycle"
+    ],
+    "createdAt": "2021-06-03",
+    "title": "A Backend Developer",
+    "organisation": {
+      "name": "Smart Tribe",
+      "description": "A software development company"
+    },
+    "Salary": { "min": 50000, "max": 300000 },
+    "work type": "full time",
+    "Category": { "name": "Information Technology" },
+    "Minimum Qualification": "DEGREE",
+    "Experience Level": "Senior",
+    "Experience Length": "2",
+    "Job Summary": "A customer care support at our lekki branch",
+    "user": "60a9cc0f932f7f0ffcb77a44"
+  },
+  {
+    "location": {
+      "Country": "Nigeria",
+      "address": "21 Adegbayi , Lagos Ibadan Expressway",
+      "city": "Ibadan",
+      "State": "Oyo"
+    },
+    "Responsiblities": [],
+    "Requirements": [
+      "Ready and comfortable to work in a Sex Toy Store.",
+      "Proximity to the place of work is important.",
+      "Attending to customers online and in-store",
+      "Taking orders on all our social media profiles",
+      "Must be well grounded on social media (WhatsApp/Instagram/Facebook/Twitter)",
+      "Must be a fun-loving and jovial person",
+      "Must be bold and confident",
+      "Ability to multi-task"
+    ],
+    "Skillset": [
+      "Nodejs",
+      "Java",
+      "GraphQl",
+      "MicroServices",
+      "Familiar with software development lifecycle"
+    ],
+    "createdAt": "2021-06-03",
+    "title": "A  Devops Engineer",
+    "organisation": {
+      "name": "Smart Tribe",
+      "description": "A software development company"
+    },
+    "Salary": { "min": 1500000, "max": 3000000 },
+    "work type": "full time",
+    "Category": { "name": "Information Technology" },
+    "Minimum Qualification": "DEGREE",
+    "Experience Level": "Senior",
+    "Experience Length": "2",
+    "Job Summary": "A customer care support at our lekki branch",
+    "Deadline": "2021-06-15",
+    "user": "60a9cc0f932f7f0ffcb77a44"
+  },
+  {
+    "location": {
+      "Country": "Nigeria",
+      "address": "21 Adegbayi , Lagos Ibadan Expressway",
+      "city": "Abuja",
+      "State": "Abuja"
+    },
+    "Responsiblities": [],
+    "Requirements": [
+      "Ready and comfortable to work in a Sex Toy Store.",
+      "Proximity to the place of work is important.",
+      "Attending to customers online and in-store",
+      "Taking orders on all our social media profiles",
+      "Must be well grounded on social media (WhatsApp/Instagram/Facebook/Twitter)",
+      "Must be a fun-loving and jovial person",
+      "Must be bold and confident",
+      "Ability to multi-task"
+    ],
+    "Skillset": [
+      "Nodejs",
+      "Java",
+      "GraphQl",
+      "MicroServices",
+      "Familiar with software development lifecycle"
+    ],
+    "createdAt": "2021-06-03",
+    "title": "Customer Service",
+    "organisation": {
+      "name": "Quilox Hotel",
+      "description": "A 5 Star hotel created for the best hospitality you could ever imagine"
+    },
+    "Salary": { "min": 1500000, "max": 3000000 },
+    "work type": "full time",
+    "Category": { "name": "Hospitality And Tourism" },
+    "Minimum Qualification": "DEGREE",
+    "Experience Level": "",
+    "Experience Length": "3",
+    "Job Summary": "A customer care support at our lekki branch",
+    "Deadline": "2021-06-11",
+    "user": "60ae87a451e6142864e79f26"
+  },
+  {
+    "location": {
+      "Country": "Nigeria",
+      "address": "21 Adegbayi , Lagos Ibadan Expressway",
+      "city": "Abuja",
+      "State": "Abuja"
+    },
+    "Responsiblities": [],
+    "Requirements": [
+      "Ready and comfortable to work in a Sex Toy Store.",
+      "Proximity to the place of work is important.",
+      "Attending to customers online and in-store",
+      "Taking orders on all our social media profiles",
+      "Must be well grounded on social media (WhatsApp/Instagram/Facebook/Twitter)",
+      "Must be a fun-loving and jovial person",
+      "Must be bold and confident",
+      "Ability to multi-task"
+    ],
+    "Skillset": [
+      "Nodejs",
+      "Java",
+      "GraphQl",
+      "MicroServices",
+      "Familiar with software development lifecycle"
+    ],
+    "createdAt": "2021-06-03",
+    "title": "A security personnel",
+    "organisation": {
+      "name": "Quilox Hotel",
+      "description": "A 5 Star hotel created for the best hospitality you could ever imagine"
+    },
+    "Salary": { "min": 30000, "max": 50000 },
+    "work type": "full time",
+    "Category": { "name": "Others" },
+    "Minimum Qualification": "DEGREE",
+    "Experience Level": "",
+    "Experience Length": "3",
+    "Job Summary": "A customer care support at our lekki branch",
+    "Deadline": "2021-06-13",
+    "user": "60ae87a451e6142864e79f26"
   }
 ]

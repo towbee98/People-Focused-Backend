@@ -113,18 +113,21 @@ const jobSchema = new mongoose.Schema(
         },
         message: "Deadline cannot come before the day job was posted",
       },
-      required: [true, "Specify the deadline for applications"],
     },
     user: {
       type: mongoose.Schema.Types.ObjectId,
       ref: "User",
       required: [true, "The job poster cannot be empty"],
     },
+    isActive: {
+      type: Boolean,
+      default: true,
+    },
   }
   // { timestamps: true }
 );
 
-//This prvents duplicate job from being posted
+//This prvents duplicate job (jobs with the same title and organisation name) from being posted
 jobSchema.index({ title: 1, "organisation.name": 1 }, { unique: true });
 
 //DOCUMENT MIDDLEWARE
