@@ -13,16 +13,10 @@ const filterReqBody = (obj, ...params) => {
 };
 
 //Apply for a particular job
-exports.Apply = catchAsync(async (req, res, next) => {
-  const filteredBody = filterReqBody(
-    req.body,
-    "name",
-    "email",
-    "document",
-    "experience"
-  );
-  filteredBody.Job = req.params.jobID;
-
+exports.Apply = catchAsync(async (req, res) => {
+  const filteredBody = filterReqBody(req.body, "name", "email", "experience");
+  if (!req.body.Job) filteredBody.Job = req.params.jobID;
+  console.log(filteredBody);
   const application = await Application.create(filteredBody);
   res.status(200).json({
     status: "success",
@@ -33,9 +27,9 @@ exports.Apply = catchAsync(async (req, res, next) => {
 //Get all applications for a particular job
 exports.getApplications = catchAsync(async (req, res, next) => {
   //Get all the applications
-  const applications = await Application.find({ Job: req.params.jobID }).select(
-    "-__v -Job"
-  );
+  let job;
+  if (!req.body.Job) job = req.params.job.jobID;
+  const applications = await Application.find({ Job: job }).select("-__v -Job");
 
   if (!applications) return next(new AppError("The job does not exist", 404));
 

@@ -111,7 +111,7 @@ const jobSchema = new mongoose.Schema(
         validator: function (value) {
           return this.createdAt < value;
         },
-        message: "Deadline cannot come before the day job was posted",
+        message: "Deadline must be after the job was posted",
       },
     },
     user: {

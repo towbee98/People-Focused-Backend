@@ -3,13 +3,11 @@ const jobController = require("../controllers/jobController");
 const authController = require("../controllers/authController");
 const applicationController = require("./../controllers/applicationController");
 const router = express.Router();
-
 //router.param("id", jobController.checkID);
 
 router
   .route("/latest-top-paying-jobs")
   .get(jobController.aliasTopJobs, jobController.getAllJobs);
-
 router.route("/JobStats").get(jobController.getJobStats);
 
 router
@@ -21,17 +19,16 @@ router
     jobController.postAJob
   );
 
-router.route("/apply/:jobID").post(applicationController.Apply);
-
 router
-  .route("/applications/:jobID")
+  .route("/myJobs")
   .get(
     authController.protect,
     authController.restrictUserTo("admin", "Employer", "superAdmin"),
-    applicationController.getApplications
+    jobController.getMyJobs
   );
+//router.route("/:id/applications", applicationRouter);
 router
-  .route("/:id")
+  .route("/:jobID")
   .get(jobController.getJob)
   .patch(jobController.updateJob)
   .delete(
@@ -40,4 +37,13 @@ router
     jobController.deleteJob
   );
 
+router.route("/:jobID/apply").post(applicationController.Apply);
+
+router
+  .route("/:jobID/applications")
+  .get(
+    authController.protect,
+    authController.restrictUserTo("admin", "Employer", "superAdmin"),
+    applicationController.getApplications
+  );
 module.exports = router;

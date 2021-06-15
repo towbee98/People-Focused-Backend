@@ -24,30 +24,62 @@ exports.getAllUsers = catchAsync(async (req, res, next) => {
   });
 });
 exports.createUser = (req, res) => {
-  res.status(500).json({
+  res.status(403).json({
     status: "error",
-    message: "This route is not yet defined",
+    message: "Sorry please use this sign up link to create a new user",
   });
 };
-exports.getUser = (req, res) => {
-  res.status(500).json({
-    status: "error",
-    message: "This route is not yet defined",
+exports.getUser = catchAsync(async (req, res, next) => {
+  const newUser = await User.findById({ _id: req.params._id });
+  if (!user) next(new AppError("User not found ", 404));
+  res.status(200).json({
+    status: "success",
+    newUser,
   });
-};
-exports.updateUser = (req, res) => {
-  res.status(500).json({
-    status: "error",
-    message: "This route is not yet defined",
-  });
-};
-exports.deleteUser = (req, res) => {
-  res.status(500).json({
-    status: "error",
-    message: "This route is not yet defined",
-  });
-};
+});
 
+//Update a particular user details excluding the password
+exports.updateUser = catchAsync(async (req, res, next) => {
+  if (req.body.password || req.body.passwordConfirm)
+    next(
+      new AppError("Sorry you cannot update user password via this route", 400)
+    );
+  const updatedUser = User.findOneAndUpdate(req.params._id, req.body, {
+    runValidators: true,
+    new: true,
+  });
+  if (!updatedUser) return next(new AppError("Sorry No user  found ", 404));
+
+  res.status(200).json({
+    status: "success",
+    data: updatedUser,
+  });
+});
+
+//Delete a particular user
+exports.deleteUser = catchAsync(async (req, res, next) => {
+  const user = User.findByIdAndDelete(req.params.id);
+  if (!user) return next(new AppError("User not found", 404));
+  res.status(204).json({
+    status: "success",
+  });
+});
+
+//Get the currently logged in user details
+exports.getMe = catchAsync(async (req, res, next) => {
+  const user = await User.findById(req.user._id).select(
+    "-passwordChangedAt -__v -active"
+  );
+  if (!user) return next(new AppError("User not found .", 404));
+  res.status(200).json({
+    status: "success",
+    data: {
+      user,
+    },
+  });
+});
+
+//Allow a user to update his/her details
 exports.updateMe = catchAsync(async (req, res, next) => {
   //verify if password or passwordConfirm does not exists in the req.body
   if (req.body.password || req.body.passwordConfirm) {

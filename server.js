@@ -23,10 +23,10 @@ mongoose
   })
   .then(() => {
     console.log("Database Connected Successfully!!");
+  })
+  .catch((err) => {
+    console.log(err);
   });
-// .catch((err) => {
-//   console.log(err);
-// });
 
 const app = require("./app");
 const PORT = process.env.PORT || 3001;

@@ -1,3 +1,4 @@
+const path = require("path");
 const express = require("express");
 const morgan = require("morgan");
 const rateLimit = require("express-rate-limit");
@@ -12,7 +13,13 @@ const jobRouter = require("./routes/jobRoutes");
 const userRouter = require("./routes/userRoutes");
 const app = express();
 
+app.set("view engine", "pug");
+app.set("views", path.join(__dirname, "views"));
+
 // GLobal Middlewares
+
+//Serve static files
+app.use(express.static(path.join(__dirname, "public")));
 
 //Create Security Headers
 app.use(helmet());
@@ -21,6 +28,7 @@ app.use(helmet());
 if (process.env.NODE_ENV === "development") {
   app.use(morgan("dev"));
 }
+
 //limit the number of requests from a particular IP
 const apiLimiter = rateLimit({
   max: 80,
@@ -29,7 +37,7 @@ const apiLimiter = rateLimit({
 });
 app.use("/api", apiLimiter);
 
-//parses the body to enable acces to body of the request
+//parses the body to enable access to body of the request
 app.use(express.json({ limit: "80kb" }));
 
 //Data Sanitization against NO SQL query Injection
@@ -58,6 +66,10 @@ app.use((req, res, next) => {
 });
 
 //ROUTES
+app.get("/", (req, res) => {
+  res.status(200).render("base");
+});
+
 app.use("/api/v1/jobs", jobRouter);
 app.use("/api/v1/users", userRouter);
 app.all("*", (req, res, next) => {
