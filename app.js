@@ -6,13 +6,13 @@ const helmet = require("helmet");
 const mongoSanitize = require("express-mongo-sanitize");
 const xss = require("xss-clean");
 const hpp = require("hpp");
+//const multer = require("multer");
 
 const AppError = require("./utils/appErrors");
 const globalErrorHandler = require("./controllers/errorController");
 const jobRouter = require("./routes/jobRoutes");
 const userRouter = require("./routes/userRoutes");
 const app = express();
-
 app.set("view engine", "pug");
 app.set("views", path.join(__dirname, "views"));
 

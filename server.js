@@ -1,5 +1,6 @@
 const mongoose = require("mongoose");
 const dotenv = require("dotenv");
+const Grid = require("gridfs-stream");
 
 process.on("uncaughtException", (err) => {
   console.log(err.name, err.message);
@@ -14,14 +15,19 @@ const DB = process.env.DATABASE.replace(
   process.env.DATABASE_PASSWORD
 );
 //const DB = process.env.DATABASE_LOCAL;
-mongoose
+
+exports.Conn = mongoose
   .connect(DB, {
     useNewUrlParser: true,
     useCreateIndex: true,
     useUnifiedTopology: true,
     useFindAndModify: false,
   })
-  .then(() => {
+  .then((res) => {
+    res.once("open", () => {
+      const gfs = Grid(res.db, mongoose.mongo);
+      gfs.collection("uploads");
+    });
     console.log("Database Connected Successfully!!");
   })
   .catch((err) => {
