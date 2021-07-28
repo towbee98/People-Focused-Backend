@@ -5,16 +5,16 @@ const Application = require("./../models/applicationsModel");
 const catchAsync = require("./../utils/catchAsync");
 const AppError = require("./../utils/appErrors");
 
+//console.log(require("./../server").Conn)
 const multerStorage = new GridFsStorage({
   db: require("./../server").Conn,
   file: (req, file) => {
     return {
-      fileInfo: {
         filename: `${file.fieldname}-of-${req.params.jobID}-${
           req.body.name
         }-${Date.now()}.${file.mimetype.split("/")[1]}`,
-        bucketName: "uploads",
-      },
+        bucketName: "applications",
+      
     };
   },
 });
@@ -52,6 +52,7 @@ exports.uploadCV = upload.single("cv");
 //Apply for a particular job
 exports.Apply = catchAsync(async (req, res, next) => {
   //filter out unecessary data from the request body
+  console.log(req.file)
   const filteredBody = filterReqBody(req.body, "name", "email", "experience");
   //add the job being applied to
   if (!req.body.Job) filteredBody.Job = req.params.jobID;

@@ -24,11 +24,12 @@ exports.Conn = mongoose
     useFindAndModify: false,
   })
   .then((res) => {
-    res.once("open", () => {
-      const gfs = Grid(res.db, mongoose.mongo);
-      gfs.collection("uploads");
-    });
+    // console.log(res.connection);
     console.log("Database Connected Successfully!!");
+    return res.connection.once("open", () => {
+      const gfs = Grid(res.connection.db, mongoose.mongo);
+      gfs.collection("applications");
+    });
   })
   .catch((err) => {
     console.log(err);
