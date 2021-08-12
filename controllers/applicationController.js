@@ -1,21 +1,35 @@
+const mongoose = require("mongoose");
 const multer = require("multer");
-const { GridFsStorage } = require("multer-gridfs-storage");
 
+const { GridFsStorage } = require("multer-gridfs-storage");
+const Grid = require("gridfs-stream");
+
+const Conn = require("./../server").Conn;
 const Application = require("./../models/applicationsModel");
 const catchAsync = require("./../utils/catchAsync");
 const AppError = require("./../utils/appErrors");
+let gfs;
 
-//console.log(require("./../server").Conn)
+//console.log(Conn);
+//Create an open connection for the database
+Conn.once("open", () => {
+  //console.log(Conn.db);
+  gfs = Grid(Conn.db, mongoose.mongo);
+  gfs.collection("uploads");
+});
+
+//
 const multerStorage = new GridFsStorage({
-  db: require("./../server").Conn,
+  db: Conn,
   file: (req, file) => {
-    return {
-        filename: `${file.fieldname}-of-${req.params.jobID}-${
-          req.body.name
-        }-${Date.now()}.${file.mimetype.split("/")[1]}`,
-        bucketName: "applications",
-      
-    };
+    if (file.mimetype.split("/")[1] === "pdf") {
+      return {
+        filename: `${file.fieldname}-of-${req.params.jobID}-${req.body.name}.${
+          file.mimetype.split("/")[1]
+        }`,
+        bucketName: "uploads",
+      };
+    } else return false;
   },
 });
 
@@ -52,25 +66,39 @@ exports.uploadCV = upload.single("cv");
 //Apply for a particular job
 exports.Apply = catchAsync(async (req, res, next) => {
   //filter out unecessary data from the request body
-  console.log(req.file)
   const filteredBody = filterReqBody(req.body, "name", "email", "experience");
-  //add the job being applied to
+  //Add the job being applied to
   if (!req.body.Job) filteredBody.Job = req.params.jobID;
+
   if (!req.file) return next(new AppError("Upload your cv please", 400));
-  filteredBody.document = req.file.filename; //Add the filename of the cv being uploaded
-  const application = await Application.create(filteredBody);
-  res.status(200).json({
-    status: "success",
-    message: "Application submitted succesfully!!",
-    application,
+
+  //Add the filename of the cv being uploaded
+  filteredBody.document = req.file.filename;
+
+  let application = await Application.findOne({
+    document: filteredBody.document,
   });
+  //Check if application exists
+  if (application) {
+    res.status(400).json({
+      status: "fail",
+      message: "Application already exists",
+    });
+  } else {
+    application = await Application.create(filteredBody);
+    res.status(200).json({
+      status: "success",
+      message: "Application submitted succesfully!!",
+      application,
+    });
+  }
 });
 
 //Get all applications for a particular job
 exports.getApplications = catchAsync(async (req, res, next) => {
   //Get all the applications
   let job;
-  if (!req.body.Job) job = req.params.job.jobID;
+  if (!req.body.Job) job = req.params.jobID;
   const applications = await Application.find({ Job: job }).select("-__v -Job");
   if (!applications) return next(new AppError("The job does not exist", 404));
 
@@ -82,3 +110,8 @@ exports.getApplications = catchAsync(async (req, res, next) => {
     },
   });
 });
+
+// //Get all files for a particular job
+// exports.getFiles = catchAsync(async (req, res, next) => {
+//   //get all the submitted cvs  for a particular job
+// });
