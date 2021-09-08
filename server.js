@@ -17,36 +17,38 @@ const DB = process.env.DATABASE.replace(
 );
 
 //const DB = process.env.DATABASE_LOCAL;
-
-exports.Conn = mongoose.createConnection(
-  DB,
-  {
-    useNewUrlParser: true,
-    useCreateIndex: true,
-    useUnifiedTopology: true,
-    useFindAndModify: false,
-  },
-  (err, data) => {
-    if (err) {
-      console.log(`Error Occured: ${err}`);
-    } else {
-      console.log("Database connected Successfully");
-      return data;
+const start = async () => {
+  await mongoose.connect(
+    DB,
+    {
+      useNewUrlParser: true,
+      useCreateIndex: true,
+      useUnifiedTopology: true,
+      useFindAndModify: false,
+    },
+    (err, data) => {
+      if (err) {
+        console.log(`Error Occured: ${err}`);
+      } else {
+        console.log("Database connected Successfully");
+        return data;
+      }
     }
-  }
-);
+  );
+  const PORT = process.env.PORT || 3001;
+  const app = await require("./app");
 
-const PORT = process.env.PORT || 3001;
-const app = require("./app");
-//START SERVER
-const server = app.listen(PORT, () => {
-  console.log(`Server running at port ${PORT}`);
-});
-
-process.on("unhandledRejection", (err) => {
-  console.log(err.name, err.message);
-  console.log("Unhandled Rejection , Shutting down...");
-  server.close(() => {
-    process.exit(1);
+  //START SERVER
+  const server = app.listen(PORT, () => {
+    console.log(`Server running at port ${PORT}`);
   });
-});
+  process.on("unhandledRejection", (err) => {
+    console.log(err.name, err.message);
+    console.log("Unhandled Rejection , Shutting down...");
+    server.close(() => {
+      process.exit(1);
+    });
+  });
+};
+
+start();

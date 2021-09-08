@@ -46,7 +46,11 @@ router
 
 router
   .route("/:jobID/apply")
-  .post(applicationController.uploadCV, applicationController.Apply);
+  .post(
+    authController.protect,
+    applicationController.uploadCV,
+    applicationController.Apply
+  );
 
 router
   .route("/:jobID/applications")

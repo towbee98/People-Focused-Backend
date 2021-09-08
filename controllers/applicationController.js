@@ -1,40 +1,30 @@
 const mongoose = require("mongoose");
 const multer = require("multer");
+const cloudinary = require("cloudinary").v2;
+const dotenv = require("dotenv");
+const { CloudinaryStorage } = require("multer-storage-cloudinary");
 
-const { GridFsStorage } = require("multer-gridfs-storage");
-const Grid = require("gridfs-stream");
-
-const Conn = require("./../server").Conn;
+dotenv.config({ path: "./config.env" });
+//const Conn = require("./../server").Conn;
 const Application = require("./../models/applicationsModel");
 const catchAsync = require("./../utils/catchAsync");
 const AppError = require("./../utils/appErrors");
-let gfs;
 
-//console.log(Conn);
-//Create an open connection for the database
-Conn.once("open", () => {
-  //console.log(Conn.db);
-  gfs = Grid(Conn.db, mongoose.mongo);
-  gfs.collection("uploads");
+cloudinary.config({
+  cloud_name: process.env.cloud_name,
+  api_key: process.env.cloud_api_key,
+  api_secret: process.env.cloud_api_secret,
+  secure: true,
 });
 
-//
-const multerStorage = new GridFsStorage({
-  db: Conn,
-  file: (req, file) => {
-    if (file.mimetype.split("/")[1] === "pdf") {
-      return {
-        filename: `${file.fieldname}-of-${req.params.jobID}-${req.body.name}.${
-          file.mimetype.split("/")[1]
-        }`,
-        bucketName: "uploads",
-      };
-    } else return false;
+const multerStorage = new CloudinaryStorage({
+  cloudinary: cloudinary,
+  params: {
+    folder: "peoplefocused-applications",
+    format: async (req, file) => "pdf",
+    public_id: (req, file) => `${req.body.name}-${req.params.jobID}`,
   },
 });
-
-//const multerStorage = multer.memoryStorage();
-
 //This prevents the upload of every other files apart from pdf files
 const multerFilter = (req, file, cb) => {
   if (file.mimetype.split("/")[1] === "pdf") {
@@ -49,7 +39,6 @@ const upload = multer({
   fileFilter: multerFilter,
   limits: { fileSize: 500000 },
 });
-
 //Filter the request body to extract the only needed
 const filterReqBody = (obj, ...params) => {
   const newObj = {};
@@ -75,23 +64,23 @@ exports.Apply = catchAsync(async (req, res, next) => {
   //Add the filename of the cv being uploaded
   filteredBody.document = req.file.filename;
 
-  let application = await Application.findOne({
-    document: filteredBody.document,
+  // let application = await Application.findOne({
+  //   document: filteredBody.document,
+  // });
+  // //Check if application exists
+  // if (application) {
+  //   res.status(400).json({
+  //     status: "fail",
+  //     message: "Application already exists",
+  //   });
+  // } else {
+  application = await Application.create(filteredBody);
+  res.status(200).json({
+    status: "success",
+    message: "Application submitted succesfully!!",
+    application,
   });
-  //Check if application exists
-  if (application) {
-    res.status(400).json({
-      status: "fail",
-      message: "Application already exists",
-    });
-  } else {
-    application = await Application.create(filteredBody);
-    res.status(200).json({
-      status: "success",
-      message: "Application submitted succesfully!!",
-      application,
-    });
-  }
+  //}
 });
 
 //Get all applications for a particular job
@@ -111,7 +100,11 @@ exports.getApplications = catchAsync(async (req, res, next) => {
   });
 });
 
-// //Get all files for a particular job
+//Get all files for a particular job
 // exports.getFiles = catchAsync(async (req, res, next) => {
-//   //get all the submitted cvs  for a particular job
+//  //get all the submitted cvs  for a particular job
+//  gfs.find().toArray((err,files))=>{
+//    if()
+//  }
+
 // });

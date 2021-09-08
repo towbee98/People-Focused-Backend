@@ -10,21 +10,15 @@ const DB = process.env.DATABASE.replace(
 );
 //const DB = process.env.DATABASE_LOCAL;
 
-mongoose
-  .connect(DB, {
-    useNewUrlParser: true,
-    useCreateIndex: true,
-    useUnifiedTopology: true,
-    useFindAndModify: false,
-  })
-  .then(() => {
-    console.log("Database Connected Successfully!!");
-  })
-  .catch((err) => {
-    console.log(err);
-  });
-
-const alljob = JSON.parse(fs.readFileSync(`${__dirname}/jobs.json`));
+const deleteData = async () => {
+  try {
+    await Jobs.deleteMany();
+    console.log("Data Successfully deleted");
+  } catch (error) {
+    console.log(error);
+  }
+  process.exit();
+};
 
 const importData = async (alljob) => {
   try {
@@ -36,20 +30,29 @@ const importData = async (alljob) => {
   process.exit();
 };
 
-const deleteData = async () => {
-  try {
-    await Jobs.deleteMany();
-    console.log("Data Successfully deleted");
-  } catch (error) {
-    console.log(error);
-  }
-  process.exit();
-};
-
 console.log(process.argv);
 
-if (process.argv[2] == "--import") {
-  importData(alljob);
-} else if (process.argv[2] == "--delete") {
-  deleteData();
-}
+const start = async () => {
+  await mongoose
+    .connect(DB, {
+      useNewUrlParser: true,
+      useCreateIndex: true,
+      useUnifiedTopology: true,
+      useFindAndModify: false,
+    })
+    .then(() => {
+      console.log("Database Connected Successfully!!");
+    })
+    .catch((err) => {
+      console.log(err);
+    });
+  const alljob = JSON.parse(fs.readFileSync(`${__dirname}/jobs.json`));
+
+  if (process.argv[2] == "--import") {
+    await importData(alljob);
+  } else if (process.argv[2] == "--delete") {
+    await deleteData();
+  }
+};
+
+start();
