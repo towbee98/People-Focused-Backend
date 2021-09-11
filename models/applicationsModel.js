@@ -1,6 +1,7 @@
 const mongoose = require("mongoose");
 const validator = require("validator");
-
+const Jobs = require("./../models/jobModel");
+const AppError = require("./../utils/appErrors");
 const applicationSchema = new mongoose.Schema({
   name: {
     type: String,
@@ -28,6 +29,17 @@ const applicationSchema = new mongoose.Schema({
 });
 //Prevent duplicate application for a specific job
 applicationSchema.index({ email: 1, Job: 1 }, { unique: true });
+
+//Check if the job being applied for exist
+applicationSchema.pre("save", async function (next) {
+  if (this.Job) {
+    const jobExist = await Jobs.findOne({ _id: this.Job });
+    if (!jobExist) return next(new AppError("Job not found", 404));
+    next();
+  } else {
+    return next(new AppError("Job cannot be empty", 400));
+  }
+});
 
 const Application = mongoose.model("Application", applicationSchema);
 

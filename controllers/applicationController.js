@@ -6,10 +6,12 @@ const { CloudinaryStorage } = require("multer-storage-cloudinary");
 
 dotenv.config({ path: "./config.env" });
 //const Conn = require("./../server").Conn;
+
 const Application = require("./../models/applicationsModel");
 const catchAsync = require("./../utils/catchAsync");
 const AppError = require("./../utils/appErrors");
-
+//const Jobs = require("./../models/jobModel");
+//Set the cloudinary configuration
 cloudinary.config({
   cloud_name: process.env.cloud_name,
   api_key: process.env.cloud_api_key,
@@ -17,12 +19,14 @@ cloudinary.config({
   secure: true,
 });
 
+//Set the multer storage
 const multerStorage = new CloudinaryStorage({
   cloudinary: cloudinary,
   params: {
     folder: "peoplefocused-applications",
-    format: async (req, file) => "pdf",
-    public_id: (req, file) => `${req.body.name}-${req.params.jobID}`,
+    format: (req, file) => "pdf",
+    public_id: (req, file) =>
+      `${req.user.firstname}-${req.user.lastName}-${req.user._id}-${req.params.jobID}`,
   },
 });
 //This prevents the upload of every other files apart from pdf files
@@ -35,10 +39,11 @@ const multerFilter = (req, file, cb) => {
 };
 
 const upload = multer({
-  storage: multerStorage,
-  fileFilter: multerFilter,
   limits: { fileSize: 500000 },
+  fileFilter: multerFilter,
+  storage: multerStorage,
 });
+
 //Filter the request body to extract the only needed
 const filterReqBody = (obj, ...params) => {
   const newObj = {};
@@ -55,14 +60,18 @@ exports.uploadCV = upload.single("cv");
 //Apply for a particular job
 exports.Apply = catchAsync(async (req, res, next) => {
   //filter out unecessary data from the request body
-  const filteredBody = filterReqBody(req.body, "name", "email", "experience");
+  const filteredBody = filterReqBody(req.body, "experience");
+
   //Add the job being applied to
   if (!req.body.Job) filteredBody.Job = req.params.jobID;
 
   if (!req.file) return next(new AppError("Upload your cv please", 400));
 
+  //console.log(req.user);
   //Add the filename of the cv being uploaded
   filteredBody.document = req.file.filename;
+  filteredBody.name = `${req.user.firstname} ${req.user.lastName}`;
+  filteredBody.email = req.user.email;
 
   // let application = await Application.findOne({
   //   document: filteredBody.document,
@@ -77,10 +86,9 @@ exports.Apply = catchAsync(async (req, res, next) => {
   application = await Application.create(filteredBody);
   res.status(200).json({
     status: "success",
-    message: "Application submitted succesfully!!",
+    message: "Application submitted successfully!!",
     application,
   });
-  //}
 });
 
 //Get all applications for a particular job

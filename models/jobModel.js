@@ -39,10 +39,16 @@ const jobSchema = new mongoose.Schema(
         default: "Nigeria",
       },
     },
-    "work type": {
+    "Work Type": {
       type: String,
       required: [true, "Specify  the type of work"],
       enum: ["full time", "part time", "contract"],
+      lowercase: true,
+    },
+    "Work Schedule": {
+      type: String,
+      required: [true, "Specify whether it is on site or remote"],
+      enum: ["on-site", "remote", "partially on-site"],
       lowercase: true,
     },
     Category: {

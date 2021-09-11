@@ -16,9 +16,7 @@ exports.getAll = (Model) => {
       status: "success",
       requestMadeAt: req.requestTime,
       result: docs.length,
-      data: {
-        docs,
-      },
+      data: docs,
     });
   });
 };
@@ -28,7 +26,7 @@ exports.getOne = (Model) => {
     const doc = await Model.findById(req.params.jobID);
 
     if (!doc) {
-      return next(new AppError("Document  not found", 404));
+      return next(new AppError("Not Found", 404));
     }
     res.status(200).json({
       status: "success",

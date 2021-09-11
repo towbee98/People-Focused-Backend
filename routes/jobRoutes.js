@@ -11,7 +11,9 @@ const router = express.Router();
 router
   .route("/latest-top-paying-jobs")
   .get(jobController.aliasTopJobs, jobController.getAllJobs);
+
 router.route("/JobStats").get(jobController.getJobStats);
+
 
 router
   .route("/")

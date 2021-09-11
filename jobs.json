@@ -3,8 +3,8 @@
     "location": {
       "Country": "Nigeria",
       "address": "4 Segun maru street Aboidun bero ,magodo isheri ",
-      "city": "Lagos",
-      "State": "Lagos"
+      "city": "Uyo",
+      "State": "Akwa-Ibom"
     },
     "Responsiblities": [],
     "Requirements": [
@@ -18,21 +18,22 @@
       "Ability to multi-task"
     ],
     "Skillset": [],
-    "createdAt": "2021-06-03",
-    "title": "A Software Developer",
+    "createdAt": "2021-09-03",
+    "title": "A Cyber Security Analyst",
     "organisation": {
-      "name": "Delanor",
+      "name": "KreateNg",
       "description": "A software development company"
     },
-    "Salary": { "min": 570000, "max": 3000000 },
-    "work type": "full time",
+    "Salary": { "min": 1500000, "max": 3000000 },
+    "Work Type": "full time",
+    "Work Schedule": "on-site",
     "Category": { "name": "Information Technology", "description": "" },
     "Minimum Qualification": "DEGREE",
     "Experience Level": "Senior",
     "Experience Length": "3",
-    "Job Summary": "A customer care support at our lekki branch",
-    "Deadline": "2021-06-10",
-    "user": "60a9cc00932f7f0ffcb77a43"
+    "Job Summary": "A cyber security analyst to secure our infastructures against attacks",
+    "Deadline": "2021-09-10",
+    "user": "613c9e1dc1d51708bc24efc7"
   },
   {
     "location": {
@@ -53,20 +54,21 @@
       "Ability to multi-task"
     ],
     "Skillset": [],
-    "createdAt": "2021-06-03",
+    "createdAt": "2021-09-03",
     "title": "A frontend Developer",
     "organisation": {
       "name": "Delanor",
       "description": "A software development company"
     },
     "Salary": { "min": 50000, "max": 300000 },
-    "work type": "full time",
+    "Work Type": "contract",
+    "Work Schedule": "remote",
     "Category": { "name": "Information Technology" },
     "Minimum Qualification": "DEGREE",
     "Experience Level": "Mid-level",
     "Experience Length": "3",
     "Job Summary": "A customer care support at our lekki branch",
-    "user": "60a9cc00932f7f0ffcb77a43"
+    "user": "613c9e2fc1d51708bc24efc8"
   },
   {
     "location": {
@@ -93,20 +95,21 @@
       "MicroServices",
       "Familiar with software development lifecycle"
     ],
-    "createdAt": "2021-06-03",
+    "createdAt": "2021-09-03",
     "title": "A Backend Developer",
     "organisation": {
       "name": "Smart Tribe",
       "description": "A software development company"
     },
     "Salary": { "min": 50000, "max": 300000 },
-    "work type": "full time",
+    "Work Type": "contract",
+    "Work Schedule": "remote",
     "Category": { "name": "Information Technology" },
     "Minimum Qualification": "DEGREE",
     "Experience Level": "Senior",
     "Experience Length": "2",
     "Job Summary": "A customer care support at our lekki branch",
-    "user": "60a9cc0f932f7f0ffcb77a44"
+    "user": "613c9e4ac1d51708bc24efc9"
   },
   {
     "location": {
@@ -140,14 +143,15 @@
       "description": "A software development company"
     },
     "Salary": { "min": 1500000, "max": 3000000 },
-    "work type": "full time",
+    "Work Type": "full time",
+    "Work Schedule": "partially on-site",
     "Category": { "name": "Information Technology" },
     "Minimum Qualification": "DEGREE",
     "Experience Level": "Senior",
     "Experience Length": "2",
     "Job Summary": "A customer care support at our lekki branch",
-    "Deadline": "2021-06-15",
-    "user": "60a9cc0f932f7f0ffcb77a44"
+    "Deadline": "2021-09-15",
+    "user": "613c9e68c1d51708bc24efca"
   },
   {
     "location": {
@@ -174,21 +178,22 @@
       "MicroServices",
       "Familiar with software development lifecycle"
     ],
-    "createdAt": "2021-06-03",
+    "createdAt": "2021-09-03",
     "title": "Customer Service",
     "organisation": {
       "name": "Quilox Hotel",
       "description": "A 5 Star hotel created for the best hospitality you could ever imagine"
     },
     "Salary": { "min": 1500000, "max": 3000000 },
-    "work type": "full time",
+    "Work Type": "full time",
+    "Work Schedule": "on-site",
     "Category": { "name": "Hospitality And Tourism" },
     "Minimum Qualification": "DEGREE",
     "Experience Level": "",
     "Experience Length": "3",
     "Job Summary": "A customer care support at our lekki branch",
-    "Deadline": "2021-06-11",
-    "user": "60ae87a451e6142864e79f26"
+    "Deadline": "2021-09-11",
+    "user": "613c9e8dc1d51708bc24efcb"
   },
   {
     "location": {
@@ -215,20 +220,90 @@
       "MicroServices",
       "Familiar with software development lifecycle"
     ],
-    "createdAt": "2021-06-03",
+    "createdAt": "2021-09-03",
     "title": "A security personnel",
     "organisation": {
       "name": "Quilox Hotel",
       "description": "A 5 Star hotel created for the best hospitality you could ever imagine"
     },
     "Salary": { "min": 30000, "max": 50000 },
-    "work type": "full time",
+    "Work Type": "full time",
+    "Work Schedule": "on-site",
     "Category": { "name": "Others" },
     "Minimum Qualification": "DEGREE",
     "Experience Level": "",
     "Experience Length": "3",
     "Job Summary": "A customer care support at our lekki branch",
-    "Deadline": "2021-06-13",
-    "user": "60ae87a451e6142864e79f26"
+    "Deadline": "2021-09-13",
+    "user": "613c9eadc1d51708bc24efcc"
+  },
+  {
+    "location": {
+      "Country": "Nigeria",
+      "address": "Mellanby Hall , University of Ibadan",
+      "city": "Ibadan",
+      "State": "Oyo"
+    },
+    "Responsiblities": [],
+    "Requirements": [
+      "Proximity to the place of work is important.",
+      "Attending to customers online and in-store",
+      "Must be well grounded on social media (WhatsApp/Instagram/Facebook/Twitter)",
+      "Must be a fun-loving and jovial person",
+      "Must be bold and confident",
+      "Ability to multi-task"
+    ],
+    "Skillset": [],
+    "createdAt": "2021-09-03",
+    "title": "A media marketer",
+    "organisation": {
+      "name": "Foransic",
+      "description": "A software development company"
+    },
+    "Salary": { "min": 45000, "max": 350000 },
+    "Work Type": "part time",
+    "Work Schedule": "partially on-site",
+    "Category": { "name": "Information Technology" },
+    "Minimum Qualification": "DEGREE",
+    "Experience Level": "Entry-level",
+    "Experience Length": "0",
+    "Job Summary": "A media marketer at a software development company",
+    "user": "613c9eccc1d51708bc24efcd"
+  },
+  {
+    "location": {
+      "Country": "Nigeria",
+      "address": "4 Segun maru street Aboidun bero ,magodo isheri ",
+      "city": "Umuahia",
+      "State": "Abia"
+    },
+    "Responsiblities": [],
+    "Requirements": [
+      "Ready and comfortable to work in a Sex Toy Store.",
+      "Proximity to the place of work is important.",
+      "Attending to customers online and in-store",
+      "Taking orders on all our social media profiles",
+      "Must be well grounded on social media (WhatsApp/Instagram/Facebook/Twitter)",
+      "Must be a fun-loving and jovial person",
+      "Must be bold and confident",
+      "Ability to multi-task"
+    ],
+    "Skillset": [],
+    "createdAt": "2021-09-10",
+    "title": "A Graphics Design Intern",
+    "organisation": {
+      "name": "CloudFare",
+      "description": "A software development company"
+    },
+    "Salary": { "min": 120000, "max": 500000 },
+    "Work Type": "full time",
+    "Work Schedule": "on-site",
+    "Category": { "name": "Information Technology", "description": "" },
+    "Minimum Qualification": "DEGREE",
+    "Experience Level": "Senior",
+    "Experience Length": "3",
+    "Job Summary": "A cyber security analyst to secure our infastructures against attacks",
+    "Deadline": "2021-09-20",
+    "user": "613c9e1dc1d51708bc24efc7"
   }
 ]
