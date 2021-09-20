@@ -95,7 +95,7 @@ exports.getMyJobs = catchAsync(async (req, res, next) => {
   const jobs = await Jobs.find({ user: req.user._id }).select(
     "title location.city organisation.name Category.name"
   );
-  if (!jobs) return next(new AppError("No posted jobs by you found ", 404));
+  if (!jobs) return next(new AppError("You have not posted any job yet", 404));
   res.status(200).json({
     status: "success",
     result: jobs.length,

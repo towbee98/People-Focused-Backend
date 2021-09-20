@@ -3,14 +3,11 @@ const multer = require("multer");
 const cloudinary = require("cloudinary").v2;
 const dotenv = require("dotenv");
 const { CloudinaryStorage } = require("multer-storage-cloudinary");
-
 dotenv.config({ path: "./config.env" });
-//const Conn = require("./../server").Conn;
-
 const Application = require("./../models/applicationsModel");
 const catchAsync = require("./../utils/catchAsync");
 const AppError = require("./../utils/appErrors");
-//const Jobs = require("./../models/jobModel");
+
 //Set the cloudinary configuration
 cloudinary.config({
   cloud_name: process.env.cloud_name,
@@ -91,21 +88,25 @@ exports.Apply = catchAsync(async (req, res, next) => {
   });
 });
 
+exports.getMyApplications = catchAsync(async (req, res, next) => {});
 //Get all applications for a particular job
 exports.getApplications = catchAsync(async (req, res, next) => {
   //Get all the applications
   let job;
   if (!req.body.Job) job = req.params.jobID;
-  const applications = await Application.find({ Job: job }).select("-__v -Job");
-  if (!applications) return next(new AppError("The job does not exist", 404));
-
-  res.status(200).json({
-    status: "success",
-    result: applications.length,
-    data: {
-      applications,
-    },
-  });
+  if (req.user.role != "Employer") {
+    const applications = await Application.find({ Job: job }).select("-__v -Job");
+    if (!applications) return next(new AppError("The job does not exist", 404));
+    res.status(200).json({
+      status: "success",
+      result: applications.length,
+      data: {
+        applications,
+      },
+    });
+  } else {
+    //Employer only access the appliactions of job he posted
+  }
 });
 
 //Get all files for a particular job

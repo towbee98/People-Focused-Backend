@@ -14,7 +14,6 @@ router
 
 router.route("/JobStats").get(jobController.getJobStats);
 
-
 router
   .route("/")
   .get(jobController.getAllJobs)
