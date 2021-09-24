@@ -49,6 +49,7 @@ router
   .route("/:jobID/apply")
   .post(
     authController.protect,
+    authController.restrictUserTo("jobSeeker"),
     applicationController.uploadCV,
     applicationController.Apply
   );
@@ -60,4 +61,5 @@ router
     authController.restrictUserTo("admin", "Employer", "superAdmin"),
     applicationController.getApplications
   );
+
 module.exports = router;

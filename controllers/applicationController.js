@@ -7,6 +7,7 @@ dotenv.config({ path: "./config.env" });
 const Application = require("./../models/applicationsModel");
 const catchAsync = require("./../utils/catchAsync");
 const AppError = require("./../utils/appErrors");
+const { callbackPromise } = require("nodemailer/lib/shared");
 
 //Set the cloudinary configuration
 cloudinary.config({
@@ -26,6 +27,7 @@ const multerStorage = new CloudinaryStorage({
       `${req.user.firstname}-${req.user.lastName}-${req.user._id}-${req.params.jobID}`,
   },
 });
+
 //This prevents the upload of every other files apart from pdf files
 const multerFilter = (req, file, cb) => {
   if (file.mimetype.split("/")[1] === "pdf") {
@@ -88,25 +90,32 @@ exports.Apply = catchAsync(async (req, res, next) => {
   });
 });
 
-exports.getMyApplications = catchAsync(async (req, res, next) => {});
 //Get all applications for a particular job
 exports.getApplications = catchAsync(async (req, res, next) => {
   //Get all the applications
-  let job;
+  let job, query;
+  //console.log(req.user);
   if (!req.body.Job) job = req.params.jobID;
+
+  // This allows the admin and superAdmin to get all applications for a particular job
   if (req.user.role != "Employer") {
-    const applications = await Application.find({ Job: job }).select("-__v -Job");
-    if (!applications) return next(new AppError("The job does not exist", 404));
-    res.status(200).json({
-      status: "success",
-      result: applications.length,
-      data: {
-        applications,
-      },
-    });
+    query = await Application.find({ Job: job });
   } else {
-    //Employer only access the appliactions of job he posted
+    //Restricts an employer to only view the job he posted
+    query = await Application.find({ Job: job }).populate("Job", "user");
+    //Remove all job applications that was not posted by the employer
+    query.forEach((el) => {
+      if (`${el.Job.user}` != `${req.user._id}`) {
+        query.pop(el);
+      }
+    });
   }
+  if (!query) return next(new AppError("The job does not exist", 404));
+  res.status(200).json({
+    status: "success",
+    result: query.length,
+    data: query,
+  });
 });
 
 //Get all files for a particular job
@@ -115,5 +124,4 @@ exports.getApplications = catchAsync(async (req, res, next) => {
 //  gfs.find().toArray((err,files))=>{
 //    if()
 //  }
-
 // });

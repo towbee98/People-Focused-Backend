@@ -41,6 +41,12 @@ applicationSchema.pre("save", async function (next) {
   }
 });
 
+//
+// applicationSchema.pre("find", async function (next) {
+//   this.populate("Job", "user");
+
+//   next()
+// });
 const Application = mongoose.model("Application", applicationSchema);
 
 module.exports = Application;
