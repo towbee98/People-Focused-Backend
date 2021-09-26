@@ -35,10 +35,21 @@ exports.postAJob = catchAsync(async (req, res, next) => {
 
 //Update a particular job
 exports.updateJob = catchAsync(async (req, res, next) => {
-  const job = await Jobs.findByIdAndUpdate(req.params.jobID, req.body, {
-    new: true,
-    runValidators: true,
-  });
+  let job;
+  if (req.user.role != "Employer") {
+    job = await Jobs.findByIdAndUpdate(req.params.jobID, req.body, {
+      new: true,
+      runValidators: true,
+    });
+  } else {
+    job = await Jobs.findOneAndUpdate(
+      { _id: req.params.jobID, user: req.user._id },
+      {
+        new: true,
+        runValidators: true,
+      }
+    );
+  }
 
   if (!job) {
     return next(new AppError("Job with that ID not found", 404));
@@ -53,8 +64,15 @@ exports.updateJob = catchAsync(async (req, res, next) => {
 
 //delete a job
 exports.deleteJob = catchAsync(async (req, res, next) => {
-  const job = await Jobs.findByIdAndDelete(req.params.jobID);
-
+  let job;
+  if (req.user.role != "Employer") {
+    job = await Jobs.findByIdAndDelete(req.params.jobID);
+  } else {
+    job = await Jobs.findOneAndDelete({
+      _id: req.params.jobID,
+      user: req.user._id,
+    });
+  }
   if (!job) {
     return next(new AppError("Job with that ID not found", 404));
   }
