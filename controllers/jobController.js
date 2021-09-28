@@ -1,6 +1,6 @@
 const Jobs = require("./../models/jobModel");
 //const Application = require("./../models/applicationsModel");
-const APIFEATURES = require("./../utils/apiFeatures");
+//const APIFEATURES = require("./../utils/apiFeatures");
 const catchAsync = require("./../utils/catchAsync");
 const AppError = require("./../utils/appErrors");
 const factory = require("./handlerFactory");
