@@ -12,6 +12,7 @@ const AppError = require("./utils/appErrors");
 const globalErrorHandler = require("./controllers/errorController");
 const jobRouter = require("./routes/jobRoutes");
 const userRouter = require("./routes/userRoutes");
+const viewRouter= require("./routes/viewRoutes")
 
 const app = express();
 
@@ -30,7 +31,6 @@ app.use(helmet());
 if (process.env.NODE_ENV === "development") {
   app.use(morgan("dev"));
 }
-
 //limit the number of requests from a particular IP
 const apiLimiter = rateLimit({
   max: 80,
@@ -68,12 +68,15 @@ app.use((req, res, next) => {
 });
 
 //ROUTES
-app.get("/", (req, res) => {
-  res.status(200).render("base");
-});
+// app.use((req,res,next)=>{
+//   res.setHeader('Content-Security-Policy',"img-src 'self' data: https:")
+//   next()
+// })
+
 
 app.use("/api/v1/jobs", jobRouter);
 app.use("/api/v1/users", userRouter);
+app.use("/",viewRouter)
 app.all("*", (req, res, next) => {
   next(
     new AppError(

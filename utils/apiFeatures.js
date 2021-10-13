@@ -39,14 +39,14 @@ class APIFEATURES {
       const field = this.queryStr.fields.split(",").join(" ");
       this.query = this.query.select(field);
     } else {
-      this.query = this.query.select("-__v");
+      this.query = this.query.select("title organisation.name location.Country location.State Skillset ");
     }
     return this;
   }
   paginate() {
     //4.)Pagination
     const page = this.queryStr.page * 1 || 1;
-    const limit = this.queryStr.limit * 1 || 12;
+    const limit = this.queryStr.limit * 1 || 6;
     const skip = (page - 1) * limit; //number of documents to skip
     this.query = this.query.skip(skip).limit(limit);
     return this;

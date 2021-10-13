@@ -1,0 +1,142 @@
+extends base
+    
+block content 
+    // page-header
+    .page-header
+        .container
+            .row
+                .col-lg-12.col-md-12.col-sm-12.col-xs-12
+                    .page-caption
+                        h1.page-title Find the job that’s just right for you
+    // /.page-header
+    // job-list-section
+    .content
+        .container
+            .row
+                .col-lg-12.col-md-12.col-sm-12.col-xs-12.mb30
+                    p.lead If you're ready for a new challenging job, Browse Jobs on PeopleFocused and take a look at our Popular Job Locations and Job Titles
+            .row
+                each job in jobs
+                    // job-list
+                    .col-lg-6.col-md-6.col-sm-6.col-xs-12
+                        .job-post-block
+                            .job-post-content
+                                a(href='jobs-single.html')
+                                    h3.job-post-title= job.title
+                                p= job.organisation.name
+                                p
+                                span.job-location-icon
+                                    i.fa.fa-map-marker= job.location.State, job.location.Country
+                            .job-post-meta
+                                 each skill in job.Skillset
+                                    span.badge= skill
+                                    //- span.badge reactjs
+                                    //- span.badge css
+                    // /.job-list
+
+                //- // job-list
+                //- .col-lg-6.col-md-6.col-sm-6.col-xs-12
+                //-     .job-post-block
+                //-         .job-post-content
+                //-             a(href='jobs-single.html')
+                //-                 h3.job-post-title
+                //-                     | Director of Software Engineering
+                //-             p Company Name
+                //-             p
+                //-             span.job-location-icon
+                //-                 i.fa.fa-map-marker
+                //-                     | Mumbai, India
+                //-         .job-post-meta
+                //-             span.badge C++14
+                //-             span.badge reactjs
+                //-             span.badge Computer vision
+                //- // /.job-list
+            .row
+                //- // job-list
+                //- .col-lg-6.col-md-6.col-sm-6.col-xs-12
+                //-     .job-post-block
+                //-         .job-post-content
+                //-             a(href='jobs-single.html')
+                //-                 h3.job-post-title Senior Java Developer
+                //-             p Company Name
+                //-             p
+                //-             span.job-location-icon
+                //-                 i.fa.fa-map-marker
+                //-                     | Banglore, India
+                //-     .job-post-meta
+                //-         span.badge javascript
+                //-         span.badge reactjs
+                //-         span.badge css
+                //- // /.job-list
+                //- // job-list
+                //- .col-lg-6.col-md-6.col-sm-6.col-xs-12
+                //-     .job-post-block
+                //-         .job-post-content
+                //-             a(href='jobs-single.html')
+                //-                 h3.job-post-title Lead Android Developer
+                //-             p Company Name
+                //-             p
+                //-             span.job-location-icon
+                //-                 i.fa.fa-map-marker
+                //-             | Pune, India
+                //-     .job-post-meta
+                //-         span.badge C++14
+                //-         span.badge reactjs
+                //-         span.badge Computer vision
+                //- // /.job-list
+            .row
+                //- // job-list
+                //- .col-lg-6.col-md-6.col-sm-6.col-xs-12
+                //-     .job-post-block
+                //-         .job-post-content
+                //-             a(href='jobs-single.html')
+                //-                 h3.job-post-title Senior Front - End Engineer
+                //-             p Company Name
+                //-             p
+                //-             span.job-location-icon
+                //-                 i.fa.fa-map-marker
+                //-                     | Ahmedabad, India
+                //-     .job-post-meta
+                //-         span.badge javascript
+                //-         span.badge reactjs
+                //-         span.badge css
+                //- // /.job-list
+                //- // job-list
+                //- .col-lg-6.col-md-6.col-sm-6.col-xs-12
+                //-     .job-post-block
+                //-         .job-post-content
+                //-             a(href='jobs-single.html')
+                //-                 h3.job-post-title
+                //-                     | Director of Software Engineering
+                //-             p Company Name
+                //-             p
+                //-             span.job-location-icon
+                //-                 i.fa.fa-map-marker
+                //-                     | Mumbai, India
+                //-     .job-post-meta
+                //-         span.badge C++14
+                //-         span.badge reactjs
+                //-         span.badge Computer vision
+                //- // /.job-list
+            .row
+                .col-lg-12.col-md-12.col-sm-12.col-xs-12
+                    .st-pagination
+                        ul.pagination
+                            li
+                                a(href='#' aria-label='previous')
+                                    span(aria-hidden='true')
+                                        i.fa.fa-angle-left
+                            
+                            //li.active
+                                a(href="#") 1
+                            //li 
+                                a(href="#")2
+                            //li 
+                                a(href="#")3
+                            li
+                                a(href='#' aria-label='Next')
+                                    span(aria-hidden='true')
+                                        i.fa.fa-angle-right
+    // job-list-section
+    include _footers
+    include _jsPlugin
