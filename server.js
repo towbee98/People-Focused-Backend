@@ -1,8 +1,6 @@
 const mongoose = require("mongoose");
 const dotenv = require("dotenv");
 
-//const Grid = require("gridfs-stream");
-
 process.on("uncaughtException", (err) => {
   console.log(err.name, err.message);
   console.log("Uncaught Exception , Shutting Down... ");
@@ -16,7 +14,8 @@ const DB = process.env.DATABASE.replace(
   process.env.DATABASE_PASSWORD
 );
 
-//const DB = process.env.DATABASE_LOCAL;
+// const DB = process.env.DATABASE_LOCAL
+
 const start = async () => {
   await mongoose.connect(
     DB,
@@ -36,9 +35,11 @@ const start = async () => {
     }
   );
   const PORT = process.env.PORT || 3001;
-  const app = await require("./app");
+  // eslint-disable-next-line global-require
+  const app = require("./app");
 
-  //START SERVER
+  // START SERVER
+
   const server = app.listen(PORT, () => {
     console.log(`Server running at port ${PORT}`);
   });

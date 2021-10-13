@@ -26,7 +26,9 @@ block content
                                 p= job.organisation.name
                                 p
                                 span.job-location-icon
-                                    i.fa.fa-map-marker= job.location.State, job.location.Country
+                                    i.fa.fa-map-marker
+                                    |  
+                                    span=  job.location.State, job.location.Country
                             .job-post-meta
                                  each skill in job.Skillset
                                     span.badge= skill

@@ -7,8 +7,8 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "start:prod": "SET NODE_ENV=production& nodemon server.js",
     "start": "nodemon server.js",
-    "watch:js":  "parcel watch ./public/Js_Files/index.js --out-dir ./public/Js_Files --out-file bundle.js --public-url ./",
-    "build:js":  "parcel build ./public/Js_Files/index.js --out-dir ./public/Js_Files --out-file bundle.js --public-url ./"
+    "watch:js": "parcel watch ./public/Js_Files/index.js --out-dir ./public/Js_Files --out-file bundle.js --public-url ./",
+    "build:js": "parcel build ./public/Js_Files/index.js --out-dir ./public/Js_Files --out-file bundle.js --public-url ./"
   },
   "author": "Oladele Tobiloba",
   "license": "ISC",
@@ -38,13 +38,14 @@
     "xss-clean": "^0.1.1"
   },
   "devDependencies": {
-    "eslint": "^7.23.0",
+    "eslint": "^7.32.0",
     "eslint-config-airbnb": "^18.2.1",
-    "eslint-config-prettier": "^8.1.0",
-    "eslint-plugin-import": "^2.22.1",
+    "eslint-config-prettier": "^8.3.0",
+    "eslint-plugin-import": "^2.25.2",
     "eslint-plugin-jsx-a11y": "^6.4.1",
     "eslint-plugin-node": "^11.1.0",
-    "eslint-plugin-react": "^7.23.1",
-    "prettier": "^2.2.1"
+    "eslint-plugin-prettier": "^4.0.0",
+    "eslint-plugin-react": "^7.26.1",
+    "prettier": "^2.4.1"
   }
 }

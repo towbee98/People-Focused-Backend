@@ -8,9 +8,11 @@
     "prettier"
   ],
   "rules": {
-    "prettier/prettier": "error",
-    "spaced-comment": "off",
-    "no-console": "warn",
+    "prettier/prettier": ["error",{
+      "endOfLine":"auto"
+    }],
+    "spaced-comment": 1,
+    "no-console": "off",
     "consistent-return": "off",
     "func-names": "off",
     "object-shorthand": "off",
@@ -29,7 +31,7 @@
     "no-unused-vars": [
       "error",
       {
-        "argsIgnorePattern": "req|res|next|val"
+        "argsIgnorePattern":"req|res|next|val"
       }
     ]
   }
