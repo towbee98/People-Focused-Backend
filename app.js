@@ -6,13 +6,13 @@ const helmet = require("helmet");
 const mongoSanitize = require("express-mongo-sanitize");
 const xss = require("xss-clean");
 const hpp = require("hpp");
-//const multer = require("multer");
+// const multer = require("multer");
 
 const AppError = require("./utils/appErrors");
 const globalErrorHandler = require("./controllers/errorController");
 const jobRouter = require("./routes/jobRoutes");
 const userRouter = require("./routes/userRoutes");
-const viewRouter= require("./routes/viewRoutes")
+const viewRouter = require("./routes/viewRoutes");
 
 const app = express();
 
@@ -21,17 +21,17 @@ app.set("views", path.join(__dirname, "views"));
 
 // GLobal Middlewares
 
-//Serve static files
+// Serve static files
 app.use(express.static(path.join(__dirname, "public")));
 
-//Create Security Headers
+// Create Security Headers
 app.use(helmet());
 
-//Development Middleware
+// Development Middleware
 if (process.env.NODE_ENV === "development") {
   app.use(morgan("dev"));
 }
-//limit the number of requests from a particular IP
+// limit the number of requests from a particular IP
 const apiLimiter = rateLimit({
   max: 80,
   windowMs: 60 * 60 * 1000,
@@ -39,16 +39,16 @@ const apiLimiter = rateLimit({
 });
 app.use("/api", apiLimiter);
 
-//parses the body to enable access to body of the request
+// parses the body to enable access to body of the request
 app.use(express.json({ limit: "80kb" }));
 
-//Data Sanitization against NO SQL query Injection
+// Data Sanitization against NO SQL query Injection
 app.use(mongoSanitize());
 
-//Data Sanitization against XSS
+// Data Sanitization against XSS
 app.use(xss());
 
-//Data Sanitization against Parameter Pollution
+// Data Sanitization against Parameter Pollution
 app.use(
   hpp({
     whitelist: [
@@ -61,22 +61,21 @@ app.use(
   })
 );
 
-//Test Middleware
+// Test Middleware
 app.use((req, res, next) => {
   req.requestTime = new Date().toISOString();
   next();
 });
 
-//ROUTES
+// ROUTES
 // app.use((req,res,next)=>{
 //   res.setHeader('Content-Security-Policy',"img-src 'self' data: https:")
 //   next()
 // })
-
-
+app.use(express.static(`${__dirname}/public`));
 app.use("/api/v1/jobs", jobRouter);
 app.use("/api/v1/users", userRouter);
-app.use("/",viewRouter)
+app.use("/", viewRouter);
 app.all("*", (req, res, next) => {
   next(
     new AppError(

@@ -1,0 +1,50 @@
+extends base
+
+block content 
+    // map-section
+    #contact-map
+    // /.map-section
+    // contact-form
+    .container
+      .row
+        .col-lg-offset-1.col-lg-10.col-md-offset-1.col-md-10.col-sm-12.col-xs-12
+          .contact-form
+            h1.contact-info-title.mb40 How Can We Help You?
+            .row
+              form(action='contactus.php' method='post')
+                .col-lg-6.col-md-6.col-sm-6.col-xs-12
+                  .form-group
+                    label.control-label.sr-only(for='name')
+                    input#name.form-control(type='text' name='name' placeholder='Name' required)
+                .col-lg-6.col-md-6.col-sm-6.col-xs-12
+                  .form-group
+                    label.control-label.sr-only(for='email')
+                    input#email.form-control(name='email' type='email' placeholder='Email' required)
+                .col-lg-6.col-md-6.col-sm-6.col-xs-12
+                  .form-group
+                    label.control-label.sr-only(for='phone')
+                    input#phone.form-control(type='text' name='phone' placeholder='Phone' required)
+                .col-lg-6.col-md-6.col-sm-6.col-xs-12
+                  .form-group
+                    label.control-label.sr-only(for='subject')
+                    input#subject.form-control(name='subject' type='text' placeholder='Subject')
+                .col-lg-12.col-md-12.col-sm-6.col-xs-12.mb20
+                  .form-group
+                    label.control-label.sr-only(for='message')
+                    textarea#message.form-control.pdt20(name='message' rows='4' placeholder='Message')
+                .col-lg-12.col-md-12.col-sm-6.col-xs-12
+                  button.btn.btn-primary.btn-lg(type='submit')
+                    | Send us message
+          // /.contact-form
+          // contact-info
+          .row
+            .col-lg-12.col-md-12.col-sm-12.col-xs-12
+              .section-title
+                h2 Our Contact Info
+                p.lead
+                  | Thank you for your interest in HR services. You can easily
+                  | contact us via the details in the footer below .
+          // /.contact-info
+
+    include  _footers
+    include  _jsPlugin

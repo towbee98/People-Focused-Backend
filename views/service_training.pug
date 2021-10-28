@@ -1,0 +1,103 @@
+extends base
+
+block content 
+    // page-header
+    .service-pageheader 
+        .container 
+            .row 
+                .col-lg-12.col-md-12.col-sm-12.col-xs-12
+    // page-header
+    //services-single
+    .content(style='padding-bottom: 0;')
+        .container
+            .row
+                .Service-description
+                    .service-data.mb30
+                        h2 Training
+                        p
+                            ul
+                                li
+                                    | At the heart of a sustainable organisational success is the continuous
+                                    | development of its greatest assets i.e employees.
+                                li
+                                    | Our training solution has been designed to identify top talents critical to the
+                                    | success of the organization or enterprise.
+                                li
+                                    | We have structured training programs that identify skills gap through training
+                                    | needs assessment ,conduct research to identify the missing knowledge and
+                                    | customise the training delivery in a manner that will fit your organisation in
+                                    | line with contemporary global trends.
+                                li
+                                    | Some of our training intervention areas include :
+                                    ul
+                                        li Empoyability training
+                                        li Leadership development
+                                        li Soft skills acquisition
+                                        li Sales and marketing 
+                                        li Management Programs
+                                        li Customer service training.
+
+                    .col-lg-4.col-md-4.col-sm-5.col-xs-12
+                        // sidenav-section
+                        .sidenav
+                            ul
+                                li.active
+                                    a(href='#') Training 
+                                li
+                                    a(href='/coaching') Coaching
+                                li
+                                    a(href='/recruitment') Recruitment
+                                li
+                                    a(href='service-single.html') Consulting
+                                li
+                                    a(href='service-single.html') Technology
+                        // /.sidenav-section
+                        // Form-section
+                        #requestAConsultation.service-sidebar.consultantion-form.mb30
+                            h3.mb30.text-center Request A Consultation
+                            form
+                                .row
+                                    .col-lg-12.col-md-12.col-sm-12.col-xs-12
+                                        .form-group
+                                            label.control-label.sr-only(for='name') First Name
+                                            input.form-control(type='text' placeholder='First Name' required)
+                                    .col-lg-12.col-md-12.col-sm-12.col-xs-12
+                                        .form-group
+                                            label.control-label.sr-only(for='name')  Last Name
+                                            input.form-control(type='text' placeholder='Last Name' required)
+                                    .col-lg-12.col-md-12.col-sm-12.col-xs-12
+                                        .form-group
+                                            label.control-label.sr-only(for='name') Phone
+                                            input.form-control(type='text' placeholder='Phone' required)
+                                    .col-lg-12.col-md-12.col-sm-12.col-xs-12
+                                        .form-group
+                                            label.control-label.sr-only(for='company') Company
+                                            input.form-control(type='text' placeholder='company' required)
+                                    .col-lg-12.col-md-12.col-sm-12.col-xs-12
+                                        .form-group
+                                            label.control-label.sr-only(for='select')
+                                            select.form-control(name='select')
+                                                option(value='') I am interested in
+                                                option(value='') HR Audit &amp; Assessment
+                                                option(value='') Legal &amp; HR Compliance
+                                                option(value='') Employment Practices
+                                    .col-lg-12.col-md-12.col-sm-12.col-xs-12.mb20
+                                        .form-group
+                                            label.control-label.sr-only(for='textarea')
+                                            textarea#textarea.form-control.pdt20(name='textarea' rows='4' placeholder='Please describe your HR needs:')
+                                    .col-lg-12.col-md-12.col-sm-12.col-xs-12
+                                        button.btn.btn-primary.btn-lg(type='submit' name='singlebutton') submit
+                        // /.Form-section
+                        // widget-cta
+                        .widget-cta
+                            .widget-cta-block
+                                .widget-cta-icon
+                                    i.icon-012-handshake
+                                .widget-cta-content
+                                    h3.text-white Let Us Help You
+                                    p You are just a click away from getting the best services you want .
+                                    a.btn.btn-white-outline(href='contact.html') contact us
+                        // /.widget-cta             
+    // service-single
+    include  _footers
+    include  _jsPlugin

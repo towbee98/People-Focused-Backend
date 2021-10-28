@@ -2,11 +2,13 @@ const express = require("express");
 
 const jobController = require("../controllers/jobController");
 const authController = require("../controllers/authController");
-const applicationController = require("./../controllers/applicationController");
+const applicationController = require("../controllers/applicationController");
+
 const router = express.Router();
 
-//const upload = multer({ dest: "public/resumes" });
-//router.param("id", jobController.checkID);
+// const upload = multer({ dest: "public/resumes" });
+
+// router.param("id", jobController.checkID);
 
 router
   .route("/latest-top-paying-jobs")
@@ -30,7 +32,7 @@ router
     authController.restrictUserTo("admin", "Employer", "superAdmin"),
     jobController.getMyJobs
   );
-//router.route("/:id/applications", applicationRouter);
+// router.route("/:id/applications", applicationRouter);
 router
   .route("/:jobID")
   .get(jobController.getJob)

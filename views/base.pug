@@ -8,7 +8,6 @@ html(lang='en')
       // The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags
       meta(name='description' content='')
       meta(name='keywords' content='')
-      title People Focused
       // Bootstrap
       link(href='css/bootstrap.min.css' rel='stylesheet')
       // Style CSS
@@ -25,6 +24,7 @@ html(lang='en')
       link(rel="icon" type="image/png" sizes="32x32" href="favicon_io/favicon-32x32.png")
       link(rel="icon" type="image/png" sizes="16x16" href="favicon_io/favicon-16x16.png")
       link(rel="manifest" href="favicon_io/site.webmanifest")
+      title People Focused
       // HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries
       // WARNING: Respond.js doesn't work if you view the page via file://
       //
@@ -32,6 +32,7 @@ html(lang='en')
         <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
         <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
         <![endif]
+
   body
     // header-section
     include _headers
@@ -54,7 +55,7 @@ html(lang='en')
                         | and Capacity Development Enterprise in Africa
                     a.btn.btn-primary.hidden-xs(href='#ServicesList') View All Services
                     | &nbsp; &nbsp;
-                    a.btn.btn-outline.hidden-xs(href='contact.html') Need help?
+                    a.btn.btn-outline.hidden-xs(href='/contact') Need help?
           .item
             .slider-img
               img(src='new-images/slider-img-2.jpg' alt='')
@@ -69,9 +70,9 @@ html(lang='en')
                     //
                       <p class="hidden-xs">Fusce suscipit <strong>porttitor felisut eleifat</strong> sem a
                       purus elementum.</p>
-                    a.btn.btn-primary.hidden-xs(href='jobs') Latest Jobs
+                    a.btn.btn-primary.hidden-xs(href='/Jobs') Latest Jobs
                     | &nbsp; &nbsp;
-                    a.btn.btn-outline.hidden-xs(href='contact.html') Need help?
+                    a.btn.btn-outline.hidden-xs(href='/contact') Need help?
           .item
             .slider-img
               img(src='new-images/slider-img-1.jpg' alt='')
@@ -86,9 +87,9 @@ html(lang='en')
                     //
                       <p class="hidden-xs">Mauris vitae <strong>condimentum toisque viverra</strong> massanec
                       tincidunt mollis.</p>
-                    a.btn.btn-primary.hidden-xs(href='blog-default.html') Latest Stories
+                    a.btn.btn-primary.hidden-xs(href='/blog') Latest Stories
                     | &nbsp; &nbsp;
-                    a.btn.btn-outline.hidden-xs(href='contact.html') Need help?
+                    a.btn.btn-outline.hidden-xs(href='/contact') Need help?
       // /.slider
       // services
       #ServicesList.space-medium.bg-light
@@ -97,7 +98,7 @@ html(lang='en')
             .col-lg-12.col-md-12.col-sm-12.col-xs-12
               .section-title
                 h2 Consultation Services
-                a.btn-link(href='service-default.html') View Services
+                a.btn-link(href='/services') View Services
           .row
             // service-block
             .col-lg-3.col-md-3.col-sm-6.col-xs-12
@@ -111,7 +112,7 @@ html(lang='en')
                     | Our training solution has been designed to identify top
                     | talents critical to the success of the organization or
                     | enterprise.
-                  a.btn-link(href='service-single.html') More Details
+                  a.btn-link(href='/training') More Details
             // /.service-block
             // service-block
             .col-lg-3.col-md-3.col-sm-6.col-xs-12
@@ -125,7 +126,7 @@ html(lang='en')
                     | Our coaching service is aimed at helping individuals and
                     | client achieve personal or professional developmental goal and
                     | expertise.
-                  a.btn-link(href='service-coaching.html') More Details
+                  a.btn-link(href='/coaching') More Details
             // /.service-block
             // service-block
             .col-lg-3.col-md-3.col-sm-6.col-xs-12
@@ -139,7 +140,7 @@ html(lang='en')
                     | We have the expertise to acquire and retain the right people
                     | and required talents that any organization need to succeed on
                     | a sustainable level.
-                  a.btn-link(href='service-recruitment.html') More Details
+                  a.btn-link(href='/recruitment') More Details
             // /.service-block
             // service-block
             .col-lg-3.col-md-3.col-sm-6.col-xs-12
@@ -153,7 +154,7 @@ html(lang='en')
                     | We operate a bespoke consulting service where we conduct an
                     | holistic analysis of your organizational health condition as
                     | it relates to HR and proffer the right solution
-                  a.btn-link(href='service-single.html') More Details
+                  a.btn-link(href='/contact') More Details
             // /.service-block
       // /.services
       // features-section

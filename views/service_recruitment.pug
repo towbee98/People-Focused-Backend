@@ -1,0 +1,108 @@
+extends base
+
+block content
+    // page-header
+    .service-pageheader 
+        .container 
+            .row 
+                .col-lg-12.col-md-12.col-sm-12.col-xs-12
+    // page-header
+    // services-single
+    .content(style='padding-bottom: 0;')
+        .container
+            .row
+                .Service-description
+                    .service-data.mb30
+                        h2 Recruitment
+                        p
+                            ul
+                                li It is said that people are the greatest asset of any organisation..
+                                li
+                                    | However, identification, attraction, selection, onboarding and retention of the
+                                    | right people otherwise known as talents is critical to the
+                                    | sustainable growth and profitability of any organisation.
+                                li
+                                    | We have the expertise to acquire and retain the right people and required talents
+                                    | that any organization need to succeed on a sustainable
+                                    | level
+                                li
+                                    | We will customize our talent management framework to suit your organisation’s
+                                    | recruitment and outsourcing need in the following
+                                    | areas:
+                                    ul
+                                        li Staffing and manpower planning
+                                        li Recruitment strategy
+                                        li Job description design
+                                        li Attraction & Employer branding 
+                                        li Assessment and selection methods
+                                        li Placement and onboarding
+                                        li Retention and engagement strategy
+                                        li Compensation, Benefits & Payroll administration
+                        h3.control-label Click 
+                            a(href='post-job.html') here 
+                            | to post a job
+                    .col-lg-4.col-md-4.col-sm-5.col-xs-12
+                        // sidenav-section
+                        .sidenav
+                            ul
+                                li
+                                    a(href='/training') Training 
+                                li
+                                    a(href='/coaching') Coaching
+                                li.active
+                                    a(href='#') Recruitment
+                                li
+                                    a(href='service-single.html') Consulting
+                                li
+                                    a(href='service-single.html') Technology
+                        // /.sidenav-section
+                        // Form-section
+                        #requestAConsultation.service-sidebar.consultantion-form.mb30
+                            h3.mb30.text-center Request A Consultation
+                            form
+                                .row
+                                    .col-lg-12.col-md-12.col-sm-12.col-xs-12
+                                        .form-group
+                                            label.control-label.sr-only(for='name') First Name
+                                            input.form-control(type='text' placeholder='First Name' required)
+                                    .col-lg-12.col-md-12.col-sm-12.col-xs-12
+                                        .form-group
+                                            label.control-label.sr-only(for='name')  Last Name
+                                            input.form-control(type='text' placeholder='Last Name' required)
+                                    .col-lg-12.col-md-12.col-sm-12.col-xs-12
+                                        .form-group
+                                            label.control-label.sr-only(for='name') Phone
+                                            input.form-control(type='text' placeholder='Phone' required)
+                                    .col-lg-12.col-md-12.col-sm-12.col-xs-12
+                                        .form-group
+                                            label.control-label.sr-only(for='company') Company
+                                            input.form-control(type='text' placeholder='company' required)
+                                    .col-lg-12.col-md-12.col-sm-12.col-xs-12
+                                        .form-group
+                                            label.control-label.sr-only(for='select')
+                                            select.form-control(name='select')
+                                                option(value='') I am interested in
+                                                option(value='') Training 
+                                                option(value='') Coaching
+                                                option(value='') Consulting
+                                    .col-lg-12.col-md-12.col-sm-12.col-xs-12.mb20
+                                        .form-group
+                                            label.control-label.sr-only(for='textarea')
+                                            textarea#textarea.form-control.pdt20(name='textarea' rows='4' placeholder='Please describe your HR needs:')
+                                    .col-lg-12.col-md-12.col-sm-12.col-xs-12
+                                        button.btn.btn-primary.btn-lg(type='submit' name='singlebutton') submit
+                        // /.Form-section
+                        // widget-cta
+                        .widget-cta
+                            .widget-cta-block
+                                .widget-cta-icon
+                                    i.icon-012-handshake
+                                .widget-cta-content
+                                    h3.text-white Let Us Help You
+                                    p You are just a click away from getting the best services you want .
+                                    a.btn.btn-white-outline(href='contact.html') contact us
+                        // /.widget-cta
+
+    // service-single
+    include  _footers
+    include  _jsPlugin

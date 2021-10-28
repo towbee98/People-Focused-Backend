@@ -1,12 +1,12 @@
-const catchAsync = require("./../utils/catchAsync");
-const AppError = require("./../utils/appErrors");
-const APIFEATURES = require("./../utils/apiFeatures");
-
+/* eslint-disable arrow-body-style */
+const catchAsync = require("../utils/catchAsync");
+const AppError = require("../utils/appErrors");
+const APIFEATURES = require("../utils/apiFeatures");
 
 exports.getAll = (Model) => {
   return catchAsync(async (req, res, next) => {
-    //console.log(req.query)
-    //Execute the query
+    // console.log(req.query)
+    // Execute the query
     const features = new APIFEATURES(Model.find(), req.query)
       .filter()
       .sort()

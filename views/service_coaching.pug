@@ -1,0 +1,102 @@
+extends base
+
+block content 
+    // page-header
+    .service-pageheader 
+        .container 
+            .row 
+                .col-lg-12.col-md-12.col-sm-12.col-xs-12
+    // page-header
+    //services-single
+    .content(style='padding-bottom: 0;')
+        .container
+            .row
+                .Service-description
+                    .service-data.mb30
+                        h2 Coaching
+                        p
+                            ul
+                                li
+                                    | Our coaching service is aimed at helping individuals and client achieve personal or
+                                    | professional developmental
+                                    | goal and expertise.
+                                li
+                                    | Our coaching curriculum is jointly designed with the client to provide an all round
+                                    | transformative coaching
+                                    | experience.
+                                li
+                                    | Our team of coaches are certified life coaches and subject matter experts with vast
+                                    | experience .
+                                li
+                                    | Our coaching intervention areas include:
+                                    ul
+                                        li Leadership & Managerial
+                                        li Performance management
+                                        li Problem solving
+                                        li Communication, Public Speaking & Presentation 
+                                        li Analytical & Synthetic skills
+                                        li Decision Making
+                    .col-lg-4.col-md-4.col-sm-5.col-xs-12
+                        // sidenav-section
+                        .sidenav
+                            ul
+                                li
+                                    a(href='/training') Training 
+                                li.active
+                                    a(href='#') Coaching
+                                li
+                                    a(href='/recruitment') Recruitment
+                                li
+                                    a(href='service-single.html') Consulting
+                                li
+                                    a(href='service-single.html') Technology
+                        // /.sidenav-section
+                        // Form-section
+                        #requestAConsultation.service-sidebar.consultantion-form.mb30
+                            h3.mb30.text-center Request A Consultation
+                            form
+                                .row
+                                    .col-lg-12.col-md-12.col-sm-12.col-xs-12
+                                        .form-group
+                                            label.control-label.sr-only(for='name') First Name
+                                            input.form-control(type='text' placeholder='First Name' required)
+                                    .col-lg-12.col-md-12.col-sm-12.col-xs-12
+                                        .form-group
+                                            label.control-label.sr-only(for='name')  Last Name
+                                            input.form-control(type='text' placeholder='Last Name' required)
+                                    .col-lg-12.col-md-12.col-sm-12.col-xs-12
+                                        .form-group
+                                            label.control-label.sr-only(for='name') Phone
+                                            input.form-control(type='text' placeholder='Phone' required)
+                                    .col-lg-12.col-md-12.col-sm-12.col-xs-12
+                                        .form-group
+                                            label.control-label.sr-only(for='company') Company
+                                            input.form-control(type='text' placeholder='company' required)
+                                    .col-lg-12.col-md-12.col-sm-12.col-xs-12
+                                        .form-group
+                                            label.control-label.sr-only(for='select')
+                                            select.form-control(name='select')
+                                                option(value='') I am interested in
+                                                option(value='') HR Audit &amp; Assessment
+                                                option(value='') Legal &amp; HR Compliance
+                                                option(value='') Employment Practices
+                                    .col-lg-12.col-md-12.col-sm-12.col-xs-12.mb20
+                                        .form-group
+                                            label.control-label.sr-only(for='textarea')
+                                            textarea#textarea.form-control.pdt20(name='textarea' rows='4' placeholder='Please describe your HR needs:')
+                                    .col-lg-12.col-md-12.col-sm-12.col-xs-12
+                                        button.btn.btn-primary.btn-lg(type='submit' name='singlebutton') submit
+                        // /.Form-section
+                        // widget-cta
+                        .widget-cta
+                            .widget-cta-block
+                                .widget-cta-icon
+                                    i.icon-012-handshake
+                                .widget-cta-content
+                                    h3.text-white Let Us Help You
+                                    p You are just a click away from getting the best services you want .
+                                    a.btn.btn-white-outline(href='contact.html') contact us
+                        // /.widget-cta                     
+    // service-single
+    include  _footers
+    include  _jsPlugin

@@ -1,0 +1,83 @@
+extends base
+
+block content 
+    // page-header
+    .page-header
+        .container
+            .row
+                .col-lg-12.col-md-12.col-sm-12.col-xs-12
+                    .page-caption
+                        h1.page-title Human Resource Services
+    // /.page-header
+    .service-list.container(style='margin: 30px auto')
+      // service-block
+      .col-lg-3.col-md-3.col-sm-6.col-xs-12
+        .service-block
+          .service-img
+            img.img-responsive(src='./new-images/training-pic.svg' alt='')
+          .service-block
+            h3.service-title(style='margin-top: 35px')
+              strong Training
+            p
+              | Our training solution has been designed to identify top talents
+              | critical to the success of the organization or enterprise.
+            a.btn-link(href='/training') More Details
+      // /.service-block
+      // service-block
+      .col-lg-3.col-md-3.col-sm-6.col-xs-12
+        .service-block
+          .service-img
+            img.img-responsive(src='./new-images/teaching-pics.svg' alt='')
+          .service-block
+            h3.service-title(style='margin-top: 35px')
+              strong Coaching
+            p
+              | Our coaching service is aimed at helping individuals and client
+              | achieve personal or professional developmental goal and expertise.
+            a.btn-link(href='/coaching') More Details
+      // /.service-block
+      // service-block
+      .col-lg-3.col-md-3.col-sm-6.col-xs-12
+        .service-block
+          .service-img
+            img.img-responsive(src='./new-images/recruit.svg' alt='')
+          .service-block
+            h3.service-title(style='margin-top: 35px')
+              strong Recruitment
+            p
+              | We have the expertise to acquire and retain the right people and
+              | required talents that any organization need to succeed on a
+              | sustainable level.
+            a.btn-link(href='/recruitment') More Details
+      // /.service-block
+      // service-block
+      .col-lg-3.col-md-3.col-sm-6.col-xs-12
+        .service-block
+          .service-img
+            img.img-responsive(src='./new-images/consult.svg' alt='')
+          .service-block
+            h3.service-title(style='margin-top: 35px')
+              strong Consulting
+            p
+              | We operate a bespoke consulting service where we conduct an
+              | holistic analysis of your organizational health condition as it
+              | relates to HR and proffer the right solution
+            a.btn-link(href='service-single.html') More Details
+      // /.service-block
+      // service-block
+      .col-lg-3.col-md-3.col-sm-6.col-xs-12
+        .service-block
+          .service-img
+            img.img-responsive(src='./new-images/consult.svg' alt='')
+          .service-block
+            h3.service-title(style='margin-top: 35px')
+              strong Technology
+            p
+              | People Focused Consulting in partnership with world class HR
+              | technology providers help organisations deploy state of the art
+              | digital HR solutions to manage and enhance people’s productivity.
+            a.btn-link(href='service-single.html') More Details
+      // /.service-block
+    include _footers
+    include _jsPlugin
+
