@@ -19,11 +19,13 @@ exports.jobs = catchAsync(async (req, res) => {
     .limitFields()
     .paginate();
   const jobs = await results.query;
+  const page = results.page;
+  // console.log(jobs);
   // render the jobs data to the template
   res
     .status(200)
     .header("Content-Security-Policy", "img-src 'self' data: https:")
-    .render("job_default", { jobs });
+    .render("job_default", { jobs, page });
 });
 
 exports.blog = catchAsync(async (req, res) => {

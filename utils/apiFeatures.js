@@ -54,6 +54,7 @@ class APIFEATURES {
     const limit = this.queryStr.limit * 1 || 6;
     const skip = (page - 1) * limit; // number of documents to skip
     this.query = this.query.skip(skip).limit(limit);
+    this.page = page;
     return this;
   }
 }

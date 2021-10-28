@@ -40,20 +40,42 @@ block content
                     .st-pagination
                         ul.pagination
                             li
-                                a(href='#' aria-label='previous' class='previous-page' page="0")
+                                a(href='#' aria-label='previous' class='previous-page' page=`${page-1}`)
                                     span(aria-hidden='true')
-                                        i.fa.fa-angle-left
-                            
-                            //- li.active
-                            //-     a(href="#") 1
-                            //- li 
-                            //-  a(href="#") 2
-                            //- li 
-                            //-  a(href="#") 3
+                                        i.fa.fa-angle-left  PREV
+                            if page === 1
+                                li.active
+                                    a(href="#") 1
+                                li 
+                                    a(href="#") 2
+                                li 
+                                    a(href="#") 3
+                            else if page === 2
+                                li
+                                    a(href="#") 1
+                                li.active
+                                    a(href="#") 2
+                                li 
+                                    a(href="#") 3
+                            else if page === 3
+                                li
+                                    a(href="#") 1
+                                li 
+                                    a(href="#") 2
+                                li.active
+                                    a(href="#") 3
+                            else 
+                                li
+                                    a(href="#") 1
+                                li 
+                                    a(href="#") 2
+                                li 
+                                    a(href="#") 3
+                                 
                             li
-                                a(href='#' aria-label='Next' class='next-page' page="2")
+                                a(href='#' aria-label='Next' class='next-page' page=`${page+1}`)
                                         span(aria-hidden='true')
-                                            i.fa.fa-angle-right
+                                            i.fa.fa-angle-right NEXT
     // job-list-section
     include _footers
     include _jsPlugin
