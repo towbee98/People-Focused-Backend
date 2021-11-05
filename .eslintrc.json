@@ -33,6 +33,11 @@
       {
         "argsIgnorePattern":"req|res|next|val"
       }
-    ]
+    ],
+    "parser": "babel-eslint",
+    "parserOptions": {
+      "sourceType": "module",
+      "allowImportExportEverywhere": true
+    }
   }
 }

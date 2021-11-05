@@ -21,7 +21,7 @@ block content
                     .col-lg-6.col-md-6.col-sm-6.col-xs-12
                         .job-post-block
                             .job-post-content
-                                a(href='jobs-single.html' job_id=`${job._id}`)
+                                a(href=`/jobs/${job._id}` job_id=`${job._id}`)
                                     h3.job-post-title= job.title
                                 p= job.organisation.name
                                 p
@@ -40,40 +40,40 @@ block content
                     .st-pagination
                         ul.pagination
                             li
-                                a(href='#' aria-label='previous' class='previous-page' page=`${page-1}`)
+                                a(href=`/Jobs?page=${page-1}` aria-label='previous' class='previous-page' page=`${page-1}`)
                                     span(aria-hidden='true')
                                         i.fa.fa-angle-left  PREV
                             if page === 1
                                 li.active
-                                    a(href="#") 1
+                                    a(href=`/Jobs?page=${page}`) 1
                                 li 
-                                    a(href="#") 2
+                                    a(href=`/Jobs?page=${page+1}`) 2
                                 li 
-                                    a(href="#") 3
+                                    a(href=`/Jobs?page=${page+2}`) 3
                             else if page === 2
                                 li
-                                    a(href="#") 1
+                                    a(href=`/Jobs?page=${page-1}`) 1
                                 li.active
-                                    a(href="#") 2
+                                    a(href=`/Jobs?page=${page}`) 2
                                 li 
-                                    a(href="#") 3
+                                    a(href=`/Jobs?page=${page+1}`) 3
                             else if page === 3
                                 li
-                                    a(href="#") 1
+                                    a(href=`/Jobs?page=${page-2}`) 1
                                 li 
-                                    a(href="#") 2
+                                    a(href=`/Jobs?page=${page-1}`) 2
                                 li.active
-                                    a(href="#") 3
+                                    a(href=`/Jobs?page=${page}`) 3
                             else 
                                 li
-                                    a(href="#") 1
+                                    a(href=`/Jobs?page=${1}`) 1
                                 li 
-                                    a(href="#") 2
+                                    a(href=`/Jobs?page=${2}`) 2
                                 li 
-                                    a(href="#") 3
+                                    a(href=`/Jobs?page=${3}`) 3
                                  
                             li
-                                a(href='#' aria-label='Next' class='next-page' page=`${page+1}`)
+                                a(href=`/Jobs?page=${page+1}` aria-label='Next' class='next-page' page=`${page+1}`)
                                         span(aria-hidden='true')
                                             i.fa.fa-angle-right NEXT
     // job-list-section

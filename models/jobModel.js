@@ -80,7 +80,8 @@ const jobSchema = new mongoose.Schema(
         validate: function (value) {
           return value > this.Salary.min;
         },
-        message: "The maximum salary must be greater than the minimum salary.",
+        message:
+          "The maximum salary must be greater than the minimum salary.",
       },
     },
     "Minimum Qualification": {
@@ -133,10 +134,10 @@ const jobSchema = new mongoose.Schema(
   // { timestamps: true }
 );
 
-//This prvents duplicate job (jobs with the same title and organisation name) from being posted
+// This prvents duplicate job (jobs with the same title and organisation name) from being posted
 jobSchema.index({ title: 1, "organisation.name": 1 }, { unique: true });
 
-//DOCUMENT MIDDLEWARE
+// DOCUMENT MIDDLEWARE
 jobSchema.pre("save", function (next) {
   this.slug = slugify(this.title, { lower: false });
   next();
@@ -146,7 +147,7 @@ jobSchema.pre("save", function (next) {
 //   next();
 // });
 
-//QUERY MIDDLEWARE
+// QUERY MIDDLEWARE
 jobSchema.pre(/^find/, function (next) {
   this.start = Date.now();
   next();
@@ -157,7 +158,7 @@ jobSchema.post(/^find/, function (docs, next) {
   next();
 });
 
-//AGGREGATE MIDDLEWARE
+// AGGREGATE MIDDLEWARE
 
 const Jobs = mongoose.model("Jobs", jobSchema);
 module.exports = Jobs;

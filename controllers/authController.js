@@ -26,6 +26,7 @@ const SendToken = async (user, statusCode, res) => {
   res.cookie("jwt", token, cookieOptions);
 
   if (statusCode === 201) {
+    // for sign up
     res.status(statusCode).json({
       status: "success",
       token,
@@ -34,12 +35,14 @@ const SendToken = async (user, statusCode, res) => {
       },
     });
   } else {
+    // for login
     res.status(statusCode).json({
       status: "success",
       token,
     });
   }
 };
+
 exports.signUp = catchAsync(async (req, res) => {
   const newUser = await User.create({
     firstname: req.body.firstname,
@@ -80,6 +83,8 @@ exports.protect = catchAsync(async (req, res, next) => {
     req.headers.authorization.startsWith("Bearer")
   ) {
     token = req.headers.authorization.split(" ")[1];
+  } else if (res.cookies.jwt) {
+    token = res.cookies.jwt;
   }
 
   if (!token) {
@@ -119,6 +124,37 @@ exports.protect = catchAsync(async (req, res, next) => {
 
   // Grant access to the protected route
   req.user = validUser;
+  next();
+});
+
+exports.isLoggedIn = catchAsync(async (req, res, next) => {
+  if (res.cookies.jwt) {
+    // Verify the token
+    const verifiedToken = await promisify(jwt.verify)(
+      res.cookies.jwt,
+      process.env.SECRET_KEY
+    );
+
+    // Check if the user still exists
+    const validUser = await User.findById(verifiedToken.id);
+
+    if (!validUser) {
+      return next();
+    }
+
+    // Check if the password was changed after token was issued
+    const checkTokenValidity = validUser.changedPasswordAfter(
+      verifiedToken.iat
+    );
+
+    if (checkTokenValidity) {
+      return next();
+    }
+
+    // Grant access to the protected route
+    res.locals.user = validUser;
+    return next();
+  }
   next();
 });
 

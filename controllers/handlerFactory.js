@@ -26,7 +26,6 @@ exports.getAll = (Model) => {
 exports.getOne = (Model) => {
   return catchAsync(async (req, res, next) => {
     const doc = await Model.findById(req.params.jobID);
-
     if (!doc) {
       return next(new AppError("Not Found", 404));
     }

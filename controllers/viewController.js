@@ -1,7 +1,8 @@
 // eslint-disable-next-line prettier/prettier
-const Job= require("../models/jobModel");
+const Job = require("../models/jobModel");
 const APIFEATURES = require("../utils/apiFeatures");
 const catchAsync = require("../utils/catchAsync");
+const AppError = require("../utils/appErrors");
 
 exports.homePage = (req, res) => {
   // Sets content security policy to allow access from other domain
@@ -55,11 +56,16 @@ exports.recruitment = catchAsync(async (req, res) => {
     .header("Content-Security-Policy", "img-src 'self' data: https:")
     .render("service_recruitment");
 });
-exports.overview = catchAsync(async (req, res) => {
+
+exports.overview = catchAsync(async (req, res, next) => {
+  const job = await Job.findOne({ _id: req.params.jobID });
+  // console.log(job);
+  if (!job) return next(new AppError("Job not found", 404));
+  // eslint-disable-next-line no-unused-expressions
   res
     .status(200)
     .header("Content-Security-Policy", "img-src 'self' data: https:")
-    .render("job_overview");
+    .render("job_overview", { job });
 });
 
 exports.services = catchAsync(async (req, res) => {
@@ -108,4 +114,11 @@ exports.forgetPassword = catchAsync(async (req, res) => {
     .status(200)
     .header("Content-Security-Policy", "img-src 'self' data: https:")
     .render("forgetPassword");
+});
+
+exports.jobApply = catchAsync(async (req, res) => {
+  res
+    .status(200)
+    .header("Content-Security-Policy", "img-src 'self' data: https:")
+    .render("job_apply");
 });

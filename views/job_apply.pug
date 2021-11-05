@@ -1,0 +1,64 @@
+extends base
+
+block content
+    // page-header
+    .service-pageheader
+      .container
+        .row
+          .col-lg-12.col-md-12.col-sm-12.col-xs-12
+    // /.page-header
+    // services-single
+    .content(style='padding-bottom: 0;')
+      .container
+        .row
+          .Service-description
+            .service-data.mb30
+              .post-job-description(style='max-width: 600px;')
+                h1.mb30.text-center Please enter your details to apply
+                form(action='#' method='POST')
+                  .row
+                    .col-lg-12.col-md-12.col-sm-12.col-xs-12.job-details
+                      .form-group
+                        label.control-label.sr-only(for='Name') Name
+                        input#Name.form-control(type='text' name='Name' placeholder='Name' required)
+                    .col-lg-12.col-md-12.col-sm-12.col-xs-12.job-details
+                      .form-group
+                        label.control-label.sr-only(for='Email') Email
+                        input#Email.form-control(type='email' name='Email' placeholder='Email' required)
+                    .col-lg-12.col-md-12.col-sm-12.col-xs-12.job-detail
+                      .form-group
+                        label(for='CV') CV
+                        input#cv.form-control(type='file' name='CV' required)
+                    .col-lg-12.col-md-12.col-sm-12.col-xs-12.job-detail
+                      .form-group
+                        label.control-label.sr-only(for='experience') Experience
+                        input#experience.form-control(type='number' name='experience' placeholder='Years of experience' min='0' required)
+                    .col-lg-12.col-md-12.col-sm-12.col-xs-12.job-detail
+                      button#submit-job-details.btn.btn-primary.btn-lg(type='submit') Submit
+            .col-lg-4.col-md-4.col-sm-5.col-xs-12
+              // sidenav-section
+              .sidenav
+                ul
+                  li
+                    a(href='/training') Training 
+                  li
+                    a(href='/coaching') Coaching
+                  li.active
+                    a(href='/recruitment') Recruitment
+                  li
+                    a(href='/#requestConsultation') Consulting
+                  li
+                    a(href='service-single.html') Technology
+        // widget-cta
+        .widget-cta
+          .widget-cta-block
+            .widget-cta-icon
+              i.icon-012-handshake
+            .widget-cta-content
+              h3.text-white Let Us Help You
+              p You are just a click away from getting the best services you want .
+              a.btn.btn-white-outline(href='/contact') contact us
+        // /.widget-cta
+      // /. services-single
+    include  _footers
+    include  _jsPlugin
