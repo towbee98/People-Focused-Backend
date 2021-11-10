@@ -23,7 +23,7 @@ const SendToken = async (user, statusCode, res) => {
 
   if (process.env.NODE_ENV === "production") cookieOptions.secure = true;
 
-  res.cookie("jwt", token, cookieOptions);
+  console.log(res.cookie("jwt", token, cookieOptions));
 
   if (statusCode === 201) {
     // for sign up
@@ -83,8 +83,8 @@ exports.protect = catchAsync(async (req, res, next) => {
     req.headers.authorization.startsWith("Bearer")
   ) {
     token = req.headers.authorization.split(" ")[1];
-  } else if (res.cookies.jwt) {
-    token = res.cookies.jwt;
+  } else if (req.cookies.jwt) {
+    token = req.cookies.jwt;
   }
 
   if (!token) {
@@ -128,10 +128,10 @@ exports.protect = catchAsync(async (req, res, next) => {
 });
 
 exports.isLoggedIn = catchAsync(async (req, res, next) => {
-  if (res.cookies.jwt) {
+  if (req.cookies.jwt) {
     // Verify the token
     const verifiedToken = await promisify(jwt.verify)(
-      res.cookies.jwt,
+      req.cookies.jwt,
       process.env.SECRET_KEY
     );
 
@@ -139,7 +139,7 @@ exports.isLoggedIn = catchAsync(async (req, res, next) => {
     const validUser = await User.findById(verifiedToken.id);
 
     if (!validUser) {
-      return next();
+      res.status(401).redirect('/login');
     }
 
     // Check if the password was changed after token was issued
@@ -148,14 +148,14 @@ exports.isLoggedIn = catchAsync(async (req, res, next) => {
     );
 
     if (checkTokenValidity) {
-      return next();
+      res.status(401).redirect('/login')
     }
 
     // Grant access to the protected route
     res.locals.user = validUser;
     return next();
   }
-  next();
+  res.status(401).redirect("/login")
 });
 
 exports.restrictUserTo =

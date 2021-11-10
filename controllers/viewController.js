@@ -122,3 +122,4 @@ exports.jobApply = catchAsync(async (req, res) => {
     .header("Content-Security-Policy", "img-src 'self' data: https:")
     .render("job_apply");
 });
+

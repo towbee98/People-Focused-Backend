@@ -29,7 +29,7 @@ block content
                             .job-company-head.clearfix
                                 a.client-img(href='#')
                                     img(src='/images/client_logo_3.png' alt='')
-                                .apply.btn.btn-outline.pull-right.mt10 Apply Now
+                                a.apply.btn.btn-outline.pull-right.mt10(href=`/jobs/${job._id}/apply`) Apply Now
                             hr
                     // ./img-section
                     // about-job
@@ -127,7 +127,7 @@ block content
                             // /.job-company
                         .col-lg-7.col-md-7.col-sm-7.col-xs-12
                         .col-lg-12.col-md-12.col-sm-12.col-xs-12
-                            .apply.btn.btn-outline.mt10 Apply
+                            a.apply.btn.btn-outline.mt10(href=`/jobs/${job._id}/apply`) Apply
     // ./job-single-section
     include  _footers
     include  _jsPlugin

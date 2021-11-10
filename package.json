@@ -7,8 +7,8 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "start:prod": "SET NODE_ENV=production& nodemon server.js",
     "start": "nodemon server.js",
-    "watch:js": "parcel watch ./public/Js_Files/index.js --out-dir ./public/Js_Files --out-file bundle.js --public-url ./",
-    "build:js": "parcel build ./public/Js_Files/index.js --out-dir ./public/Js_Files --out-file bundle.js --public-url ./"
+    "watch:js": "parcel watch regenerator-runtime/runtime.js ./public/Js_Files/index.js --out-dir ./public/Js_Files --out-file bundle.js --public-url ./",
+    "build:js": "parcel build regenerator-runtime/runtime.js ./public/Js_Files/index.js --out-dir ./public/Js_Files --out-file bundle.js --public-url ./"
   },
   "author": "Oladele Tobiloba",
   "license": "ISC",
@@ -16,6 +16,7 @@
     "axios": "^0.23.0",
     "bcrypt": "^5.0.1",
     "cloudinary": "^1.26.3",
+    "cookie-parser": "^1.4.5",
     "core-js": "^2.6.12",
     "dotenv": "^8.2.0",
     "express": "^4.17.1",
@@ -34,6 +35,7 @@
     "nodemon": "^2.0.2",
     "parcel": "^2.0.0-rc.0",
     "pug": "^3.0.2",
+    "regenerator-runtime": "^0.13.9",
     "save-dev": "0.0.1-security",
     "slugify": "^1.5.0",
     "validator": "^13.6.0",

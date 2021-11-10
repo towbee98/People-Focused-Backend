@@ -1,5 +1,6 @@
-import "core-js";
-
+//import "core-js";
+import 'regenerator-runtime/runtime'
+import {login} from "./login.js"
 
 if (
   document.querySelector(".previous-page") ||
@@ -56,7 +57,17 @@ if (document.querySelector(".apply")) {
   document.querySelectorAll(".apply").forEach((el) => {
     el.addEventListener("click", (e) => {
       // e.preventDefault();
+
       console.log("apply button was clicked");
     });
   });
+}
+
+if(document.forms.login){
+  document.forms[0][2].addEventListener("click",async (e)=>{
+      e.preventDefault();
+      const email=document.forms.login.elements.email.value;
+      const password= document.forms.login.elements.password.value;
+      await login(email,password);
+  })
 }

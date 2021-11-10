@@ -15,7 +15,7 @@ block content
                     .service-data.mb30
                         .post-job-description(style='max-width: 600px;')
                             h1.mb30.text-center Sign In
-                            form(action='#' method='POST')
+                            form(action='#' method='POST' name="login")
                                 .row
                                     .col-lg-12.col-md-12.col-sm-12.col-xs-12
                                         .form-group
@@ -26,7 +26,18 @@ block content
                                             label.control-label.sr-only(for='password') Password
                                             input#password.form-control(type='password' name='password' placeholder='Password*' required)
                                     .col-lg-12.col-md-12.col-sm-12.col-xs-12
-                                        button#submit-job-details.btn.btn-primary.btn-lg(type='submit') Submit
+                                        button#submit-job-details.btn.btn-primary.btn-lg(type='submit') Submit 
+                                        |
+                                        |
+                                        span.alert.alert-success(role="alert" style="display:none")
+                                            span(class="glyphicon glyphicon-ok" aria-hidden="true")
+                                            |
+                                            | Login Successful
+                                        |
+                                        span.alert.alert-danger(role="alert" style="display:none")
+                                            span(class="glyphicon glyphicon-warning-sign" aria-hidden="true")
+                                            |
+                                            | Error Signing In
                                     .col-lg-12.col-md-12.col-sm-12.col-xs-12
                                         | Forgot your password?
                                         |
