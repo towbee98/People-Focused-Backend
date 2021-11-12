@@ -16,3 +16,19 @@ export const login = async (email,password)=>{
         return displayMessage("error");
     }
 }
+
+export const signUp =async (firstname,lastName,email,password,passwordConfirm)=>{
+    try {
+        const res=await axios({
+            method:"POST",
+            url:"/api/v1/users/signup",
+            data:{
+                firstname,lastName,email,password,passwordConfirm
+            }
+        })
+       return displayMessage(res.data.status);
+    } catch (err) {
+        console.log(err)
+        return displayMessage("error")
+    }
+}

@@ -2995,7 +2995,7 @@ exports.displayMessage = displayMessage;
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.login = void 0;
+exports.signUp = exports.login = void 0;
 
 var _axios = _interopRequireDefault(require("axios"));
 
@@ -3048,6 +3048,52 @@ var login = /*#__PURE__*/function () {
 }();
 
 exports.login = login;
+
+var signUp = /*#__PURE__*/function () {
+  var _ref2 = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee2(firstname, lastName, email, password, passwordConfirm) {
+    var res;
+    return regeneratorRuntime.wrap(function _callee2$(_context2) {
+      while (1) {
+        switch (_context2.prev = _context2.next) {
+          case 0:
+            _context2.prev = 0;
+            _context2.next = 3;
+            return (0, _axios.default)({
+              method: "POST",
+              url: "/api/v1/users/signup",
+              data: {
+                firstname: firstname,
+                lastName: lastName,
+                email: email,
+                password: password,
+                passwordConfirm: passwordConfirm
+              }
+            });
+
+          case 3:
+            res = _context2.sent;
+            return _context2.abrupt("return", (0, _display.displayMessage)(res.data.status));
+
+          case 7:
+            _context2.prev = 7;
+            _context2.t0 = _context2["catch"](0);
+            console.log(_context2.t0);
+            return _context2.abrupt("return", (0, _display.displayMessage)("error"));
+
+          case 11:
+          case "end":
+            return _context2.stop();
+        }
+      }
+    }, _callee2, null, [[0, 7]]);
+  }));
+
+  return function signUp(_x3, _x4, _x5, _x6, _x7) {
+    return _ref2.apply(this, arguments);
+  };
+}();
+
+exports.signUp = signUp;
 },{"axios":"../../node_modules/axios/index.js","./display":"display.js"}],"index.js":[function(require,module,exports) {
 "use strict";
 
@@ -3213,6 +3259,37 @@ if (document.forms.login) {
     };
   }());
 }
+
+if (document.forms.signUp) {
+  document.forms[0][5].addEventListener("click", /*#__PURE__*/function () {
+    var _ref5 = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee5(e) {
+      var firstname, lastname, email, password, passwordConfirm;
+      return regeneratorRuntime.wrap(function _callee5$(_context5) {
+        while (1) {
+          switch (_context5.prev = _context5.next) {
+            case 0:
+              e.preventDefault();
+              firstname = document.forms.signUp.elements.firstname.value;
+              lastname = document.forms.signUp.elements.lastname.value;
+              email = document.forms.signUp.elements.email.value;
+              password = document.forms.signUp.elements.password.value;
+              passwordConfirm = document.forms.signUp.elements.passwordConfirm.value;
+              _context5.next = 8;
+              return (0, _login.signUp)(firstname, lastname, email, password, passwordConfirm);
+
+            case 8:
+            case "end":
+              return _context5.stop();
+          }
+        }
+      }, _callee5);
+    }));
+
+    return function (_x5) {
+      return _ref5.apply(this, arguments);
+    };
+  }());
+}
 },{"regenerator-runtime/runtime":"../../node_modules/regenerator-runtime/runtime.js","./login.js":"login.js"}],"../../node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
 var global = arguments[3];
 var OVERLAY_ID = '__parcel__error__overlay__';
@@ -3241,7 +3318,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "63933" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "55623" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};

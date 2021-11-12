@@ -15,12 +15,16 @@ block content
                     .service-data.mb30
                         .post-job-description(style='max-width: 600px;')
                             h1.mb30.text-center Sign Up
-                            form(action='#' method='POST')
+                            form(action='#' method='POST' name="signUp")
                                 .row
                                     .col-lg-12.col-md-12.col-sm-12.col-xs-12
                                         .form-group
-                                            label.control-label.sr-only(for='name') Name
-                                            input#name.form-control(type='text' name='name' placeholder='Name*' required)
+                                            label.control-label.sr-only(for='name') First Name
+                                            input#firstname.form-control(type='text' name='firstname' placeholder='First Name*' required)
+                                    .col-lg-12.col-md-12.col-sm-12.col-xs-12
+                                        .form-group
+                                            label.control-label.sr-only(for='name') Last Name
+                                            input#lastname.form-control(type='text' name='lastname' placeholder='Last Name*' required)
                                     .col-lg-12.col-md-12.col-sm-12.col-xs-12
                                         .form-group
                                             label.control-label.sr-only(for='email') Email
@@ -35,10 +39,21 @@ block content
                                             input#passwordConfirm.form-control(type='password' name='passwordConfirm' placeholder='PasswordConfirm*' required)
                                     .col-lg-12.col-md-12.col-sm-12.col-xs-12
                                         button#submit-job-details.btn.btn-primary.btn-lg(type='submit') Submit
+                                        |
+                                        |
+                                        span.alert.alert-success(role="alert" style="display:none")
+                                            span(class="glyphicon glyphicon-ok" aria-hidden="true")
+                                            |
+                                            | Sign up Successful
+                                        |
+                                        span.alert.alert-danger(role="alert" style="display:none")
+                                            span(class="glyphicon glyphicon-warning-sign" aria-hidden="true")
+                                            |
+                                            | Error Signing up
                                     .col-lg-12.col-md-12.col-sm-12.col-xs-12
                                         | Already have an account?
                                         |
-                                        a(href='/Login.html') Click here to login.
+                                        a(href='/login') Click here to login.
                     .col-lg-4.col-md-4.col-sm-5.col-xs-12
                         // sidenav-section
                         .sidenav
