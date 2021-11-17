@@ -3,7 +3,7 @@ html
     head
         meta(name='viewport' content='width=device-width')
         meta(http-equiv='Content-Type' content='text/html; charset=UTF-8')
-        title=subject
+        title= subject
         include _style 
     body
         span.preheader
@@ -21,26 +21,15 @@ html
                                         tr
                                             td
                                                 // Content
-                                                p Welcome ,
-                                                p Welcome to people focused , we are glad to have you . 
-                                                table.btn.btn-primary(role='presentation' border='0' cellpadding='0' cellspacing='0' style='box-sizing: border-box;')
-                                                    tbody
-                                                        tr
-                                                            td(align='left' style='padding-bottom: 15px;')
-                                                                table(role='presentation' border='0' cellpadding='0' cellspacing='0')
-                                                                    tbody
-                                                                        tr
-                                                                            td
-                                                                                a(href='http://htmlemail.io' target='_blank') Call To Action
-                                                p This is a really simple email template. Its sole purpose is to get the recipient to click the button with no distractions.
-                                                p Good luck! Hope it works.
+                                                block content
+                                                   
                             // END MAIN CONTENT AREA
                             // START FOOTER
                             .footer
                                 table(role='presentation' border='0' cellpadding='0' cellspacing='0')
                                     tr
                                         td.content-block
-                                            span.apple-link Company Inc, 3 Abbey Road, San Francisco CA 94102
+                                            span.apple-link 171 Owonrosoki-Oshodi Express Way 1st Pedro Bus-Stop, Beside Ecobank Gbagada Lagos
                                             br
                                             | Don't like these emails?
                                             a(href='http://i.imgur.com/CScmqnj.gif' style='text-decoration: underline;') Unsubscribe

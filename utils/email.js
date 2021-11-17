@@ -1,6 +1,6 @@
 const nodemailer = require("nodemailer");
 const pug = require("pug");
-const {convert}=require("html-to-text");
+const {convert} = require("html-to-text");
 
 module.exports= class Email{
   constructor(user,url){
@@ -26,8 +26,9 @@ module.exports= class Email{
   }
    //Send the actual email
   async send(template,subject){
+
    //1. Render html based on a pug template
-   const html =pug.render(`./../views/emails/${template}.pug`,{
+   const html =pug.render(`../views/emails/${template}.pug`,{
      firstName:this.firstName,
      url:this.url,
      subject,
@@ -43,9 +44,8 @@ module.exports= class Email{
    //3. Define a transport and send email
    await this.newTransport().sendMail(mailOptions)
   }
-
   async sendWelcome(){
-    await this.send("Welcome","Welcome to peopleFocusedNg.com")
+    await this.send("welcome","Welcome to peopleFocusedNg.com")
   }
 }
 
