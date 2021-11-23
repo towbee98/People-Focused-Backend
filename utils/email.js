@@ -15,24 +15,27 @@ module.exports= class Email{
       //Gmail
     return 1
     }
-    return  nodemailer.createTransport({
-      host: process.env.Email_Host,
-      port: process.env.Email_Port,
-      auth: {
-        user: process.env.Email_Username,
-        pass: process.env.Email_Password,
-      },
-    });
+    else{
+      return  nodemailer.createTransport({
+        host: process.env.Email_Host,
+        port: process.env.Email_Port,
+        auth: {
+          user: process.env.Email_Username,
+          pass: process.env.Email_Password,
+        },
+      });
+    }
   }
-   //Send the actual email
+  
+  //Send the actual email
   async send(template,subject){
-
    //1. Render html based on a pug template
-   const html =pug.render(`../views/emails/${template}.pug`,{
-     firstName:this.firstName,
+   const html =pug.renderFile(`views/emails/${template}.pug`,{
+     firstname:this.firstName,
      url:this.url,
      subject,
    })
+  //  console.log(html)
    //2. Define email options
    const mailOptions = {
     from: this.from,

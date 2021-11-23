@@ -6,7 +6,6 @@ style.
     RESPONSIVE AND MOBILE FRIENDLY STYLES
     ------------------------------------- */
     body{
-        background-color: #f6f6f6;
         font-family: sans-serif;
         -webkit-font-smoothing: antialiased; 
         font-size: 14px;
@@ -33,7 +32,7 @@ style.
         mso-table-lspace: 0pt; 
         mso-table-rspace: 0pt; 
         width: 100%; 
-        background-color: #f6f6f6;
+        background-color:white;
     }
     table.container{
         font-family: sans-serif; 
@@ -76,12 +75,17 @@ style.
         width: 100%;
 
     }
+    h2{
+        color:black;
+        font-weight:bold;
+    }
     p{
         font-family: sans-serif; 
         font-size: 14px; 
-        font-weight: normal; 
+        font-weight: bold; 
         margin: 0; 
         margin-bottom: 15px;
+        color:black;
     }
     td > table{
         border-collapse: separate; 
@@ -90,19 +94,20 @@ style.
         width: auto;
     }
     tr > td{
-        background-color: #3498db;
+        background-color: white;
         border-radius: 5px; 
         text-align: center;
     }
     td > a{
         display: inline-block; 
-        color: #ffffff; 
-        background-color: #3498db; 
+        color: white; 
+        background-color: red; 
         border: solid 1px #3498db; 
         border-radius: 5px; 
         box-sizing: border-box; 
         cursor: pointer; 
-        text-decoration: none; 
+        text-decoration: none;
+        text-align:center;
         font-size: 14px; 
         font-weight: bold; 
         margin: 0; 
@@ -112,7 +117,7 @@ style.
     }
     .footer{
         clear: both; 
-        Margin-top: 10px; 
+        margin-top: 10px; 
         text-align: center; 
         width: 100%;
     }
@@ -132,41 +137,41 @@ style.
         text-align: center;
     }
     @media only screen and (max-width: 620px) {
-    table[class=body] h1 {
+    table.body h1 {
     font-size: 28px !important;
     margin-bottom: 10px !important;
     }
-    table[class=body] p,
-    table[class=body] ul,
-    table[class=body] ol,
-    table[class=body] td,
-    table[class=body] span,
-    table[class=body] a {
+    table.body p,
+    table.body ul,
+    table.body ol,
+    table.body td,
+    table.body span,
+    table.body a {
     font-size: 16px !important;
     }
-    table[class=body] .wrapper,
-    table[class=body] .article {
+    table.body .wrapper,
+    table.body .article {
     padding: 10px !important;
     }
-    table[class=body] .content {
+    table.body .content {
     padding: 0 !important;
     }
-    table[class=body] .container {
+    table.body .container {
     padding: 0 !important;
     width: 100% !important;
     }
-    table[class=body] .main {
+    table.body .main {
     border-left-width: 0 !important;
     border-radius: 0 !important;
     border-right-width: 0 !important;
     }
-    table[class=body] .btn table {
+    table.body .btn table {
     width: 100% !important;
     }
-    table[class=body] .btn a {
+    table.body .btn a {
     width: 100% !important;
     }
-    table[class=body] .img-responsive {
+    table.body .img-responsive {
     height: auto !important;
     max-width: 100% !important;
     width: auto !important;

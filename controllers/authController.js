@@ -23,7 +23,7 @@ const SendToken = async (user, statusCode, res) => {
 
   if (process.env.NODE_ENV === "production") cookieOptions.secure = true;
 
-  console.log(res.cookie("jwt", token, cookieOptions));
+  res.cookie("jwt", token, cookieOptions);
 
   if (statusCode === 201) {
     // for sign up
@@ -53,7 +53,7 @@ exports.signUp = catchAsync(async (req, res) => {
     passwordChangedAt: req.body.passwordChangedAt,
     role: req.body.role,
   });
-  url=0;
+  url=`#`;
   newUser.password = undefined;
   await new Email(newUser,url).sendWelcome();
   SendToken(newUser, 201, res);
