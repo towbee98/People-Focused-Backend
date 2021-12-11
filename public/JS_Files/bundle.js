@@ -2978,8 +2978,10 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.displayMessage = void 0;
 
-var displayMessage = function displayMessage(status) {
+var displayMessage = function displayMessage(status, message) {
+  // console.log(message)
   if (status === "success") {
+    console.log(document.querySelector(".alert-success").firstElementChild);
     document.querySelector(".alert-success").style.display = "inline";
     document.querySelector(".alert-danger").style.display = "none";
   } else {
@@ -3032,7 +3034,7 @@ var login = /*#__PURE__*/function () {
           case 7:
             _context.prev = 7;
             _context.t0 = _context["catch"](0);
-            return _context.abrupt("return", (0, _display.displayMessage)("error"));
+            return _context.abrupt("return", (0, _display.displayMessage)(_context.t0.message));
 
           case 10:
           case "end":
@@ -3050,45 +3052,46 @@ var login = /*#__PURE__*/function () {
 exports.login = login;
 
 var signUp = /*#__PURE__*/function () {
-  var _ref2 = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee2(firstname, lastName, email, password, passwordConfirm) {
+  var _ref2 = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee2(userDetails) {
     var res;
     return regeneratorRuntime.wrap(function _callee2$(_context2) {
       while (1) {
         switch (_context2.prev = _context2.next) {
           case 0:
             _context2.prev = 0;
-            _context2.next = 3;
+            console.log(userDetails);
+            _context2.next = 4;
             return (0, _axios.default)({
               method: "POST",
               url: "/api/v1/users/signup",
               data: {
-                firstname: firstname,
-                lastName: lastName,
-                email: email,
-                password: password,
-                passwordConfirm: passwordConfirm
+                firstname: userDetails.firstname,
+                lastName: userDetails.lastname,
+                email: userDetails.email,
+                password: userDetails.password,
+                passwordConfirm: userDetails.passwordConfirm
               }
             });
 
-          case 3:
+          case 4:
             res = _context2.sent;
-            return _context2.abrupt("return", (0, _display.displayMessage)(res.data.status));
+            return _context2.abrupt("return", (0, _display.displayMessage)(res.data.status, res.data.data.message));
 
-          case 7:
-            _context2.prev = 7;
+          case 8:
+            _context2.prev = 8;
             _context2.t0 = _context2["catch"](0);
             console.log(_context2.t0);
-            return _context2.abrupt("return", (0, _display.displayMessage)("error"));
+            return _context2.abrupt("return", (0, _display.displayMessage)(_context2.t0.message));
 
-          case 11:
+          case 12:
           case "end":
             return _context2.stop();
         }
       }
-    }, _callee2, null, [[0, 7]]);
+    }, _callee2, null, [[0, 8]]);
   }));
 
-  return function signUp(_x3, _x4, _x5, _x6, _x7) {
+  return function signUp(_x3) {
     return _ref2.apply(this, arguments);
   };
 }();
@@ -3263,7 +3266,7 @@ if (document.forms.login) {
 if (document.forms.signUp) {
   document.forms[0][5].addEventListener("click", /*#__PURE__*/function () {
     var _ref5 = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee5(e) {
-      var firstname, lastname, email, password, passwordConfirm;
+      var firstname, lastname, email, password, passwordConfirm, userDetails;
       return regeneratorRuntime.wrap(function _callee5$(_context5) {
         while (1) {
           switch (_context5.prev = _context5.next) {
@@ -3274,10 +3277,17 @@ if (document.forms.signUp) {
               email = document.forms.signUp.elements.email.value;
               password = document.forms.signUp.elements.password.value;
               passwordConfirm = document.forms.signUp.elements.passwordConfirm.value;
-              _context5.next = 8;
-              return (0, _login.signUp)(firstname, lastname, email, password, passwordConfirm);
+              userDetails = {
+                firstname: firstname,
+                lastname: lastname,
+                email: email,
+                password: password,
+                passwordConfirm: passwordConfirm
+              };
+              _context5.next = 9;
+              return (0, _login.signUp)(userDetails);
 
-            case 8:
+            case 9:
             case "end":
               return _context5.stop();
           }
@@ -3318,7 +3328,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "60431" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "56700" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};

@@ -56,6 +56,15 @@ const userSchema = new mongoose.Schema({
     type: Boolean,
     default: true,
   },
+  status:{
+    type:String,
+    default:"Pending"
+  },
+  confirmationCode:{
+    type:String,
+    unique:true,
+    select:false
+  }
 });
 
 userSchema.pre("save", async function (next) {

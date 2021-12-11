@@ -1,17 +1,17 @@
 const { promisify } = require("util");
 const crypto = require("crypto");
 const jwt = require("jsonwebtoken");
-
 const User = require("../models/userModel");
 const catchAsync = require("../utils/catchAsync");
 const AppError = require("../utils/appErrors");
 const Email = require("../utils/email");
 
 // This function generates a token for a logged in user
-const signToken = (id) =>
+const signToken = (id) =>{
   jwt.sign({ id }, process.env.SECRET_KEY, {
     expiresIn: "4h",
   });
+}
 
 const SendToken = async (user, statusCode, res) => {
   const token = await signToken(user._id);
@@ -44,19 +44,31 @@ const SendToken = async (user, statusCode, res) => {
 };
 
 exports.signUp = catchAsync(async (req, res) => {
+  const confirmCode= jwt.sign({email:req.body.email},process.env.SECRET_KEY);
   const newUser = await User.create({
     firstname: req.body.firstname,
     lastName: req.body.lastName,
     email: req.body.email,
     password: req.body.password,
     passwordConfirm: req.body.passwordConfirm,
-    passwordChangedAt: req.body.passwordChangedAt,
+    confirmationCode:confirmCode,
     role: req.body.role,
   });
-  url=`#`;
+  //console.log(confirmCode);
+  url=`${req.protocol}://${req.get("host")}/api/v1/users/confirm/${confirmCode}`;
   newUser.password = undefined;
+  newUser.confirmationCode=undefined;
+  //Send confirmation to the new user's email
   await new Email(newUser,url).sendWelcome();
-  SendToken(newUser, 201, res);
+  //return response to the user 
+    res.status(201).json({
+      status: "success",
+      data: {
+        message:"Account created successfully.Check your email to verify your account.",
+        newUser
+      },
+    });
+  //SendToken(newUser, 201, res);
 });
 
 exports.login = catchAsync(async (req, res, next) => {
@@ -74,6 +86,9 @@ exports.login = catchAsync(async (req, res, next) => {
     return next(new AppError("Incorrect email or password", 401));
   }
 
+  if(user.status != "Active"){
+    return next(new AppError("Pending account .Please verify your email",401))
+  }
   SendToken(user, 200, res);
 });
 
@@ -263,3 +278,22 @@ exports.updatePassword = catchAsync(async (req, res, next) => {
   // Log the user in again
   SendToken(user, 200, res);
 });
+
+
+exports.verifyUser= catchAsync(async(req,res,next)=>{
+  //find the user and activate the account .
+  const user= await User.findOneAndUpdate({confirmationCode:req.params.confirmCode},{status:"Active"},{
+    new:true,
+    runValidators:true
+  });
+  if(!user) {
+      return res.status(404).json({
+      status:"fail",
+      message:"User not found"
+    })
+  };
+  res.status(200).json({
+    status:"success",
+    message:"Your account has now been activated successfully"
+  })
+})

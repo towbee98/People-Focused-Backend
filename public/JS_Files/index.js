@@ -80,6 +80,7 @@ if(document.forms.signUp){
     const email= document.forms.signUp.elements.email.value;
     const password= document.forms.signUp.elements.password.value;
     const passwordConfirm=document.forms.signUp.elements.passwordConfirm.value;
-    await signUp(firstname,lastname,email,password,passwordConfirm)
+    const userDetails= {firstname,lastname,email,password,passwordConfirm};
+    await signUp(userDetails);
   })
 }
