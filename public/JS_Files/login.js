@@ -33,7 +33,10 @@ export const signUp =async (userDetails)=>{
         })
        return  displayMessage(res.data.status,res.data.data.message);
     } catch (err) {
-        console.log(err)
-        return displayMessage(err.message);
+        if(err.response){
+            console.log(err.response);
+            return displayMessage('error',err.response.data.message);
+        }
+        return displayMessage('error',err.message);
     }
 }

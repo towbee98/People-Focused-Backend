@@ -43,7 +43,7 @@ const SendToken = async (user, statusCode, res) => {
   }
 };
 
-exports.signUp = catchAsync(async (req, res) => {
+exports.signUp = catchAsync(async (req, res,next) => {
   const confirmCode= jwt.sign({email:req.body.email},process.env.SECRET_KEY);
   const newUser = await User.create({
     firstname: req.body.firstname,

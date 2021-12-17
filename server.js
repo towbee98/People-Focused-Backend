@@ -35,6 +35,7 @@ const start = async () => {
     }
   );
   const PORT = process.env.PORT || 3001;
+  
   // eslint-disable-next-line global-require
   const app = require("./app");
 

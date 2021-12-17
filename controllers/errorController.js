@@ -17,9 +17,12 @@ const handleDuplicateErrorDB = (err) => {
   const extractedDuplicateValue = err.message.match(
     /([""'])(?:(?=(\\?))\2.)*?\1/g
   );
-  //console.log(quotedValue);
-  const message = `Duplicate field value(s): ${extractedDuplicateValue}, Try using another value(s)`;
-  return new AppError(message, 400);
+  const duplicateEmail= err.message.match(/email/i)[0];
+  if(duplicateEmail=="email"){
+    return new AppError("Email already exists, Try another one!", 400);
+  }
+    const message = `Duplicate field value(s): ${extractedDuplicateValue}, Try using another value(s)`;
+    return new AppError(message, 400);
 };
 
 //handles validation error
@@ -29,6 +32,7 @@ const handleValidationErrorDB = (err) => {
   return new AppError(message, 400);
 };
 const sendErrorDev = (err, res) => {
+  //console.log(err);
   res.status(err.statusCode).json({
     status: err.statusCode,
     error: err,
@@ -38,13 +42,14 @@ const sendErrorDev = (err, res) => {
 };
 
 const sendErrorProd = (err, res) => {
+  //console.log(err);
   if (err.isOperational) {
     res.status(err.statusCode).json({
       status: err.status,
       message: err.message,
     });
   } else {
-    // console.log("🦡🎆 Error:", err);
+    console.log("🦡🎆 Error:", err);
     res.status(500).json({
       status: "error",
       message: "🔥 Oops , Something went wrong!",
@@ -74,7 +79,7 @@ module.exports = (err, req, res, next) => {
       error = handleJWTError(error);
     }
     sendErrorProd(error, res);
-  } else if (process.env.NODE_ENV === "development") {
+  }else{
     sendErrorDev(err, res);
   }
 };

@@ -32,8 +32,8 @@ const userSchema = new mongoose.Schema({
   passwordConfirm: {
     type: String,
     required: [true, "Enter a valid passwordConfirm"],
-    maxlength: [10, "Sorry passwordConfirm cannot exceed 10 characters"],
-    minlength: [7, "Sorry Password cannot be less than the 7 characters"],
+    maxlength: [10, "PasswordConfirm cannot exceed 10 characters"],
+    minlength: [7, " PasswordConfirm cannot be less than 7 characters"],
     validate: {
       validator: function (value) {
         return value === this.password;

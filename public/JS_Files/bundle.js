@@ -2981,10 +2981,11 @@ exports.displayMessage = void 0;
 var displayMessage = function displayMessage(status, message) {
   // console.log(message)
   if (status === "success") {
-    console.log(document.querySelector(".alert-success").firstElementChild);
+    document.querySelector(".alert-success").firstElementChild.textContent = message;
     document.querySelector(".alert-success").style.display = "inline";
     document.querySelector(".alert-danger").style.display = "none";
   } else {
+    document.querySelector(".alert-danger").firstElementChild.textContent = message;
     document.querySelector(".alert-success").style.display = "none";
     document.querySelector(".alert-danger").style.display = "inline";
   }
@@ -3080,10 +3081,19 @@ var signUp = /*#__PURE__*/function () {
           case 8:
             _context2.prev = 8;
             _context2.t0 = _context2["catch"](0);
-            console.log(_context2.t0);
-            return _context2.abrupt("return", (0, _display.displayMessage)(_context2.t0.message));
 
-          case 12:
+            if (!_context2.t0.response) {
+              _context2.next = 13;
+              break;
+            }
+
+            console.log(_context2.t0.response);
+            return _context2.abrupt("return", (0, _display.displayMessage)('error', _context2.t0.response.data.message));
+
+          case 13:
+            return _context2.abrupt("return", (0, _display.displayMessage)('error', _context2.t0.message));
+
+          case 14:
           case "end":
             return _context2.stop();
         }
@@ -3328,7 +3338,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "56700" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "56521" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};
