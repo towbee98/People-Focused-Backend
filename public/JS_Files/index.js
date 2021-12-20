@@ -1,6 +1,6 @@
 //import "core-js";
 import 'regenerator-runtime/runtime'
-import {login,signUp} from "./login.js"
+import {login,signUp,forgotPassword,resetPassword} from "./login.js"
 
 if (
   document.querySelector(".previous-page") ||
@@ -82,5 +82,25 @@ if(document.forms.signUp){
     const passwordConfirm=document.forms.signUp.elements.passwordConfirm.value;
     const userDetails= {firstname,lastname,email,password,passwordConfirm};
     await signUp(userDetails);
+  })
+}
+
+if(document.forms.forgetPassword){
+  document.forms[0][1].addEventListener("click",async(e)=>{
+    e.preventDefault();
+    const userEmail= document.forms.forgetPassword.elements.email.value;
+    await forgotPassword(userEmail);
+  }) 
+}
+
+if(document.forms.resetPassword){
+  //console.log(location.pathname.split('/')[2]);
+  document.forms[0][2].addEventListener("click",async(e)=>{
+    e.preventDefault();
+    const newPassword= document.forms.resetPassword.elements.password.value;
+    const newPasswordConfirm= document.forms.resetPassword.elements.passwordConfirm.value;
+    const passwordDetails= {newPassword,newPasswordConfirm};
+    const resetToken=location.pathname.split('/')[2];
+    await resetPassword(passwordDetails,resetToken);
   })
 }

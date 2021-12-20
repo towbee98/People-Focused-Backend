@@ -2979,7 +2979,6 @@ Object.defineProperty(exports, "__esModule", {
 exports.displayMessage = void 0;
 
 var displayMessage = function displayMessage(status, message) {
-  // console.log(message)
   if (status === "success") {
     document.querySelector(".alert-success").firstElementChild.textContent = message;
     document.querySelector(".alert-success").style.display = "inline";
@@ -2998,7 +2997,7 @@ exports.displayMessage = displayMessage;
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.signUp = exports.login = void 0;
+exports.signUp = exports.resetPassword = exports.login = exports.forgotPassword = void 0;
 
 var _axios = _interopRequireDefault(require("axios"));
 
@@ -3030,14 +3029,28 @@ var login = /*#__PURE__*/function () {
 
           case 3:
             res = _context.sent;
-            return _context.abrupt("return", (0, _display.displayMessage)(res.data.status));
+            return _context.abrupt("return", (0, _display.displayMessage)(res.data.status, "Login Successful"));
 
           case 7:
             _context.prev = 7;
             _context.t0 = _context["catch"](0);
-            return _context.abrupt("return", (0, _display.displayMessage)(_context.t0.message));
 
-          case 10:
+            if (!_context.t0.response) {
+              _context.next = 12;
+              break;
+            }
+
+            console.log(_context.t0.response);
+            return _context.abrupt("return", (0, _display.displayMessage)('error', _context.t0.response.data.message));
+
+          case 12:
+            if (_context.t0.request) {
+              console.log(_context.t0.request);
+            }
+
+            return _context.abrupt("return", (0, _display.displayMessage)('error', _context.t0.message));
+
+          case 14:
           case "end":
             return _context.stop();
         }
@@ -3107,6 +3120,119 @@ var signUp = /*#__PURE__*/function () {
 }();
 
 exports.signUp = signUp;
+
+var forgotPassword = /*#__PURE__*/function () {
+  var _ref3 = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee3(userEmail) {
+    var res;
+    return regeneratorRuntime.wrap(function _callee3$(_context3) {
+      while (1) {
+        switch (_context3.prev = _context3.next) {
+          case 0:
+            _context3.prev = 0;
+            _context3.next = 3;
+            return (0, _axios.default)({
+              method: "POST",
+              url: "/api/v1/users/forgotPassword",
+              data: {
+                email: userEmail
+              }
+            });
+
+          case 3:
+            res = _context3.sent;
+            return _context3.abrupt("return", (0, _display.displayMessage)(res.data.status, res.data.message));
+
+          case 7:
+            _context3.prev = 7;
+            _context3.t0 = _context3["catch"](0);
+            console.log(_context3.t0);
+
+            if (!_context3.t0.response) {
+              _context3.next = 13;
+              break;
+            }
+
+            console.log(_context3.t0.response);
+            return _context3.abrupt("return", (0, _display.displayMessage)('error', _context3.t0.response.data.message));
+
+          case 13:
+            if (_context3.t0.request) {
+              console.log(_context3.t0.request);
+            }
+
+            return _context3.abrupt("return", (0, _display.displayMessage)('error', _context3.t0.message));
+
+          case 15:
+          case "end":
+            return _context3.stop();
+        }
+      }
+    }, _callee3, null, [[0, 7]]);
+  }));
+
+  return function forgotPassword(_x4) {
+    return _ref3.apply(this, arguments);
+  };
+}();
+
+exports.forgotPassword = forgotPassword;
+
+var resetPassword = /*#__PURE__*/function () {
+  var _ref4 = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee4(passwordDetails, resetToken) {
+    var res;
+    return regeneratorRuntime.wrap(function _callee4$(_context4) {
+      while (1) {
+        switch (_context4.prev = _context4.next) {
+          case 0:
+            _context4.prev = 0;
+            _context4.next = 3;
+            return (0, _axios.default)({
+              method: "PATCH",
+              url: "/api/v1/users/resetPassword/".concat(resetToken),
+              data: {
+                password: passwordDetails.newPassword,
+                passwordConfirm: passwordDetails.newPasswordConfirm
+              }
+            });
+
+          case 3:
+            res = _context4.sent;
+            return _context4.abrupt("return", (0, _display.displayMessage)(res.data.status, res.data.message));
+
+          case 7:
+            _context4.prev = 7;
+            _context4.t0 = _context4["catch"](0);
+            console.log(_context4.t0);
+
+            if (!_context4.t0.response) {
+              _context4.next = 13;
+              break;
+            }
+
+            console.log(_context4.t0.response);
+            return _context4.abrupt("return", (0, _display.displayMessage)('error', _context4.t0.response.data.message));
+
+          case 13:
+            if (_context4.t0.request) {
+              console.log(_context4.t0.request);
+            }
+
+            return _context4.abrupt("return", (0, _display.displayMessage)('error', _context4.t0.message));
+
+          case 15:
+          case "end":
+            return _context4.stop();
+        }
+      }
+    }, _callee4, null, [[0, 7]]);
+  }));
+
+  return function resetPassword(_x5, _x6) {
+    return _ref4.apply(this, arguments);
+  };
+}();
+
+exports.resetPassword = resetPassword;
 },{"axios":"../../node_modules/axios/index.js","./display":"display.js"}],"index.js":[function(require,module,exports) {
 "use strict";
 
@@ -3310,6 +3436,67 @@ if (document.forms.signUp) {
     };
   }());
 }
+
+if (document.forms.forgetPassword) {
+  document.forms[0][1].addEventListener("click", /*#__PURE__*/function () {
+    var _ref6 = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee6(e) {
+      var userEmail;
+      return regeneratorRuntime.wrap(function _callee6$(_context6) {
+        while (1) {
+          switch (_context6.prev = _context6.next) {
+            case 0:
+              e.preventDefault();
+              userEmail = document.forms.forgetPassword.elements.email.value;
+              _context6.next = 4;
+              return (0, _login.forgotPassword)(userEmail);
+
+            case 4:
+            case "end":
+              return _context6.stop();
+          }
+        }
+      }, _callee6);
+    }));
+
+    return function (_x6) {
+      return _ref6.apply(this, arguments);
+    };
+  }());
+}
+
+if (document.forms.resetPassword) {
+  //console.log(location.pathname.split('/')[2]);
+  document.forms[0][2].addEventListener("click", /*#__PURE__*/function () {
+    var _ref7 = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee7(e) {
+      var newPassword, newPasswordConfirm, passwordDetails, resetToken;
+      return regeneratorRuntime.wrap(function _callee7$(_context7) {
+        while (1) {
+          switch (_context7.prev = _context7.next) {
+            case 0:
+              e.preventDefault();
+              newPassword = document.forms.resetPassword.elements.password.value;
+              newPasswordConfirm = document.forms.resetPassword.elements.passwordConfirm.value;
+              passwordDetails = {
+                newPassword: newPassword,
+                newPasswordConfirm: newPasswordConfirm
+              };
+              resetToken = location.pathname.split('/')[2];
+              _context7.next = 7;
+              return (0, _login.resetPassword)(passwordDetails, resetToken);
+
+            case 7:
+            case "end":
+              return _context7.stop();
+          }
+        }
+      }, _callee7);
+    }));
+
+    return function (_x7) {
+      return _ref7.apply(this, arguments);
+    };
+  }());
+}
 },{"regenerator-runtime/runtime":"../../node_modules/regenerator-runtime/runtime.js","./login.js":"login.js"}],"../../node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
 var global = arguments[3];
 var OVERLAY_ID = '__parcel__error__overlay__';
@@ -3338,7 +3525,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "56521" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "58520" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};

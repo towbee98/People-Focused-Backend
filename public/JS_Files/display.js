@@ -1,5 +1,4 @@
 export const displayMessage =(status,message)=>{
-   // console.log(message)
    if(status==="success"){
        document.querySelector(".alert-success").firstElementChild.textContent=message;
        document.querySelector(".alert-success").style.display="inline";

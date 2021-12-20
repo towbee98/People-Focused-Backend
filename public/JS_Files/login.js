@@ -10,10 +10,16 @@ export const login = async (email,password)=>{
                 password
             }
         });
-        return displayMessage(res.data.status);
+        return displayMessage(res.data.status,"Login Successful");
     } catch (err) {
-        // console.log(err.message);
-        return displayMessage(err.message);
+        if(err.response){
+            console.log(err.response);
+            return displayMessage('error',err.response.data.message);
+        }
+        if(err.request){
+            console.log(err.request);
+        }
+        return displayMessage('error',err.message);
     }
 }
 
@@ -36,6 +42,55 @@ export const signUp =async (userDetails)=>{
         if(err.response){
             console.log(err.response);
             return displayMessage('error',err.response.data.message);
+        }
+        return displayMessage('error',err.message);
+    }
+}
+
+export const forgotPassword= async(userEmail)=>{
+    try {
+        const res= await axios({
+            method:"POST",
+            url:"/api/v1/users/forgotPassword",
+            data:{
+                email:userEmail
+            }
+        })
+        //console.log(res);
+      // console.log(res.data.status,res.data.message);
+        return  displayMessage(res.data.status,res.data.message);
+    } catch (err) {
+        console.log(err)
+        if(err.response){
+            console.log(err.response);
+            return displayMessage('error',err.response.data.message);
+        }
+        if(err.request){
+            console.log(err.request);
+        }
+        return displayMessage('error',err.message);
+    }
+}
+
+export const resetPassword =async (passwordDetails,resetToken)=>{
+    try {
+        const res= await axios({
+            method:"PATCH",
+            url:`/api/v1/users/resetPassword/${resetToken}`,
+            data:{
+                password:passwordDetails.newPassword,
+                passwordConfirm:passwordDetails.newPasswordConfirm
+            }
+        })
+        return  displayMessage(res.data.status,res.data.message);
+    } catch (err) {
+        console.log(err)
+        if(err.response){
+            console.log(err.response);
+            return displayMessage('error',err.response.data.message);
+        }
+        if(err.request){
+            console.log(err.request);
         }
         return displayMessage('error',err.message);
     }

@@ -21,4 +21,8 @@ viewRouter.route("/about").get(viewController.about);
 viewRouter.route("/signUp").get(viewController.signUp);
 viewRouter.route("/login").get(viewController.login);
 viewRouter.route("/forgetPassword").get(viewController.forgetPassword);
+viewRouter.route("/resetPassword/:resetToken").get(viewController.resetPassword);
+viewRouter
+  .route("/users/confirm/:confirmCode")
+  .get(authController.verifyUser,viewController.verifyUserPage);
 module.exports = viewRouter;

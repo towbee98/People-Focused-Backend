@@ -1,8 +1,10 @@
 // eslint-disable-next-line prettier/prettier
 const Job = require("../models/jobModel");
+const User= require("../models/userModel");
 const APIFEATURES = require("../utils/apiFeatures");
 const catchAsync = require("../utils/catchAsync");
 const AppError = require("../utils/appErrors");
+const { async } = require("regenerator-runtime");
 
 exports.homePage = (req, res) => {
   // Sets content security policy to allow access from other domain
@@ -116,6 +118,14 @@ exports.forgetPassword = catchAsync(async (req, res) => {
     .render("forgetPassword");
 });
 
+exports.resetPassword =catchAsync (async(req,res)=>{
+  const resetToken= req.params.resetToken;
+  res
+    .status(200)
+    .header("Content-Security-Policy","img-src 'self' data: https:")
+    .render("resetPassword",{resetToken})
+})
+
 exports.jobApply = catchAsync(async (req, res) => {
   res
     .status(200)
@@ -123,3 +133,9 @@ exports.jobApply = catchAsync(async (req, res) => {
     .render("job_apply");
 });
 
+exports.verifyUserPage= catchAsync(async (req,res)=>{
+  res
+  .status(200)
+  .header("Content-Security-Policy","img-src 'self' data: https:")
+  .render("confirmation_page")
+})

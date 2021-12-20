@@ -6,41 +6,23 @@ const catchAsync = require("../utils/catchAsync");
 const AppError = require("../utils/appErrors");
 const Email = require("../utils/email");
 
-// This function generates a token for a logged in user
-const signToken = (id) =>{
-  jwt.sign({ id }, process.env.SECRET_KEY, {
-    expiresIn: "4h",
-  });
-}
 
+//Send token for logged in users 
 const SendToken = async (user, statusCode, res) => {
-  const token = await signToken(user._id);
-
+  const token = jwt.sign({ id:user._id }, process.env.SECRET_KEY, {expiresIn: "4h"});
   const cookieOptions = {
     expires: new Date(Date.now() + 4 * 60 * 60 * 1000),
     httpOnly: true,
   };
-
   if (process.env.NODE_ENV === "production") cookieOptions.secure = true;
 
   res.cookie("jwt", token, cookieOptions);
 
-  if (statusCode === 201) {
-    // for sign up
-    res.status(statusCode).json({
-      status: "success",
-      token,
-      data: {
-        user,
-      },
-    });
-  } else {
-    // for login
-    res.status(statusCode).json({
+  res.status(statusCode).json({
       status: "success",
       token,
     });
-  }
+
 };
 
 exports.signUp = catchAsync(async (req, res,next) => {
@@ -55,7 +37,7 @@ exports.signUp = catchAsync(async (req, res,next) => {
     role: req.body.role,
   });
   //console.log(confirmCode);
-  url=`${req.protocol}://${req.get("host")}/api/v1/users/confirm/${confirmCode}`;
+  url=`${req.protocol}://${req.get("host")}/users/confirm/${confirmCode}`;
   newUser.password = undefined;
   newUser.confirmationCode=undefined;
   //Send confirmation to the new user's email
@@ -89,7 +71,7 @@ exports.login = catchAsync(async (req, res, next) => {
   if(user.status != "Active"){
     return next(new AppError("Pending account .Please verify your email",401))
   }
-  SendToken(user, 200, res);
+  await SendToken(user, 200, res);
 });
 
 exports.protect = catchAsync(async (req, res, next) => {
@@ -200,22 +182,9 @@ exports.forgotPassword = catchAsync(async (req, res, next) => {
   // Send token to the user email
   const resetUrl = `${req.protocol}://${req.get(
     "host"
-  )}/api/v1/users/resetPassword/${resetToken}`;
-
-  const message = `Hello ${user.email} \n
-   Someone has requested a link to change your password.
-   You can do this by submitting a patch request with your new password and passwordConfirm to the link below.\n
-   ${resetUrl}.\n If you did not forget your password , please ignore this email`;
-
-  const subject = `Reset Password Instruction for your PeopleFocused Account(Valid for 10 mins)`;
-
-  // Send the mail containing the password reset token  to the user specified email
+  )}/resetPassword/${resetToken}`;
   try {
-    // await sendEmail({
-    //   email: user.email,
-    //   message: message,
-    //   subject: subject,
-    // });
+    await new Email(user,resetUrl).forgetPassword();
 
     res.status(200).json({
       status: "success",
@@ -257,8 +226,13 @@ exports.resetPassword = catchAsync(async (req, res, next) => {
 
   // 3.)Update the passwordChangedAt property
 
-  // 4.) Log the user in ,send the JWT
-  SendToken(user, 200, res);
+  // 4.) Ask the user to login again with the new password
+  res.status(200).json({
+    status:"success",
+    message:"Password changed successfully, Login with the new password credentials"
+  })
+  // // 4.) Log the user in ,send the JWT
+  // SendToken(user, 200, res);
 });
 
 exports.updatePassword = catchAsync(async (req, res, next) => {
@@ -287,13 +261,16 @@ exports.verifyUser= catchAsync(async(req,res,next)=>{
     runValidators:true
   });
   if(!user) {
-      return res.status(404).json({
-      status:"fail",
-      message:"User not found"
-    })
+    //   return res.status(404).json({
+    //   status:"fail",
+    //   message:"User not found"
+    // })
+    return next(new AppError("User not found",404));
   };
-  res.status(200).json({
-    status:"success",
-    message:"Your account has now been activated successfully"
-  })
+
+  next();
+  // res.status(200).json({
+  //   status:"success",
+  //   message:"Your account has now been activated successfully"
+  // })
 })
