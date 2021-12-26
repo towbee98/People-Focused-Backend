@@ -1,6 +1,6 @@
 //import "core-js";
 import 'regenerator-runtime/runtime'
-import {login,signUp,forgotPassword,resetPassword} from "./login.js"
+import {login,signUp,forgotPassword,resetPassword,postJobHandler} from "./login.js"
 
 if (
   document.querySelector(".previous-page") ||
@@ -73,14 +73,15 @@ if(document.forms.login){
 }
 
 if(document.forms.signUp){
-  document.forms[0][5].addEventListener("click",async(e)=>{
+  document.querySelector("#submit-job-details").addEventListener("click",async(e)=>{
     e.preventDefault();
     const firstname=document.forms.signUp.elements.firstname.value;
     const lastname=document.forms.signUp.elements.lastname.value;
     const email= document.forms.signUp.elements.email.value;
-    const password= document.forms.signUp.elements.password.value;
+    const password=document.forms.signUp.elements.password.value;
     const passwordConfirm=document.forms.signUp.elements.passwordConfirm.value;
-    const userDetails= {firstname,lastname,email,password,passwordConfirm};
+    const role= document.forms.signUp.elements.role.value;
+    const userDetails= {firstname,lastname,email,password,passwordConfirm,role};
     await signUp(userDetails);
   })
 }
@@ -102,5 +103,12 @@ if(document.forms.resetPassword){
     const passwordDetails= {newPassword,newPasswordConfirm};
     const resetToken=location.pathname.split('/')[2];
     await resetPassword(passwordDetails,resetToken);
+  })
+}
+
+if(document.querySelector(".post-a-job")){
+  document.querySelector(".post-a-job").addEventListener("click",async(e)=>{
+    e.preventDefault();
+    await postJobHandler();
   })
 }

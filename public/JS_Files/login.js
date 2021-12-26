@@ -13,12 +13,15 @@ export const login = async (email,password)=>{
         return displayMessage(res.data.status,"Login Successful");
     } catch (err) {
         if(err.response){
-            console.log(err.response);
+            console.log("true")
+            console.log(err.response.statusCode);
             return displayMessage('error',err.response.data.message);
         }
         if(err.request){
+            console.log(err)
             console.log(err.request);
         }
+        console.log(err);
         return displayMessage('error',err.message);
     }
 }
@@ -34,7 +37,8 @@ export const signUp =async (userDetails)=>{
                 lastName:userDetails.lastname,
                 email:userDetails.email,
                 password:userDetails.password,
-                passwordConfirm:userDetails.passwordConfirm
+                passwordConfirm:userDetails.passwordConfirm,
+                role:userDetails.role
             }
         })
        return  displayMessage(res.data.status,res.data.data.message);
@@ -94,4 +98,23 @@ export const resetPassword =async (passwordDetails,resetToken)=>{
         }
         return displayMessage('error',err.message);
     }
+}
+
+
+export const postJobHandler= async()=>{
+    try{
+        await axios.get("/postJob");
+      }catch(err){
+          if(err.response) {
+            //   setTimeout(()=>{
+            //     window.location.assign(`/login`)
+            // },3000);
+            return displayMessage("error",err.response.data.message);
+          }
+          else if(err.request){              
+           return displayMessage("error",err.request.response);
+          }
+          //console.log(err)
+          return  displayMessage('error',err.message);
+      }
 }

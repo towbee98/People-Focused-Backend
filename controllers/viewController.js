@@ -104,6 +104,12 @@ exports.signUp = catchAsync(async (req, res) => {
     .render("signUp");
 });
 
+// exports.employerSignUp= catchAsync(async (req,res)=>{
+//   res
+//     .status(200)
+//     .header("Content-Security-Policy", "img-src 'self' data: https:")
+//     .render("employerSignUp");
+// })
 exports.login = catchAsync(async (req, res) => {
   res
     .status(200)
@@ -139,3 +145,10 @@ exports.verifyUserPage= catchAsync(async (req,res)=>{
   .header("Content-Security-Policy","img-src 'self' data: https:")
   .render("confirmation_page")
 })
+
+exports.postJob = catchAsync(async (req,res)=>{
+  res
+  .status(200)
+  .header("Content-Security-Policy","img-src 'self' data:  https:")
+  .render("postJob");
+});

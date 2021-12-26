@@ -38,6 +38,12 @@ block content
                                             label.control-label.sr-only(for='passwordConfirm') PasswordConfirm
                                             input#passwordConfirm.form-control(type='password' name='passwordConfirm' placeholder='PasswordConfirm*' required)
                                     .col-lg-12.col-md-12.col-sm-12.col-xs-12
+                                        .form-group
+                                            label.control-label.sr-only(for='role') Describe yourself 
+                                            select#role.form-control( name='role' required)
+                                                option(value="JobSeeker") Job Seeker
+                                                option(value="Employer") Employer
+                                    .col-lg-12.col-md-12.col-sm-12.col-xs-12
                                         button#submit-job-details.btn.btn-primary.btn-lg(type='submit') Submit
                                         |
                                         |

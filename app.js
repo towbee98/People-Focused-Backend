@@ -80,8 +80,7 @@ app.use((req, res, next) => {
 app.use(express.static(`${__dirname}/public`));
 app.use("/api/v1/jobs", jobRouter);
 app.use("/api/v1/users", userRouter);
-app.use("/", viewRouter);
-app.all("*", (req, res, next) => {
+app.all("/api/*", (req, res, next) => {
   next(
     new AppError(
       `😧 Oops the page you requested for @${req.originalUrl} not found`,
@@ -89,6 +88,13 @@ app.all("*", (req, res, next) => {
     )
   );
 });
+app.use("/", viewRouter);
+app.all("*",(req,res,next)=>{
+  res
+  .status(404)
+  .header("Content-Security-Policy","img-src 'self' data: https:")
+  .render("404Page")
+})
 
 app.use(globalErrorHandler);
 module.exports = app;

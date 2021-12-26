@@ -38,9 +38,15 @@ block content
                                         li Placement and onboarding
                                         li Retention and engagement strategy
                                         li Compensation, Benefits & Payroll administration
-                        h3.control-label Click 
-                            a(href='post-job.html') here 
-                            | to post a job
+                        button.btn-sm.btn-primary.control-label.post-a-job  Click here to post a job
+                        span.alert.alert-success(role="alert" style="display:none")
+                            span(class="glyphicon glyphicon-ok" aria-hidden="true")
+                            |
+                            |
+                        span.alert.alert-danger(role="alert" style="display:none")
+                            span(class="glyphicon glyphicon-warning-sign" aria-hidden="true")
+                            |
+                            |
                     .col-lg-4.col-md-4.col-sm-5.col-xs-12
                         // sidenav-section
                         .sidenav
@@ -100,7 +106,7 @@ block content
                                 .widget-cta-content
                                     h3.text-white Let Us Help You
                                     p You are just a click away from getting the best services you want .
-                                    a.btn.btn-white-outline(href='contact.html') contact us
+                                    a.btn.btn-white-outline(href='/contact') contact us
                         // /.widget-cta
 
     // service-single

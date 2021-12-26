@@ -26,6 +26,7 @@ const SendToken = async (user, statusCode, res) => {
 };
 
 exports.signUp = catchAsync(async (req, res,next) => {
+  let role;
   const confirmCode= jwt.sign({email:req.body.email},process.env.SECRET_KEY);
   const newUser = await User.create({
     firstname: req.body.firstname,
@@ -34,9 +35,9 @@ exports.signUp = catchAsync(async (req, res,next) => {
     password: req.body.password,
     passwordConfirm: req.body.passwordConfirm,
     confirmationCode:confirmCode,
-    role: req.body.role,
+    role:req.body.role,
   });
-  //console.log(confirmCode);
+  console.log(newUser);
   url=`${req.protocol}://${req.get("host")}/users/confirm/${confirmCode}`;
   newUser.password = undefined;
   newUser.confirmationCode=undefined;
@@ -158,8 +159,9 @@ exports.isLoggedIn = catchAsync(async (req, res, next) => {
 });
 
 exports.restrictUserTo =
-  (...roles) =>
+  (...roles) =>//["admin", "jobSeeker", "Employer", "superAdmin"]
   (req, res, next) => {
+    console.log(res);
     if (!roles.includes(req.user.role)) {
       return next(
         new AppError("Sorry you are not allowed to access this route", 403)
@@ -261,16 +263,7 @@ exports.verifyUser= catchAsync(async(req,res,next)=>{
     runValidators:true
   });
   if(!user) {
-    //   return res.status(404).json({
-    //   status:"fail",
-    //   message:"User not found"
-    // })
     return next(new AppError("User not found",404));
   };
-
   next();
-  // res.status(200).json({
-  //   status:"success",
-  //   message:"Your account has now been activated successfully"
-  // })
 })

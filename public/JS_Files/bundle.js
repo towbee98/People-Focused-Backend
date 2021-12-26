@@ -2997,7 +2997,7 @@ exports.displayMessage = displayMessage;
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.signUp = exports.resetPassword = exports.login = exports.forgotPassword = void 0;
+exports.signUp = exports.resetPassword = exports.postJobHandler = exports.login = exports.forgotPassword = void 0;
 
 var _axios = _interopRequireDefault(require("axios"));
 
@@ -3036,21 +3036,24 @@ var login = /*#__PURE__*/function () {
             _context.t0 = _context["catch"](0);
 
             if (!_context.t0.response) {
-              _context.next = 12;
+              _context.next = 13;
               break;
             }
 
-            console.log(_context.t0.response);
+            console.log("true");
+            console.log(_context.t0.response.statusCode);
             return _context.abrupt("return", (0, _display.displayMessage)('error', _context.t0.response.data.message));
 
-          case 12:
+          case 13:
             if (_context.t0.request) {
+              console.log(_context.t0);
               console.log(_context.t0.request);
             }
 
+            console.log(_context.t0);
             return _context.abrupt("return", (0, _display.displayMessage)('error', _context.t0.message));
 
-          case 14:
+          case 16:
           case "end":
             return _context.stop();
         }
@@ -3083,7 +3086,8 @@ var signUp = /*#__PURE__*/function () {
                 lastName: userDetails.lastname,
                 email: userDetails.email,
                 password: userDetails.password,
-                passwordConfirm: userDetails.passwordConfirm
+                passwordConfirm: userDetails.passwordConfirm,
+                role: userDetails.role
               }
             });
 
@@ -3233,6 +3237,57 @@ var resetPassword = /*#__PURE__*/function () {
 }();
 
 exports.resetPassword = resetPassword;
+
+var postJobHandler = /*#__PURE__*/function () {
+  var _ref5 = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee5() {
+    return regeneratorRuntime.wrap(function _callee5$(_context5) {
+      while (1) {
+        switch (_context5.prev = _context5.next) {
+          case 0:
+            _context5.prev = 0;
+            _context5.next = 3;
+            return _axios.default.get("/postJob");
+
+          case 3:
+            _context5.next = 14;
+            break;
+
+          case 5:
+            _context5.prev = 5;
+            _context5.t0 = _context5["catch"](0);
+
+            if (!_context5.t0.response) {
+              _context5.next = 11;
+              break;
+            }
+
+            return _context5.abrupt("return", (0, _display.displayMessage)("error", _context5.t0.response.data.message));
+
+          case 11:
+            if (!_context5.t0.request) {
+              _context5.next = 13;
+              break;
+            }
+
+            return _context5.abrupt("return", (0, _display.displayMessage)("error", _context5.t0.request.response));
+
+          case 13:
+            return _context5.abrupt("return", (0, _display.displayMessage)('error', _context5.t0.message));
+
+          case 14:
+          case "end":
+            return _context5.stop();
+        }
+      }
+    }, _callee5, null, [[0, 5]]);
+  }));
+
+  return function postJobHandler() {
+    return _ref5.apply(this, arguments);
+  };
+}();
+
+exports.postJobHandler = postJobHandler;
 },{"axios":"../../node_modules/axios/index.js","./display":"display.js"}],"index.js":[function(require,module,exports) {
 "use strict";
 
@@ -3400,9 +3455,9 @@ if (document.forms.login) {
 }
 
 if (document.forms.signUp) {
-  document.forms[0][5].addEventListener("click", /*#__PURE__*/function () {
+  document.querySelector("#submit-job-details").addEventListener("click", /*#__PURE__*/function () {
     var _ref5 = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee5(e) {
-      var firstname, lastname, email, password, passwordConfirm, userDetails;
+      var firstname, lastname, email, password, passwordConfirm, role, userDetails;
       return regeneratorRuntime.wrap(function _callee5$(_context5) {
         while (1) {
           switch (_context5.prev = _context5.next) {
@@ -3413,17 +3468,19 @@ if (document.forms.signUp) {
               email = document.forms.signUp.elements.email.value;
               password = document.forms.signUp.elements.password.value;
               passwordConfirm = document.forms.signUp.elements.passwordConfirm.value;
+              role = document.forms.signUp.elements.role.value;
               userDetails = {
                 firstname: firstname,
                 lastname: lastname,
                 email: email,
                 password: password,
-                passwordConfirm: passwordConfirm
+                passwordConfirm: passwordConfirm,
+                role: role
               };
-              _context5.next = 9;
+              _context5.next = 10;
               return (0, _login.signUp)(userDetails);
 
-            case 9:
+            case 10:
             case "end":
               return _context5.stop();
           }
@@ -3497,6 +3554,31 @@ if (document.forms.resetPassword) {
     };
   }());
 }
+
+if (document.querySelector(".post-a-job")) {
+  document.querySelector(".post-a-job").addEventListener("click", /*#__PURE__*/function () {
+    var _ref8 = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee8(e) {
+      return regeneratorRuntime.wrap(function _callee8$(_context8) {
+        while (1) {
+          switch (_context8.prev = _context8.next) {
+            case 0:
+              e.preventDefault();
+              _context8.next = 3;
+              return (0, _login.postJobHandler)();
+
+            case 3:
+            case "end":
+              return _context8.stop();
+          }
+        }
+      }, _callee8);
+    }));
+
+    return function (_x8) {
+      return _ref8.apply(this, arguments);
+    };
+  }());
+}
 },{"regenerator-runtime/runtime":"../../node_modules/regenerator-runtime/runtime.js","./login.js":"login.js"}],"../../node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
 var global = arguments[3];
 var OVERLAY_ID = '__parcel__error__overlay__';
@@ -3525,7 +3607,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "58520" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "49276" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};

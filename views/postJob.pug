@@ -1,0 +1,191 @@
+extends base
+
+block content 
+    // services-single
+    .content(style='padding-bottom: 0;')
+      .container
+        .row
+          .Service-description
+            .service-data.mb30
+              .post-job-description(style='max-width: 600px;')
+                h1.mb30.text-center Post a Job Opening
+                form(action='#')
+                  .row
+                    .col-lg-12.col-md-12.col-sm-12.col-xs-12.job-details
+                      .form-group
+                        label.control-label.sr-only(for='Company-name')
+                          | Company name for
+                          | this job
+                        input#company-name.form-control(type='text' name='company-name' placeholder='Company Name' required)
+                    .col-lg-12.col-md-12.col-sm-12.col-xs-12.job-detail
+                      .form-group
+                        label.control-label.sr-only(for='job-title') Job Title
+                        input#job-title.form-control(type='text' name='job-title' placeholder='Job Title' required)
+                    .col-lg-12.col-md-12.col-sm-12.col-xs-12.job-detail
+                      .form-group
+                        label.control-label.sr-only(for='location') Location
+                        input#location.form-control(type='text' name='location' placeholder='Location' required)
+                    .col-lg-12.col-md-12.col-sm-12.col-xs-12.job-detail
+                      .form-group
+                        label.control-label.sr-only(for='country') Country
+                        input#country.form-control(type='text' name='country' placeholder='Country' required)
+                    .col-lg-12.col-md-12.col-sm-12.col-xs-12.job-detail
+                      label.control-label(for='remote' style='margin-bottom: 0;') Remote
+                      br
+                      input#remote-yes(type='radio' name='remote' required)
+                      label(for='remote-yes' style='margin-right:5px;') YES
+                      input#remote-no(type='radio' name='remote' required)
+                      label(for='remote-no') NO
+                    .col-lg-12.col-md-12.col-sm-12.col-xs-12.job-detail
+                      input#hire.form-control(type='number' name='hires' min='1' placeholder='How many hires' required)
+                    .col-lg-12.col-md-12.col-sm-12.col-xs-12.job-detail
+                      input#phone.form-control(type='tel' name='phone' min='1' placeholder='Phone Number' required)
+                    .col-lg-12.col-md-12.col-sm-12.col-xs-12.job-detail
+                      label.control-label(for='employ-type' style='margin-bottom: 0;')
+                        | What
+                        | type of employment is it ?
+                      br
+                      input#full-time(type='radio' name='employ-type' required)
+                      label(for='remote-yes' style='margin-right:5px;') Full Time
+                      input#part-time(type='radio' name='employ-type' required)
+                      label(for='employ-type') Part Time
+                    .col-lg-12.col-md-12.col-sm-12.col-xs-12.job-detail
+                      label.control-label(for='contract-type' style='margin-bottom: 0;')
+                        | What
+                        | Contract type is it ?
+                        span(style='opacity: 0.5;')
+                          | (Select all that apply)
+                      br
+                      input#Temporary(type='checkbox' name='contract-type')
+                      label(for='contract-type' style='margin-right:5px;') Temporary
+                      br
+                      input#Contract(type='checkbox' name='contract-type')
+                      label(for='contract-type' style='margin-right:5px;') Contract
+                      br
+                      input#Internship(type='checkbox' name='contract-type')
+                      label(for='contract-type' style='margin-right:5px;') Internship
+                      br
+                      input#Commission(type='checkbox' name='contract-type')
+                      label(for='contract-type' style='margin-right:5px;') Commission
+                      br
+                      input#New-Grad(type='checkbox' name='contract-type')
+                      label(for='contract-type' style='margin-right:5px;') New Grad
+                      br
+                      input#permanent(type='checkbox' name='contract-type')
+                      label(for='contract-type' style='margin-right:5px;') Permanent
+                      br
+                    .col-lg-12.col-md-12.col-sm-12.col-xs-12.job-detail
+                      label.control-label(for='salary' style='margin-bottom: 0;')
+                        | Salary
+                      br
+                      input#min-salary(type='number' name='salary' min='1000' placeholder=' minimum amount')
+                      br
+                      span To
+                      br
+                      input#max-salary(type='number' name='salary' min='1000' placeholder='maximum amount')
+                      br
+                      select#salary-basis(name='salary-basis' style='margin-top:15px;')
+                        option(value='monthly' selected) per month
+                        option(value='yearly') per year
+                        option(value='weekly') per week
+                        option(value='daily') per day
+                    .col-lg-12.col-md-12.col-sm-12.col-xs-12.job-detail
+                      label.control-label(for='submit-cv' style='margin-bottom: 0;')
+                        | Do you
+                        | want applicants to submit a CV ?
+                      br
+                      input#sumbit-cv-yes(type='radio' name='submit-cv')
+                      label(for='sumbit-cv-yes' style='margin-right:5px;') Yes
+                      input#submit-cv-no(type='radio' name='submit-cv')
+                      label(for='submit-cv-no' style='margin-right:5px;') No
+                      input#submit-cv-optional(type='radio' name='submit-cv')
+                      label(for='submit-cv-optional' style='margin-right:5px;') Optional
+                    .col-lg-12.col-md-12.col-sm-12.col-xs-12.job-detail
+                      label.control-label(for='application-deadline' style='margin-bottom: 0;') Is there an application deadline ? 
+                      br
+                      input#application-deadline-yes(type='radio' name='application-deadline')
+                      label(for='application-deadline-yes' style='margin-right:5px;') Yes
+                      input#application-deadline-no(type='radio' name='submit-cv')
+                      label(for='application-deadline-no' style='margin-right:5px;') No
+                      br
+                      label(for='application-deadline-date') If yes
+                      input#application-deadline-date(type='date' name='application-deadline-date')
+                    .col-lg-12.col-md-12.col-sm-12.col-xs-12.job-detail
+                      label.control-label(for='employer-email')
+                        | Updates about this job will be sent to
+                      br
+                      input#employer-email(type='email' name='employer-email' placeholder='Email')
+                    .col-lg-12.col-md-12.col-sm-12.col-xs-12.job-detail
+                      label.control-label(for='Job-description')
+                        | Job Description
+                      br
+                      label(for='job-description')
+                        | Describe the responsibilities of this job ,required
+                        | work experiences ,skills or education.
+                      textarea#job-description(name='job-description' cols='50' rows='8' style='resize: none; border-radius: 5px;')
+                    .col-lg-12.col-md-12.col-sm-12.col-xs-12.job-detail
+                      button#submit-job-details.btn.btn-primary.btn-lg(type='submit') Submit
+            .col-lg-4.col-md-4.col-sm-5.col-xs-12
+              // sidenav-section
+              .sidenav
+                ul
+                  li
+                    a(href='service-single.html') Training 
+                  li
+                    a(href='#') Coaching
+                  li.active
+                    a(href='service-single.html') Recruitment
+                  li
+                    a(href='service-single.html') Consulting
+                  li
+                    a(href='service-single.html') Technology
+              // /.sidenav-section
+              // Form-section
+              #requestAConsultation.service-sidebar.consultantion-form.mb30
+                h3.mb30.text-center Request A Consultation
+                form
+                  .row
+                    .col-lg-12.col-md-12.col-sm-12.col-xs-12
+                      .form-group
+                        label.control-label.sr-only(for='name') First Name
+                        input.form-control(type='text' placeholder='First Name' required)
+                    .col-lg-12.col-md-12.col-sm-12.col-xs-12
+                      .form-group
+                        label.control-label.sr-only(for='name')  Last Name
+                        input.form-control(type='text' placeholder='Last Name' required)
+                    .col-lg-12.col-md-12.col-sm-12.col-xs-12
+                      .form-group
+                        label.control-label.sr-only(for='name') Phone
+                        input.form-control(type='text' placeholder='Phone' required)
+                    .col-lg-12.col-md-12.col-sm-12.col-xs-12
+                      .form-group
+                        label.control-label.sr-only(for='company') Company
+                        input.form-control(type='text' placeholder='company' required)
+                    .col-lg-12.col-md-12.col-sm-12.col-xs-12
+                      .form-group
+                        label.control-label.sr-only(for='select')
+                        select.form-control(name='select')
+                          option(value='') I am interested in
+                          option(value='') Training 
+                          option(value='') Coaching
+                          option(value='') Consulting
+                    .col-lg-12.col-md-12.col-sm-12.col-xs-12.mb20
+                      .form-group
+                        label.control-label.sr-only(for='textarea')
+                        textarea#textarea.form-control..pdt20(name='textarea' rows='4' placeholder='Please describe your HR needs:')
+                    .col-lg-12.col-md-12.col-sm-12.col-xs-12
+                      button.btn.btn-primary..btn-lg.(type='submit' name='singlebutton') submit
+              // /.Form-section
+        // widget-cta
+        .widget-cta
+          .widget-cta-block
+            .widget-cta-icon
+              i.icon-012-handshake
+            .widget-cta-content
+              h3.text-white Let Us Help You
+              p You are just a click away from getting the best services you want .
+              a.btn.btn-white-outline(href='contact.html') contact us
+        // /.widget-cta
+      // /. services-single
+    include _footers
+    include _jsPlugin
