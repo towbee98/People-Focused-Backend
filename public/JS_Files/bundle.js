@@ -3019,8 +3019,8 @@ var login = /*#__PURE__*/function () {
             _context.prev = 0;
             _context.next = 3;
             return (0, _axios.default)({
-              method: 'POST',
-              url: '/api/v1/users/login',
+              method: "POST",
+              url: "/api/v1/users/login",
               data: {
                 email: email,
                 password: password
@@ -3042,7 +3042,7 @@ var login = /*#__PURE__*/function () {
 
             console.log("true");
             console.log(_context.t0.response.statusCode);
-            return _context.abrupt("return", (0, _display.displayMessage)('error', _context.t0.response.data.message));
+            return _context.abrupt("return", (0, _display.displayMessage)("error", _context.t0.response.data.message));
 
           case 13:
             if (_context.t0.request) {
@@ -3051,7 +3051,7 @@ var login = /*#__PURE__*/function () {
             }
 
             console.log(_context.t0);
-            return _context.abrupt("return", (0, _display.displayMessage)('error', _context.t0.message));
+            return _context.abrupt("return", (0, _display.displayMessage)("error", _context.t0.message));
 
           case 16:
           case "end":
@@ -3105,10 +3105,10 @@ var signUp = /*#__PURE__*/function () {
             }
 
             console.log(_context2.t0.response);
-            return _context2.abrupt("return", (0, _display.displayMessage)('error', _context2.t0.response.data.message));
+            return _context2.abrupt("return", (0, _display.displayMessage)("error", _context2.t0.response.data.message));
 
           case 13:
-            return _context2.abrupt("return", (0, _display.displayMessage)('error', _context2.t0.message));
+            return _context2.abrupt("return", (0, _display.displayMessage)("error", _context2.t0.message));
 
           case 14:
           case "end":
@@ -3157,14 +3157,14 @@ var forgotPassword = /*#__PURE__*/function () {
             }
 
             console.log(_context3.t0.response);
-            return _context3.abrupt("return", (0, _display.displayMessage)('error', _context3.t0.response.data.message));
+            return _context3.abrupt("return", (0, _display.displayMessage)("error", _context3.t0.response.data.message));
 
           case 13:
             if (_context3.t0.request) {
               console.log(_context3.t0.request);
             }
 
-            return _context3.abrupt("return", (0, _display.displayMessage)('error', _context3.t0.message));
+            return _context3.abrupt("return", (0, _display.displayMessage)("error", _context3.t0.message));
 
           case 15:
           case "end":
@@ -3214,14 +3214,14 @@ var resetPassword = /*#__PURE__*/function () {
             }
 
             console.log(_context4.t0.response);
-            return _context4.abrupt("return", (0, _display.displayMessage)('error', _context4.t0.response.data.message));
+            return _context4.abrupt("return", (0, _display.displayMessage)("error", _context4.t0.response.data.message));
 
           case 13:
             if (_context4.t0.request) {
               console.log(_context4.t0.request);
             }
 
-            return _context4.abrupt("return", (0, _display.displayMessage)('error', _context4.t0.message));
+            return _context4.abrupt("return", (0, _display.displayMessage)("error", _context4.t0.message));
 
           case 15:
           case "end":
@@ -3249,37 +3249,37 @@ var postJobHandler = /*#__PURE__*/function () {
             return _axios.default.get("/postJob");
 
           case 3:
-            _context5.next = 14;
-            break;
+            return _context5.abrupt("return", location.assign("".concat(location.protocol, "//").concat(location.host, "/postJob")));
 
-          case 5:
-            _context5.prev = 5;
+          case 6:
+            _context5.prev = 6;
             _context5.t0 = _context5["catch"](0);
+            console.log(_context5.t0);
 
             if (!_context5.t0.response) {
-              _context5.next = 11;
+              _context5.next = 13;
               break;
             }
 
             return _context5.abrupt("return", (0, _display.displayMessage)("error", _context5.t0.response.data.message));
 
-          case 11:
+          case 13:
             if (!_context5.t0.request) {
-              _context5.next = 13;
+              _context5.next = 15;
               break;
             }
 
             return _context5.abrupt("return", (0, _display.displayMessage)("error", _context5.t0.request.response));
 
-          case 13:
-            return _context5.abrupt("return", (0, _display.displayMessage)('error', _context5.t0.message));
+          case 15:
+            return _context5.abrupt("return", (0, _display.displayMessage)("error", _context5.t0.message));
 
-          case 14:
+          case 16:
           case "end":
             return _context5.stop();
         }
       }
-    }, _callee5, null, [[0, 5]]);
+    }, _callee5, null, [[0, 6]]);
   }));
 
   return function postJobHandler() {
@@ -3294,6 +3294,18 @@ exports.postJobHandler = postJobHandler;
 require("regenerator-runtime/runtime");
 
 var _login = require("./login.js");
+
+function _toConsumableArray(arr) { return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _unsupportedIterableToArray(arr) || _nonIterableSpread(); }
+
+function _nonIterableSpread() { throw new TypeError("Invalid attempt to spread non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
+
+function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(o); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
+
+function _iterableToArray(iter) { if (typeof Symbol !== "undefined" && iter[Symbol.iterator] != null || iter["@@iterator"] != null) return Array.from(iter); }
+
+function _arrayWithoutHoles(arr) { if (Array.isArray(arr)) return _arrayLikeToArray(arr); }
+
+function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
 
 function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
 
@@ -3537,7 +3549,7 @@ if (document.forms.resetPassword) {
                 newPassword: newPassword,
                 newPasswordConfirm: newPasswordConfirm
               };
-              resetToken = location.pathname.split('/')[2];
+              resetToken = location.pathname.split("/")[2];
               _context7.next = 7;
               return (0, _login.resetPassword)(passwordDetails, resetToken);
 
@@ -3579,6 +3591,52 @@ if (document.querySelector(".post-a-job")) {
     };
   }());
 }
+
+if (document.forms.uploadJob) {
+  document.forms.uploadJob[46].addEventListener("click", /*#__PURE__*/function () {
+    var _ref9 = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee9(e) {
+      var companyName, companyEmail, companyDescription, category, jobTitle, jobSummary, address, city, country, jobLink1, jobLink2, jobLink3, remote, numberOfHires, phone, employmentType, contractTypes;
+      return regeneratorRuntime.wrap(function _callee9$(_context9) {
+        while (1) {
+          switch (_context9.prev = _context9.next) {
+            case 0:
+              e.preventDefault();
+              companyName = document.forms.uploadJob.elements.companyName.value;
+              companyEmail = document.forms.uploadJob.elements.companyEmail.value;
+              companyDescription = document.forms.uploadJob.elements.companyDescription.value;
+              category = document.forms.uploadJob.category.value;
+              jobTitle = document.forms.uploadJob.elements.jobTitle.value;
+              jobSummary = document.forms.uploadJob.elements.jobSummary.value;
+              address = document.forms.uploadJob.elements.address.value;
+              city = document.forms.uploadJob.elements.city.value;
+              country = document.forms.uploadJob.elements.country.value;
+              jobLink1 = document.forms.uploadJob.elements.linkToJob1.value;
+              jobLink2 = document.forms.uploadJob.elements.linkToJob2.value;
+              jobLink3 = document.forms.uploadJob.elements.linkToJob3.value;
+              remote = document.forms.uploadJob.remote.value;
+              numberOfHires = document.forms.uploadJob.hire.value;
+              phone = document.forms.uploadJob.phone.value;
+              employmentType = document.forms.uploadJob.employType.value;
+              contractTypes = _toConsumableArray(document.forms.uploadJob.elements.contractTypes).filter(function (contractType) {
+                return contractType.checked;
+              }).map(function (contractType) {
+                return contractType.value;
+              });
+              console.log(contractTypes);
+
+            case 19:
+            case "end":
+              return _context9.stop();
+          }
+        }
+      }, _callee9);
+    }));
+
+    return function (_x9) {
+      return _ref9.apply(this, arguments);
+    };
+  }());
+}
 },{"regenerator-runtime/runtime":"../../node_modules/regenerator-runtime/runtime.js","./login.js":"login.js"}],"../../node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
 var global = arguments[3];
 var OVERLAY_ID = '__parcel__error__overlay__';
@@ -3607,7 +3665,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "49276" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "62906" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};

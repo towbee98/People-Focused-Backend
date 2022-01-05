@@ -19,14 +19,14 @@ exports.getAllUsers = catchAsync(async (req, res, next) => {
   res.status(200).json({
     status: "success",
     data: {
-      users,
-    },
+      users
+    }
   });
 });
 exports.createUser = (req, res) => {
   res.status(403).json({
     status: "error",
-    message: "Sorry please use this sign up link to create a new user",
+    message: "Sorry please use this sign up link to create a new user"
   });
 };
 exports.getUser = catchAsync(async (req, res, next) => {
@@ -34,7 +34,7 @@ exports.getUser = catchAsync(async (req, res, next) => {
   if (!user) next(new AppError("User not found ", 404));
   res.status(200).json({
     status: "success",
-    newUser,
+    newUser
   });
 });
 
@@ -46,13 +46,13 @@ exports.updateUser = catchAsync(async (req, res, next) => {
     );
   const updatedUser = User.findOneAndUpdate(req.params._id, req.body, {
     runValidators: true,
-    new: true,
+    new: true
   });
   if (!updatedUser) return next(new AppError("Sorry No user  found ", 404));
 
   res.status(200).json({
     status: "success",
-    data: updatedUser,
+    data: updatedUser
   });
 });
 
@@ -61,7 +61,7 @@ exports.deleteUser = catchAsync(async (req, res, next) => {
   const user = User.findByIdAndDelete(req.params.id);
   if (!user) return next(new AppError("User not found", 404));
   res.status(204).json({
-    status: "success",
+    status: "success"
   });
 });
 
@@ -74,8 +74,8 @@ exports.getMe = catchAsync(async (req, res, next) => {
   res.status(200).json({
     status: "success",
     data: {
-      user,
-    },
+      user
+    }
   });
 });
 
@@ -84,7 +84,10 @@ exports.updateMe = catchAsync(async (req, res, next) => {
   //verify if password or passwordConfirm does not exists in the req.body
   if (req.body.password || req.body.passwordConfirm) {
     return next(
-      new AppError("Sorry you cannot update your password via this route, ", 400)
+      new AppError(
+        "Sorry you cannot update your password via this route, ",
+        400
+      )
     );
   }
   //Remove unwanted fields that are not allowed to be updated
@@ -93,14 +96,14 @@ exports.updateMe = catchAsync(async (req, res, next) => {
   //Update the user
   const updatedUser = await User.findByIdAndUpdate(req.user._id, filteredObj, {
     new: true,
-    runValidators: true,
+    runValidators: true
   });
 
   res.status(200).json({
     status: "success",
     data: {
-      user: updatedUser,
-    },
+      user: updatedUser
+    }
   });
 });
 
@@ -110,11 +113,11 @@ exports.deleteMe = catchAsync(async (req, res, next) => {
     { active: false },
     {
       new: true,
-      runValidators: true,
+      runValidators: true
     }
   );
   res.status(204).json({
     status: "success",
-    data: null,
+    data: null
   });
 });

@@ -1,13 +1,14 @@
 const mongoose = require("mongoose");
 const dotenv = require("dotenv");
+//const http= require("http");
+
+dotenv.config({ path: "./config.env" });
 
 process.on("uncaughtException", (err) => {
   console.log(err.name, err.message);
   console.log("Uncaught Exception , Shutting Down... ");
   process.exit(1);
 });
-
-dotenv.config({ path: "./config.env" });
 
 const DB = process.env.DATABASE.replace(
   "<password>",
@@ -23,7 +24,7 @@ const start = async () => {
       useNewUrlParser: true,
       useCreateIndex: true,
       useUnifiedTopology: true,
-      useFindAndModify: false,
+      useFindAndModify: false
     },
     (err, data) => {
       if (err) {
@@ -34,17 +35,21 @@ const start = async () => {
       }
     }
   );
+
+  start(); //connect to the database
+
   const PORT = process.env.PORT || 3001;
-  
+
   // eslint-disable-next-line global-require
   const app = require("./app");
 
   // START SERVER
-
+  //const server= http.createServer(app);
+  //server.listen(PORT,()=>{})
   const server = app.listen(PORT, () => {
     console.log(`Server running at port ${PORT}`);
   });
-  
+
   process.on("unhandledRejection", (err) => {
     console.log(err.name, err.message);
     console.log("Unhandled Rejection , Shutting down...");
@@ -53,5 +58,3 @@ const start = async () => {
     });
   });
 };
-
-start();

@@ -5,51 +5,65 @@ const jobSchema = new mongoose.Schema(
   {
     title: {
       type: String,
-      required: [true, "Job Title cannot be empty"],
+      required: [true, "Job Title cannot be empty"]
     },
     slug: String,
     organisation: {
       name: {
         type: String,
-        required: [true, "Enter the name of the organisation"],
+        required: [true, "Enter the name of the organisation"]
       },
       description: {
         type: String,
-        required: [true, "Enter the description of the organisation"],
+        required: [true, "Enter the description of the organisation"]
       },
-      website: {
+      companyEmail: {
         type: String,
-      },
+        required: [true, "Enter the company's email address"]
+      }
     },
     location: {
       address: {
         type: String,
-        required: [true, "Enter the  Street Address "],
+        required: [true, "Enter the  Street Address "]
       },
       city: {
         type: String,
-        required: [true, "Enter the city"],
-      },
-      State: {
-        type: String,
-        required: [true, "Enter the state"],
+        required: [true, "Enter the city"]
       },
       Country: {
         type: String,
-        default: "Nigeria",
+        default: "Nigeria"
+      }
+    },
+    linkStOjoB: {
+      link1: {
+        type: String,
+        required: [true, "Please specify an external link to jobs"]
       },
+      link2: {
+        type: String
+      },
+      link3: {
+        type: String
+      }
     },
     "Work Type": {
-      type: String,
+      type: [String],
       required: [true, "Specify  the type of work"],
-      enum: ["full time", "part time", "contract"],
-      lowercase: true,
+      enum: [
+        "temporary",
+        "internship",
+        "contract",
+        "Commission",
+        "new grad",
+        "permanent"
+      ],
+      lowercase: true
     },
-    "Work Schedule": {
-      type: String,
-      required: [true, "Specify whether it is on site or remote"],
-      enum: ["on-site", "remote", "partially on-site"],
-      lowercase: true,
+    Remote: {
+      type: Boolean,
+      required: [true, "Specify whether it is on site or remote"]
     },
     Category: {
       name: {
@@ -63,54 +77,58 @@ const jobSchema = new mongoose.Schema(
           "Hospitality And Tourism",
           "Information Technology",
           "Transportation and Logistics",
-          "Others",
+          "Others"
         ],
-        required: [true, "Specify the category the company belongs to"],
-      },
-      description: {
-        type: "String",
-      },
+        required: [true, "Specify the category the company belongs to"]
+      }
     },
     Salary: {
       min: {
-        type: Number,
+        type: Number
       },
       max: {
         type: Number,
         validate: function (value) {
           return value > this.Salary.min;
         },
-        message:
-          "The maximum salary must be greater than the minimum salary.",
-      },
+        message: "The maximum salary must be greater than the minimum salary."
+      }
     },
     "Minimum Qualification": {
       type: String,
-      enum: ["SSCE", "OND", "HND", "DEGREE"],
-      uppercase: true,
+      enum: [
+        "SSCE",
+        "NCE",
+        "ND",
+        "HND",
+        "UNDERGRADUATE",
+        "MASTERS",
+        "DOCTORATE"
+      ],
+      uppercase: true
     },
     "Experience Level": {
-      type: String,
+      type: String
     },
     "Experience Length": {
-      type: String,
+      type: Number
     },
     "Job Summary": {
-      type: String,
+      type: String
     },
-    Responsiblities: {
-      type: Array,
-    },
-    Requirements: {
-      type: Array,
-    },
-    Skillset: {
-      type: Array,
-    },
+    // Responsiblities: {
+    //   type: Array,
+    // },
+    // Requirements: {
+    //   type: Array,
+    // },
+    // Skillset: {
+    //   type: Array,
+    // },
     createdAt: {
       type: Date,
       default: Date.now(),
-      select: false,
+      select: false
     },
     Deadline: {
       type: Date,
@@ -118,18 +136,18 @@ const jobSchema = new mongoose.Schema(
         validator: function (value) {
           return this.createdAt < value;
         },
-        message: "Deadline must be after the job was posted",
-      },
+        message: "Deadline must be after the job was posted"
+      }
     },
     user: {
       type: mongoose.Schema.Types.ObjectId,
       ref: "User",
-      required: [true, "The job poster cannot be empty"],
+      required: [true, "The job poster cannot be empty"]
     },
     isActive: {
       type: Boolean,
-      default: true,
-    },
+      default: true
+    }
   }
   // { timestamps: true }
 );

@@ -6,7 +6,7 @@ const helmet = require("helmet");
 const mongoSanitize = require("express-mongo-sanitize");
 const xss = require("xss-clean");
 const hpp = require("hpp");
-const cookieParser= require('cookie-parser')
+const cookieParser = require("cookie-parser");
 // const multer = require("multer");
 
 const AppError = require("./utils/appErrors");
@@ -36,7 +36,7 @@ if (process.env.NODE_ENV === "development") {
 const apiLimiter = rateLimit({
   max: 80,
   windowMs: 60 * 60 * 1000,
-  message: "Too much requests from this IP. Try again later",
+  message: "Too much requests from this IP. Try again later"
 });
 app.use("/api", apiLimiter);
 
@@ -44,7 +44,7 @@ app.use("/api", apiLimiter);
 app.use(express.json({ limit: "80kb" }));
 
 //parses the req to access the cookie
-app.use(cookieParser())
+app.use(cookieParser());
 
 // Data Sanitization against NO SQL query Injection
 app.use(mongoSanitize());
@@ -60,8 +60,8 @@ app.use(
       "Minimum Qualification",
       "Industry",
       "Salary.min",
-      "Salary.max",
-    ],
+      "Salary.max"
+    ]
   })
 );
 
@@ -89,12 +89,12 @@ app.all("/api/*", (req, res, next) => {
   );
 });
 app.use("/", viewRouter);
-app.all("*",(req,res,next)=>{
+app.all("*", (req, res) => {
   res
-  .status(404)
-  .header("Content-Security-Policy","img-src 'self' data: https:")
-  .render("404Page")
-})
+    .status(404)
+    .header("Content-Security-Policy", "img-src 'self' data: https:")
+    .render("404Page");
+});
 
 app.use(globalErrorHandler);
 module.exports = app;

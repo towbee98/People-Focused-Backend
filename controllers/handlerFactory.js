@@ -18,7 +18,7 @@ exports.getAll = (Model) => {
       status: "success",
       requestMadeAt: req.requestTime,
       result: docs.length,
-      data: docs,
+      data: docs
     });
   });
 };
@@ -33,8 +33,8 @@ exports.getOne = (Model) => {
       status: "success",
       requestMadeAt: req.requestTime,
       data: {
-        doc,
-      },
+        doc
+      }
     });
   });
 };

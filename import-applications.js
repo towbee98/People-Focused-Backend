@@ -15,7 +15,7 @@ mongoose
     useNewUrlParser: true,
     useCreateIndex: true,
     useUnifiedTopology: true,
-    useFindAndModify: false,
+    useFindAndModify: false
   })
   .then(() => {
     console.log("Database Connected Successfully!!");
@@ -55,4 +55,3 @@ if (process.argv[2] == "--import") {
 } else if (process.argv[2] == "--delete") {
   deleteData();
 }
-

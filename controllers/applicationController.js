@@ -15,7 +15,7 @@ cloudinary.config({
   cloud_name: process.env.cloud_name,
   api_key: process.env.cloud_api_key,
   api_secret: process.env.cloud_api_secret,
-  secure: true,
+  secure: true
 });
 
 // Set the multer storage
@@ -27,8 +27,8 @@ const multerStorage = new CloudinaryStorage({
     format: (req, file) => "pdf",
     // eslint-disable-next-line no-unused-vars
     public_id: (req, file) =>
-      `${req.user.firstname}-${req.user.lastName}-${req.user._id}-${req.params.jobID}`,
-  },
+      `${req.user.firstname}-${req.user.lastName}-${req.user._id}-${req.params.jobID}`
+  }
 });
 
 // This prevents the upload of every other files apart from pdf files
@@ -43,7 +43,7 @@ const multerFilter = (req, file, cb) => {
 const upload = multer({
   limits: { fileSize: 500000 },
   fileFilter: multerFilter,
-  storage: multerStorage,
+  storage: multerStorage
 });
 
 // Filter the request body to extract the only needed
@@ -89,7 +89,7 @@ exports.Apply = catchAsync(async (req, res, next) => {
   res.status(200).json({
     status: "success",
     message: "Application submitted successfully!!",
-    application,
+    application
   });
 });
 
@@ -118,7 +118,7 @@ exports.getApplications = catchAsync(async (req, res, next) => {
   res.status(200).json({
     status: "success",
     result: query.length,
-    data: query,
+    data: query
   });
 });
 

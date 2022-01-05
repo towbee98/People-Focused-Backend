@@ -28,8 +28,8 @@ exports.postAJob = catchAsync(async (req, res, next) => {
   res.status(201).json({
     status: "success",
     data: {
-      newJob,
-    },
+      newJob
+    }
   });
 });
 
@@ -39,14 +39,14 @@ exports.updateJob = catchAsync(async (req, res, next) => {
   if (req.user.role !== "Employer") {
     job = await Jobs.findByIdAndUpdate(req.params.jobID, req.body, {
       new: true,
-      runValidators: true,
+      runValidators: true
     });
   } else {
     job = await Jobs.findOneAndUpdate(
       { _id: req.params.jobID, user: req.user._id },
       {
         new: true,
-        runValidators: true,
+        runValidators: true
       }
     );
   }
@@ -57,8 +57,8 @@ exports.updateJob = catchAsync(async (req, res, next) => {
   res.status(200).json({
     status: "success",
     data: {
-      job,
-    },
+      job
+    }
   });
 });
 
@@ -70,7 +70,7 @@ exports.deleteJob = catchAsync(async (req, res, next) => {
   } else {
     job = await Jobs.findOneAndDelete({
       _id: req.params.jobID,
-      user: req.user._id,
+      user: req.user._id
     });
   }
   if (!job) {
@@ -78,7 +78,7 @@ exports.deleteJob = catchAsync(async (req, res, next) => {
   }
   res.status(204).json({
     status: "success",
-    data: {},
+    data: {}
   });
 });
 
@@ -86,7 +86,7 @@ exports.deleteJob = catchAsync(async (req, res, next) => {
 exports.getJobStats = catchAsync(async (req, res, next) => {
   const stats = await Jobs.aggregate([
     {
-      $match: { "Salary.min": { $gte: 70000 } },
+      $match: { "Salary.min": { $gte: 70000 } }
     },
     {
       $group: {
@@ -94,17 +94,17 @@ exports.getJobStats = catchAsync(async (req, res, next) => {
         // _id: "$title",
         numJobs: { $sum: 1 },
         highestPaidJob: { $max: "$Salary.max" },
-        lowestpaidJob: { $min: "$Salary.min" },
-      },
+        lowestpaidJob: { $min: "$Salary.min" }
+      }
     },
-    { $sort: { highestPaidJob: 1 } },
+    { $sort: { highestPaidJob: 1 } }
   ]);
 
   res.status(200).json({
     status: "success",
     data: {
-      stats,
-    },
+      stats
+    }
   });
 });
 
@@ -113,11 +113,10 @@ exports.getMyJobs = catchAsync(async (req, res, next) => {
   const jobs = await Jobs.find({ user: req.user._id }).select(
     "title location.city organisation.name Category.name"
   );
-  if (!jobs)
-    return next(new AppError("You have not posted any job yet", 404));
+  if (!jobs) return next(new AppError("You have not posted any job yet", 404));
   res.status(200).json({
     status: "success",
     result: jobs.length,
-    data: jobs,
+    data: jobs
   });
 });

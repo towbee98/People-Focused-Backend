@@ -8,26 +8,26 @@ const userSchema = new mongoose.Schema({
   firstname: {
     type: String,
     required: [true, "Enter the first name"],
-    maxlength: [16, "Firstname cannot exceed 16 characters"],
+    maxlength: [16, "Firstname cannot exceed 16 characters"]
   },
   lastName: {
     type: String,
     required: [true, "Last Name cannot be empty"],
-    maxlength: [16, "Last name cannot exceed 16 charaters"],
+    maxlength: [16, "Last name cannot exceed 16 charaters"]
   },
   email: {
     type: String,
     required: [true, "Email cannot be empty"],
     unique: [true, "Email already exists"],
     validate: [validator.isEmail, "Please enter a valid email "],
-    lowercase: true,
+    lowercase: true
   },
   password: {
     type: String,
     required: [true, "Enter a valid password"],
     maxlength: [10, "Sorry password cannot exceed 10 characters"],
     minlength: [7, "Sorry password cannot be less than 7 characters"],
-    select: false,
+    select: false
   },
   passwordConfirm: {
     type: String,
@@ -38,14 +38,14 @@ const userSchema = new mongoose.Schema({
       validator: function (value) {
         return value === this.password;
       },
-      message: "Sorry the passwordConfirm must match the password",
+      message: "Sorry the passwordConfirm must match the password"
     },
-    select: false,
+    select: false
   },
   role: {
     type: String,
     enum: ["admin", "jobSeeker", "Employer", "superAdmin"],
-    default: "jobSeeker",
+    default: "jobSeeker"
 
     // select: false,
   },
@@ -54,16 +54,16 @@ const userSchema = new mongoose.Schema({
   passwordResetExpires: Date,
   active: {
     type: Boolean,
-    default: true,
+    default: true
   },
-  status:{
-    type:String,
-    default:"Pending"
+  status: {
+    type: String,
+    default: "Pending"
   },
-  confirmationCode:{
-    type:String,
-    unique:true,
-    select:false
+  confirmationCode: {
+    type: String,
+    unique: true,
+    select: false
   }
 });
 

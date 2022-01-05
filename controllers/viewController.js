@@ -1,6 +1,6 @@
 // eslint-disable-next-line prettier/prettier
 const Job = require("../models/jobModel");
-const User= require("../models/userModel");
+const User = require("../models/userModel");
 const APIFEATURES = require("../utils/apiFeatures");
 const catchAsync = require("../utils/catchAsync");
 const AppError = require("../utils/appErrors");
@@ -124,13 +124,13 @@ exports.forgetPassword = catchAsync(async (req, res) => {
     .render("forgetPassword");
 });
 
-exports.resetPassword =catchAsync (async(req,res)=>{
-  const resetToken= req.params.resetToken;
+exports.resetPassword = catchAsync(async (req, res) => {
+  const resetToken = req.params.resetToken;
   res
     .status(200)
-    .header("Content-Security-Policy","img-src 'self' data: https:")
-    .render("resetPassword",{resetToken})
-})
+    .header("Content-Security-Policy", "img-src 'self' data: https:")
+    .render("resetPassword", { resetToken });
+});
 
 exports.jobApply = catchAsync(async (req, res) => {
   res
@@ -139,16 +139,16 @@ exports.jobApply = catchAsync(async (req, res) => {
     .render("job_apply");
 });
 
-exports.verifyUserPage= catchAsync(async (req,res)=>{
+exports.verifyUserPage = catchAsync(async (req, res) => {
   res
-  .status(200)
-  .header("Content-Security-Policy","img-src 'self' data: https:")
-  .render("confirmation_page")
-})
+    .status(200)
+    .header("Content-Security-Policy", "img-src 'self' data: https:")
+    .render("confirmation_page");
+});
 
-exports.postJob = catchAsync(async (req,res)=>{
+exports.postJob = catchAsync(async (req, res) => {
   res
-  .status(200)
-  .header("Content-Security-Policy","img-src 'self' data:  https:")
-  .render("postJob");
+    .status(200)
+    .header("Content-Security-Policy", "img-src 'self' data:  https:")
+    .render("postJob");
 });

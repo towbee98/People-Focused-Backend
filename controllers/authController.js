@@ -6,51 +6,54 @@ const catchAsync = require("../utils/catchAsync");
 const AppError = require("../utils/appErrors");
 const Email = require("../utils/email");
 
-
-//Send token for logged in users 
+//Send token for logged in users
 const SendToken = async (user, statusCode, res) => {
-  const token = jwt.sign({ id:user._id }, process.env.SECRET_KEY, {expiresIn: "4h"});
+  const token = jwt.sign({ id: user._id }, process.env.SECRET_KEY, {
+    expiresIn: "4h"
+  });
   const cookieOptions = {
     expires: new Date(Date.now() + 4 * 60 * 60 * 1000),
-    httpOnly: true,
+    httpOnly: true
   };
   if (process.env.NODE_ENV === "production") cookieOptions.secure = true;
 
   res.cookie("jwt", token, cookieOptions);
 
   res.status(statusCode).json({
-      status: "success",
-      token,
-    });
-
+    status: "success",
+    token
+  });
 };
 
-exports.signUp = catchAsync(async (req, res,next) => {
+exports.signUp = catchAsync(async (req, res, next) => {
   let role;
-  const confirmCode= jwt.sign({email:req.body.email},process.env.SECRET_KEY);
+  const confirmCode = jwt.sign(
+    { email: req.body.email },
+    process.env.SECRET_KEY
+  );
   const newUser = await User.create({
     firstname: req.body.firstname,
     lastName: req.body.lastName,
     email: req.body.email,
     password: req.body.password,
     passwordConfirm: req.body.passwordConfirm,
-    confirmationCode:confirmCode,
-    role:req.body.role,
+    confirmationCode: confirmCode,
+    role: req.body.role
   });
-  console.log(newUser);
-  url=`${req.protocol}://${req.get("host")}/users/confirm/${confirmCode}`;
+  url = `${req.protocol}://${req.get("host")}/users/confirm/${confirmCode}`;
   newUser.password = undefined;
-  newUser.confirmationCode=undefined;
+  newUser.confirmationCode = undefined;
   //Send confirmation to the new user's email
-  await new Email(newUser,url).sendWelcome();
-  //return response to the user 
-    res.status(201).json({
-      status: "success",
-      data: {
-        message:"Account created successfully.Check your email to verify your account.",
-        newUser
-      },
-    });
+  await new Email(newUser, url).sendWelcome();
+  //return response to the user
+  res.status(201).json({
+    status: "success",
+    data: {
+      message:
+        "Account created successfully.Check your email to verify your account.",
+      newUser
+    }
+  });
   //SendToken(newUser, 201, res);
 });
 
@@ -58,9 +61,7 @@ exports.login = catchAsync(async (req, res, next) => {
   const { email, password } = req.body;
   // Check if user entered an email and password
   if (!email || !password) {
-    return next(
-      new AppError("Please enter a valid email and password", 400)
-    );
+    return next(new AppError("Please enter a valid email and password", 400));
   }
   // Check if the email exists
   const user = await User.findOne({ email }).select("+password");
@@ -69,8 +70,8 @@ exports.login = catchAsync(async (req, res, next) => {
     return next(new AppError("Incorrect email or password", 401));
   }
 
-  if(user.status != "Active"){
-    return next(new AppError("Pending account .Please verify your email",401))
+  if (user.status != "Active") {
+    return next(new AppError("Pending account .Please verify your email", 401));
   }
   await SendToken(user, 200, res);
 });
@@ -109,16 +110,11 @@ exports.protect = catchAsync(async (req, res, next) => {
   }
 
   // Check if the password was changed after token was issued
-  const checkTokenValidity = validUser.changedPasswordAfter(
-    verifiedToken.iat
-  );
+  const checkTokenValidity = validUser.changedPasswordAfter(verifiedToken.iat);
 
   if (checkTokenValidity) {
     return next(
-      new AppError(
-        "Password was changed recently , Please login again",
-        401
-      )
+      new AppError("Password was changed recently , Please login again", 401)
     );
   }
 
@@ -139,30 +135,33 @@ exports.isLoggedIn = catchAsync(async (req, res, next) => {
     const validUser = await User.findById(verifiedToken.id);
 
     if (!validUser) {
-      res.status(401).redirect('/login');
+      res.status(401).redirect("/login");
     }
 
     // Check if the password was changed after token was issued
     const checkTokenValidity = validUser.changedPasswordAfter(
       verifiedToken.iat
     );
-
     if (checkTokenValidity) {
-      res.status(401).redirect('/login')
+      res.status(401).redirect("/login");
     }
 
     // Grant access to the protected route
     res.locals.user = validUser;
     return next();
   }
-  res.status(401).redirect("/login")
+  res.status(401).redirect("/login");
 });
 
 exports.restrictUserTo =
-  (...roles) =>//["admin", "jobSeeker", "Employer", "superAdmin"]
+  (
+    ...roles //["admin", "jobSeeker", "Employer", "superAdmin"]
+  ) =>
   (req, res, next) => {
-    console.log(res);
-    if (!roles.includes(req.user.role)) {
+    if (
+      (req.user != undefined && !roles.includes(req.user.role)) ||
+      (res.locals.user != undefined && !roles.includes(res.locals.user.role))
+    ) {
       return next(
         new AppError("Sorry you are not allowed to access this route", 403)
       );
@@ -186,11 +185,11 @@ exports.forgotPassword = catchAsync(async (req, res, next) => {
     "host"
   )}/resetPassword/${resetToken}`;
   try {
-    await new Email(user,resetUrl).forgetPassword();
+    await new Email(user, resetUrl).forgetPassword();
 
     res.status(200).json({
       status: "success",
-      message: "Password Reset token sent to email",
+      message: "Password Reset token sent to email"
     });
   } catch (err) {
     user.passwordResetToken = undefined;
@@ -211,7 +210,7 @@ exports.resetPassword = catchAsync(async (req, res, next) => {
 
   const user = await User.findOne({
     passwordResetToken: hashedToken,
-    passwordResetExpires: { $gt: Date.now() },
+    passwordResetExpires: { $gt: Date.now() }
   });
   // 2.) check if the user exists and if token is valid before assigning the new password
   if (!user) {
@@ -230,9 +229,10 @@ exports.resetPassword = catchAsync(async (req, res, next) => {
 
   // 4.) Ask the user to login again with the new password
   res.status(200).json({
-    status:"success",
-    message:"Password changed successfully, Login with the new password credentials"
-  })
+    status: "success",
+    message:
+      "Password changed successfully, Login with the new password credentials"
+  });
   // // 4.) Log the user in ,send the JWT
   // SendToken(user, 200, res);
 });
@@ -255,15 +255,18 @@ exports.updatePassword = catchAsync(async (req, res, next) => {
   SendToken(user, 200, res);
 });
 
-
-exports.verifyUser= catchAsync(async(req,res,next)=>{
+exports.verifyUser = catchAsync(async (req, res, next) => {
   //find the user and activate the account .
-  const user= await User.findOneAndUpdate({confirmationCode:req.params.confirmCode},{status:"Active"},{
-    new:true,
-    runValidators:true
-  });
-  if(!user) {
-    return next(new AppError("User not found",404));
-  };
+  const user = await User.findOneAndUpdate(
+    { confirmationCode: req.params.confirmCode },
+    { status: "Active" },
+    {
+      new: true,
+      runValidators: true
+    }
+  );
+  if (!user) {
+    return next(new AppError("User not found", 404));
+  }
   next();
-})
+});
