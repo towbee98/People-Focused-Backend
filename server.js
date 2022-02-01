@@ -17,44 +17,27 @@ const DB = process.env.DATABASE.replace(
 
 // const DB = process.env.DATABASE_LOCAL
 
-const start = async () => {
-  await mongoose.connect(
-    DB,
-    {
-      useNewUrlParser: true,
-      useCreateIndex: true,
-      useUnifiedTopology: true,
-      useFindAndModify: false
-    },
-    (err, data) => {
-      if (err) {
-        console.log(`Error Occured: ${err}`);
-      } else {
-        console.log("Database connected Successfully");
-        return data;
-      }
-    }
-  );
+const PORT = process.env.PORT || 3001;
 
-  start(); //connect to the database
+// eslint-disable-next-line global-require
+const app = require("./app");
 
-  const PORT = process.env.PORT || 3001;
-
-  // eslint-disable-next-line global-require
-  const app = require("./app");
-
-  // START SERVER
-  //const server= http.createServer(app);
-  //server.listen(PORT,()=>{})
-  const server = app.listen(PORT, () => {
-    console.log(`Server running at port ${PORT}`);
+// START SERVER
+const server = app.listen(PORT, async () => {
+  await mongoose.connect(DB, {
+    useNewUrlParser: true,
+    useCreateIndex: true,
+    useUnifiedTopology: true,
+    useFindAndModify: false
   });
+  console.log("Database connected succesfully");
+  console.log(`Server running at port ${PORT}`);
+});
 
-  process.on("unhandledRejection", (err) => {
-    console.log(err.name, err.message);
-    console.log("Unhandled Rejection , Shutting down...");
-    server.close(() => {
-      process.exit(1);
-    });
+process.on("unhandledRejection", (err) => {
+  console.log(err.name, err.message);
+  console.log("Unhandled Rejection , Shutting down...");
+  server.close(() => {
+    process.exit(1);
   });
-};
+});

@@ -2736,7 +2736,7 @@ img {
     border-radius: 0px;
     border: 1px solid #0084bf;
     background-color: transparent;
-    font-weight: 700;
+    /* font-weight: 700; */
     text-transform: uppercase;
     margin-right: 10px;
     margin-bottom: 8px;

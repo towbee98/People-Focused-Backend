@@ -41,7 +41,7 @@ block content
                         ul.pagination
                             li
                                 a(href=`/Jobs?page=${page-1}` aria-label='previous' class='previous-page' page=`${page-1}`)
-                                    span(aria-hidden='true')
+                                    span
                                         i.fa.fa-angle-left  PREV
                             if page === 1
                                 li.active
@@ -74,8 +74,8 @@ block content
                                  
                             li
                                 a(href=`/Jobs?page=${page+1}` aria-label='Next' class='next-page' page=`${page+1}`)
-                                        span(aria-hidden='true')
-                                            i.fa.fa-angle-right NEXT
+                                        span NEXT 
+                                            i.fa.fa-angle-right 
     // job-list-section
     include _footers
     include _jsPlugin

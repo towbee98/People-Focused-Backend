@@ -18,14 +18,12 @@ export const login = async (email, password) => {
       return displayMessage("error", err.response.data.message);
     }
     if (err.request) {
-      console.log(err);
       console.log(err.request);
     }
     console.log(err);
     return displayMessage("error", err.message);
   }
 };
-
 export const signUp = async (userDetails) => {
   try {
     console.log(userDetails);
@@ -112,6 +110,33 @@ export const postJobHandler = async () => {
       return displayMessage("error", err.request.response);
     }
     //console.log(err)
+    return displayMessage("error", err.message);
+  }
+};
+
+export const applyForJob = async () => {
+  try {
+  } catch (error) {}
+};
+
+export const postJob = async (jobDetails) => {
+  try {
+    const res = await axios({
+      method: "POST",
+      url: `/api/v1/jobs`,
+      data: jobDetails
+    });
+    console.log(res);
+    return displayMessage(res.data.status, "Job successfully posted.");
+  } catch (err) {
+    console.log(err);
+    if (err.response) {
+      console.log(err.response);
+      return displayMessage("error", err.response.data.message);
+    }
+    if (err.request) {
+      console.log(err.request);
+    }
     return displayMessage("error", err.message);
   }
 };

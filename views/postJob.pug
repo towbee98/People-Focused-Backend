@@ -62,9 +62,9 @@ block content
                     .col-lg-12.col-md-12.col-sm-12.col-xs-12.job-detail
                       label.control-label(for='remote' style='margin-bottom: 0; margin-top:10px;') Remote
                       br
-                      input#remoteYes(type='radio' name='remote' value= "YES" required)
-                      label(for='remote-yes' style='margin-left:5px; margin-left:5px; margin-right:15px;;') YES
-                      input#remoteNo(type='radio' name='remote'  value= "NO" required)
+                      input#remoteYes(type='radio' name='remote' value= "True" required)
+                      label(for='remote-yes' style='margin-left:5px; margin-left:5px; margin-right:15px;') YES
+                      input#remoteNo(type='radio' name='remote'  value='False' required)
                       label(for='remote-no' style='margin: 0 5px;') NO
                     .col-lg-12.col-md-12.col-sm-12.col-xs-12.job-detail
                       input#hire.form-control(type='number' name='hires' min='1' placeholder='How many hires' required)
@@ -75,7 +75,7 @@ block content
                         | What
                         | type of employment is it ?
                       br
-                      input#fullTime(type='radio' name='employType' value="Full TIme" required)
+                      input#fullTime(type='radio' name='employType' value="Full Time" required)
                       label(for='fullTime' style='margin-left:5px; margin-right:15px;') Full Time
                       input#partTime(type='radio' name='employType' value="Part Time" required)
                       label(for='partTime') Part Time
@@ -108,13 +108,13 @@ block content
                       label.control-label(for='salary' style='margin-bottom: 0; margin-top:10px;')
                         | Salary
                       br
-                      input#minSalary(type='number' name='salary' min='1000' placeholder='minimum amount')
+                      input#minSalary(type='number' name='minimum' min='1000' placeholder='minimum amount')
                       br
                       span To
                       br
-                      input#maxSalary(type='number' name='salary' min='1000' placeholder='maximum amount')
+                      input#maxSalary(type='number' name='maximum' min='1000' placeholder='maximum amount')
                       br
-                      select#salaryBasis(name='salary-basis' style='margin-top:15px;')
+                      select#salaryBasis(name='salaryBasis' style='margin-top:15px;')
                         option(value='monthly' selected) per month
                         option(value='yearly') per year
                         option(value='weekly') per week
@@ -124,68 +124,68 @@ block content
                         | Do you
                         | want applicants to submit a CV ?
                       br
-                      input#sumbitCvYes(type='radio' name='submit-cv')
+                      input#sumbitCvYes(type='radio' name='submitCV' value="yes")
                       label(for='sumbit-cv-yes' style='margin-left:5px; margin-right:15px;') Yes
-                      input#submitCvNo(type='radio' name='submit-cv')
+                      input#submitCvNo(type='radio' name='submitCV' value= "no")
                       label(for='submit-cv-no' style='margin-left:5px; margin-right:15px;') No
-                      input#submitCvOptional(type='radio' name='submit-cv')
-                      label(for='submit-cv-optional' style='margin-left:5px; margin-right:15px;') Optional
+                      //- input#submitCvOptional(type='radio' name='submit-cv')
+                      //- label(for='submit-cv-optional' style='margin-left:5px; margin-right:15px;') Optional
                     .col-lg-12.col-md-12.col-sm-12.col-xs-12.job-detail
                       label.control-label(for='application-deadline' style='margin-bottom: 0; margin-top:10px;') Is there an application deadline ? 
                       br
-                      input#applicationDeadlineYes(type='radio' name='application-deadline')
+                      input#applicationDeadlineYes(type='radio' name='application-deadline' value="yes")
                       label(for='application-deadline-yes' style='margin-left:5px; margin-right:15px;') Yes
-                      input#applicationDeadlineNo(type='radio' name='submit-cv')
+                      input#applicationDeadlineNo(type='radio' name='applicationdeadline' value="no")
                       label(for='application-deadline-no' style='margin-left:5px; margin-right:15px;') No
                       br
                       label(for='application-deadline-date') If yes
-                      input#applicationDeadlineDate(type='date' name='application-deadline-date')
+                      input#applicationDeadlineDate(type='date' name='applicationDeadline')
                     .col-lg-12.col-md-12.col-sm-12.col-xs-12.job-detail
                       label.control-label(for='employer-email' )
                         | Updates about this job will be sent to
                       br
-                      input#employerEmail(type='email' name='employer-email' placeholder='Email')
+                      input#employerEmail(type='email' name='updateEmail' placeholder='Email')
                     .col-lg-12.col-md-12.col-sm-12.col-xs-12.job-detail
                       label.control-label(for='education' style='margin-bottom: 0; margin-top:10px;') Minimum Education Qualification
                       br
-                      input#minimumEducationSCE(type='radio' name='minimum-education' required)
+                      input#minimumEducationSCE(type='radio' name='minimumEducation' value="SSCE" required)
                       label(for='minimum-education' style='margin-left:5px; margin-left:5px; margin-right:15px;;') SSCE 
                       br
-                      input#minimumEducationNCE(type='radio' name='minimum-education' required)
+                      input#minimumEducationNCE(type='radio' name='minimumEducation' value="NCE" required)
                       label(for='minimum-education-NCE' style='margin: 0 5px;') NCE
                       br
-                      input#minimumEducationND(type='radio' name='minimum-education' required)
+                      input#minimumEducationND(type='radio' name='minimumEducation' value="ND" required)
                       label(for='minimum-education-ND' style='margin: 0 5px;') ND
                       br
-                      input#minimumEducationHND(type='radio' name='minimum-education' required)
+                      input#minimumEducationHND(type='radio' name='minimumEducation' value="HND" required)
                       label(for='minimum-education-HND' style='margin: 0 5px;') HND
                       br
-                      input#minimumEducationUG(type='radio' name='minimum-education' required)
+                      input#minimumEducationUG(type='radio' name='minimumEducation' value="UNDERGRADUATE" required)
                       label(for='minimum-education-UG' style='margin: 0 5px;') UNDERGRADUATE
                       br
-                      input#minimumEducationMASTERS(type='radio' name='minimum-education' required)
+                      input#minimumEducationMASTERS(type='radio' name='minimumEducation' value="MASTERS" required)
                       label(for='minimum-education-MASTERS' style='margin: 0 5px;') MASTERS
                       br
-                      input#minimumEducationDOCTORATE(type='radio' name='minimum-education' required)
+                      input#minimumEducationDOCTORATE(type='radio' name='minimumEducation' value="DOCTORATE" required)
                       label(for='minimum-education-DOCTORATE' style='margin: 0 5px;') DOCTORATE
                       br
                     .col-lg-12.col-md-12.col-sm-12.col-xs-12.job-detail
                       label.control-label(for='experience-level' style='margin-bottom: 0; margin-top:10px;') Experience Level
                       br
-                      input#junior(type='radio' name='experience-level' required)
+                      input#junior(type='radio' name='experienceLevel' value="Junior" required)
                       label(for='experience-level-junior' style='margin-left:5px; margin-left:5px; margin-right:15px;;') Junior
                       br
-                      input#intermediate(type='radio' name='experience-level' required)
+                      input#intermediate(type='radio' name='experienceLevel' value="Intermediate" required)
                       label(for='experience-level-intermediate' style='margin: 0 5px;') Intermediate
                       br
-                      input#Senior(type='radio' name='experience-level' required)
+                      input#Senior(type='radio' name='experienceLevel' value="Senior" required)
                       label(for='experience-level-senior' style='margin: 0 5px;') Senior
                       br
                     .col-lg-12.col-md-12.col-sm-12.col-xs-12.job-detail
                       label.control-label(for='experience-length' )
                         | Experience Length
                       br
-                      input#experienceLength(type='number' name='experience-length' placeholder='Years of experience')
+                      input#experienceLength(type='number' name='experienceLength' placeholder='Years of experience')
                     .col-lg-12.col-md-12.col-sm-12.col-xs-12.job-detail
                       label.control-label(for='Job-description')
                         | Job Description
@@ -193,9 +193,19 @@ block content
                       label(for='job-description')
                         | Describe the responsibilities of this job ,required
                         | work experiences ,skills or education.
-                      textarea#job-description(name='job-description' cols='50' rows='8' style='resize: none; border-radius: 5px;')
+                      textarea#job-description(name='jobDescription' cols='50' rows='8' style='resize: none; border-radius: 5px;')
                     .col-lg-12.col-md-12.col-sm-12.col-xs-12.job-detail
                       button#submit-job-details.btn.btn-primary.btn-lg(type='submit') Submit
+                      |
+                      |
+                      span.alert.alert-success(role="alert" style="display:none")
+                            span(class="glyphicon glyphicon-ok" aria-hidden="true")
+                            |
+                            | 
+                      span.alert.alert-danger(role="alert" style="display:none")
+                            span(class="glyphicon glyphicon-warning-sign" aria-hidden="true")
+                            |
+                            | 
             .col-lg-4.col-md-4.col-sm-5.col-xs-12
               // sidenav-section
               .sidenav

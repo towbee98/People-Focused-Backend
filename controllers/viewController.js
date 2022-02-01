@@ -152,3 +152,10 @@ exports.postJob = catchAsync(async (req, res) => {
     .header("Content-Security-Policy", "img-src 'self' data:  https:")
     .render("postJob");
 });
+
+exports.dashboard = catchAsync(async (req, res) => {
+  res
+    .status(200)
+    .header("Content-Security-Policy", "img-src 'self' data: https:")
+    .render("admin");
+});

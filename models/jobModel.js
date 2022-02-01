@@ -17,7 +17,7 @@ const jobSchema = new mongoose.Schema(
         type: String,
         required: [true, "Enter the description of the organisation"]
       },
-      companyEmail: {
+      email: {
         type: String,
         required: [true, "Enter the company's email address"]
       }
@@ -36,7 +36,13 @@ const jobSchema = new mongoose.Schema(
         default: "Nigeria"
       }
     },
-    linkStOjoB: {
+    phone: {
+      type: String
+    },
+    sendUpdatesToEmail: {
+      type: String
+    },
+    linksToJob: {
       link1: {
         type: String,
         required: [true, "Please specify an external link to jobs"]
@@ -48,21 +54,26 @@ const jobSchema = new mongoose.Schema(
         type: String
       }
     },
-    "Work Type": {
+    contractTypes: {
       type: [String],
-      required: [true, "Specify  the type of work"],
+      required: [true, "Specify  the type of contract"],
       enum: [
-        "temporary",
-        "internship",
-        "contract",
+        "Temporary",
+        "Internship",
+        "Contract",
         "Commission",
-        "new grad",
-        "permanent"
+        "New grad",
+        "Permanent"
       ],
       lowercase: true
     },
+    employmentType: {
+      type: String,
+      enum: ["Full Time", "Part Time"]
+    },
     Remote: {
-      type: Boolean,
+      type: String,
+      enum: ["True", "False"],
       required: [true, "Specify whether it is on site or remote"]
     },
     Category: {
@@ -92,6 +103,11 @@ const jobSchema = new mongoose.Schema(
           return value > this.Salary.min;
         },
         message: "The maximum salary must be greater than the minimum salary."
+      },
+      SalaryBasis: {
+        type: String,
+        enum: ["monthly", "yearly", "weekly", "daily"],
+        lowercase: true
       }
     },
     "Minimum Qualification": {
@@ -107,8 +123,13 @@ const jobSchema = new mongoose.Schema(
       ],
       uppercase: true
     },
+    submitCV: {
+      type: String,
+      enum: ["yes", "no"]
+    },
     "Experience Level": {
-      type: String
+      type: String,
+      enum: ["Junior", "Intermediate", "Senior"]
     },
     "Experience Length": {
       type: Number
@@ -116,15 +137,21 @@ const jobSchema = new mongoose.Schema(
     "Job Summary": {
       type: String
     },
+    "Job Description": {
+      type: String
+    },
+    numberOfHires: {
+      type: Number
+    },
     // Responsiblities: {
     //   type: Array,
     // },
     // Requirements: {
     //   type: Array,
     // },
-    // Skillset: {
-    //   type: Array,
-    // },
+    sendUpdateTo: {
+      type: String
+    },
     createdAt: {
       type: Date,
       default: Date.now(),

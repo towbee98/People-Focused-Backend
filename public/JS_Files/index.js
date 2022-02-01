@@ -5,7 +5,8 @@ import {
   signUp,
   forgotPassword,
   resetPassword,
-  postJobHandler
+  postJobHandler,
+  postJob
 } from "./login.js";
 
 if (
@@ -131,7 +132,7 @@ if (document.querySelector(".post-a-job")) {
 }
 
 if (document.forms.uploadJob) {
-  document.forms.uploadJob[46].addEventListener("click", async (e) => {
+  document.forms.uploadJob[45].addEventListener("click", async (e) => {
     e.preventDefault();
     const companyName = document.forms.uploadJob.elements.companyName.value;
     const companyEmail = document.forms.uploadJob.elements.companyEmail.value;
@@ -146,7 +147,7 @@ if (document.forms.uploadJob) {
     const jobLink1 = document.forms.uploadJob.elements.linkToJob1.value;
     const jobLink2 = document.forms.uploadJob.elements.linkToJob2.value;
     const jobLink3 = document.forms.uploadJob.elements.linkToJob3.value;
-    const remote = document.forms.uploadJob.remote.value;
+    const Remote = document.forms.uploadJob.remote.value;
     const numberOfHires = document.forms.uploadJob.hire.value;
     const phone = document.forms.uploadJob.phone.value;
     const employmentType = document.forms.uploadJob.employType.value;
@@ -155,6 +156,76 @@ if (document.forms.uploadJob) {
         return contractType.checked;
       })
       .map((contractType) => contractType.value);
-    console.log(contractTypes);
+    const minSalary = document.forms.uploadJob.minimum.value;
+    const maxSalary = document.forms.uploadJob.maximum.value;
+    const SalaryBasis = document.forms.uploadJob.salaryBasis.value;
+    const submitCV = document.forms.uploadJob.submitCV.value;
+    const applicationDeadline =
+      document.forms.uploadJob.applicationDeadline.value;
+    const updateEmail = document.forms.uploadJob.updateEmail.value;
+    const minimumEducation = document.forms.uploadJob.minimumEducation.value;
+    const experienceLevel = document.forms.uploadJob.experienceLevel.value;
+    const experienceLength = document.forms.uploadJob.experienceLength.value;
+    const jobDescription = document.forms.uploadJob.jobDescription.value;
+    console.log(SalaryBasis);
+    const jobDetails = {
+      title: jobTitle,
+      organisation: {
+        name: companyName,
+        description: companyDescription,
+        email: companyEmail
+      },
+      location: {
+        address,
+        city,
+        country
+      },
+      linksToJob: {
+        link1: jobLink1,
+        link2: jobLink2,
+        link3: jobLink3
+      },
+      contractTypes,
+      Remote,
+      numberOfHires,
+      phone,
+      employmentType,
+      Category: {
+        name: category
+      },
+      "Job Summary": jobSummary,
+      Salary: {
+        min: minSalary,
+        max: maxSalary,
+        SalaryBasis
+      },
+      submitCV,
+      Deadline: applicationDeadline,
+      sendUpdatesToEmail: updateEmail,
+      "Minimum Qualification": minimumEducation,
+      "Experience Level": experienceLevel,
+      "Experience Length": experienceLength,
+      "Job Description": jobDescription
+    };
+    await postJob(jobDetails);
+  });
+}
+
+if (document.forms.applyForJob) {
+  console.log(document.forms.applyForJob);
+  console.log(location.href);
+  document.forms.applyForJob[4].addEventListener("click", (event) => {
+    event.preventDefault();
+    const name = document.forms.applyForJob.Name.value;
+    const email = document.forms.applyForJob.Email.value;
+    const cv = document.forms.applyForJob.CV.value;
+    const experience = document.forms.applyForJob.experience.value;
+    const details = {
+      name,
+      email,
+      cv,
+      experience
+    };
+    console.log(details);
   });
 }

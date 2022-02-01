@@ -2997,7 +2997,7 @@ exports.displayMessage = displayMessage;
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.signUp = exports.resetPassword = exports.postJobHandler = exports.login = exports.forgotPassword = void 0;
+exports.signUp = exports.resetPassword = exports.postJobHandler = exports.postJob = exports.login = exports.forgotPassword = exports.applyForJob = void 0;
 
 var _axios = _interopRequireDefault(require("axios"));
 
@@ -3046,7 +3046,6 @@ var login = /*#__PURE__*/function () {
 
           case 13:
             if (_context.t0.request) {
-              console.log(_context.t0);
               console.log(_context.t0.request);
             }
 
@@ -3288,6 +3287,84 @@ var postJobHandler = /*#__PURE__*/function () {
 }();
 
 exports.postJobHandler = postJobHandler;
+
+var applyForJob = /*#__PURE__*/function () {
+  var _ref6 = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee6() {
+    return regeneratorRuntime.wrap(function _callee6$(_context6) {
+      while (1) {
+        switch (_context6.prev = _context6.next) {
+          case 0:
+            try {} catch (error) {}
+
+          case 1:
+          case "end":
+            return _context6.stop();
+        }
+      }
+    }, _callee6);
+  }));
+
+  return function applyForJob() {
+    return _ref6.apply(this, arguments);
+  };
+}();
+
+exports.applyForJob = applyForJob;
+
+var postJob = /*#__PURE__*/function () {
+  var _ref7 = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee7(jobDetails) {
+    var res;
+    return regeneratorRuntime.wrap(function _callee7$(_context7) {
+      while (1) {
+        switch (_context7.prev = _context7.next) {
+          case 0:
+            _context7.prev = 0;
+            _context7.next = 3;
+            return (0, _axios.default)({
+              method: "POST",
+              url: "/api/v1/jobs",
+              data: jobDetails
+            });
+
+          case 3:
+            res = _context7.sent;
+            console.log(res);
+            return _context7.abrupt("return", (0, _display.displayMessage)(res.data.status, "Job successfully posted."));
+
+          case 8:
+            _context7.prev = 8;
+            _context7.t0 = _context7["catch"](0);
+            console.log(_context7.t0);
+
+            if (!_context7.t0.response) {
+              _context7.next = 14;
+              break;
+            }
+
+            console.log(_context7.t0.response);
+            return _context7.abrupt("return", (0, _display.displayMessage)("error", _context7.t0.response.data.message));
+
+          case 14:
+            if (_context7.t0.request) {
+              console.log(_context7.t0.request);
+            }
+
+            return _context7.abrupt("return", (0, _display.displayMessage)("error", _context7.t0.message));
+
+          case 16:
+          case "end":
+            return _context7.stop();
+        }
+      }
+    }, _callee7, null, [[0, 8]]);
+  }));
+
+  return function postJob(_x7) {
+    return _ref7.apply(this, arguments);
+  };
+}();
+
+exports.postJob = postJob;
 },{"axios":"../../node_modules/axios/index.js","./display":"display.js"}],"index.js":[function(require,module,exports) {
 "use strict";
 
@@ -3593,9 +3670,9 @@ if (document.querySelector(".post-a-job")) {
 }
 
 if (document.forms.uploadJob) {
-  document.forms.uploadJob[46].addEventListener("click", /*#__PURE__*/function () {
+  document.forms.uploadJob[45].addEventListener("click", /*#__PURE__*/function () {
     var _ref9 = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee9(e) {
-      var companyName, companyEmail, companyDescription, category, jobTitle, jobSummary, address, city, country, jobLink1, jobLink2, jobLink3, remote, numberOfHires, phone, employmentType, contractTypes;
+      var companyName, companyEmail, companyDescription, category, jobTitle, jobSummary, address, city, country, jobLink1, jobLink2, jobLink3, Remote, numberOfHires, phone, employmentType, contractTypes, minSalary, maxSalary, SalaryBasis, submitCV, applicationDeadline, updateEmail, minimumEducation, experienceLevel, experienceLength, jobDescription, jobDetails;
       return regeneratorRuntime.wrap(function _callee9$(_context9) {
         while (1) {
           switch (_context9.prev = _context9.next) {
@@ -3613,7 +3690,7 @@ if (document.forms.uploadJob) {
               jobLink1 = document.forms.uploadJob.elements.linkToJob1.value;
               jobLink2 = document.forms.uploadJob.elements.linkToJob2.value;
               jobLink3 = document.forms.uploadJob.elements.linkToJob3.value;
-              remote = document.forms.uploadJob.remote.value;
+              Remote = document.forms.uploadJob.remote.value;
               numberOfHires = document.forms.uploadJob.hire.value;
               phone = document.forms.uploadJob.phone.value;
               employmentType = document.forms.uploadJob.employType.value;
@@ -3622,9 +3699,60 @@ if (document.forms.uploadJob) {
               }).map(function (contractType) {
                 return contractType.value;
               });
-              console.log(contractTypes);
+              minSalary = document.forms.uploadJob.minimum.value;
+              maxSalary = document.forms.uploadJob.maximum.value;
+              SalaryBasis = document.forms.uploadJob.salaryBasis.value;
+              submitCV = document.forms.uploadJob.submitCV.value;
+              applicationDeadline = document.forms.uploadJob.applicationDeadline.value;
+              updateEmail = document.forms.uploadJob.updateEmail.value;
+              minimumEducation = document.forms.uploadJob.minimumEducation.value;
+              experienceLevel = document.forms.uploadJob.experienceLevel.value;
+              experienceLength = document.forms.uploadJob.experienceLength.value;
+              jobDescription = document.forms.uploadJob.jobDescription.value;
+              console.log(SalaryBasis);
+              jobDetails = {
+                title: jobTitle,
+                organisation: {
+                  name: companyName,
+                  description: companyDescription,
+                  email: companyEmail
+                },
+                location: {
+                  address: address,
+                  city: city,
+                  country: country
+                },
+                linksToJob: {
+                  link1: jobLink1,
+                  link2: jobLink2,
+                  link3: jobLink3
+                },
+                contractTypes: contractTypes,
+                Remote: Remote,
+                numberOfHires: numberOfHires,
+                phone: phone,
+                employmentType: employmentType,
+                Category: {
+                  name: category
+                },
+                "Job Summary": jobSummary,
+                Salary: {
+                  min: minSalary,
+                  max: maxSalary,
+                  SalaryBasis: SalaryBasis
+                },
+                submitCV: submitCV,
+                Deadline: applicationDeadline,
+                sendUpdatesToEmail: updateEmail,
+                "Minimum Qualification": minimumEducation,
+                "Experience Level": experienceLevel,
+                "Experience Length": experienceLength,
+                "Job Description": jobDescription
+              };
+              _context9.next = 32;
+              return (0, _login.postJob)(jobDetails);
 
-            case 19:
+            case 32:
             case "end":
               return _context9.stop();
           }
@@ -3636,6 +3764,25 @@ if (document.forms.uploadJob) {
       return _ref9.apply(this, arguments);
     };
   }());
+}
+
+if (document.forms.applyForJob) {
+  console.log(document.forms.applyForJob);
+  console.log(location.href);
+  document.forms.applyForJob[4].addEventListener("click", function (event) {
+    event.preventDefault();
+    var name = document.forms.applyForJob.Name.value;
+    var email = document.forms.applyForJob.Email.value;
+    var cv = document.forms.applyForJob.CV.value;
+    var experience = document.forms.applyForJob.experience.value;
+    var details = {
+      name: name,
+      email: email,
+      cv: cv,
+      experience: experience
+    };
+    console.log(details);
+  });
 }
 },{"regenerator-runtime/runtime":"../../node_modules/regenerator-runtime/runtime.js","./login.js":"login.js"}],"../../node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
 var global = arguments[3];
@@ -3665,7 +3812,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "62906" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "55439" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};

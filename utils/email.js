@@ -1,6 +1,8 @@
 const nodemailer = require("nodemailer");
 const pug = require("pug");
 const { convert } = require("html-to-text");
+const { google } = require("googleapis");
+const OAuth2 = google.auth.OAuth2;
 
 module.exports = class Email {
   constructor(user, url) {
@@ -13,11 +15,31 @@ module.exports = class Email {
   newTransport() {
     if (process.env.NODE_ENV === "production") {
       //Gmail
+      const oauth2Client = new OAuth2(
+        process.env.client_id,
+        process.env.client_secret,
+        process.env.redirect_uri
+      );
+
+      oauth2client.setCredentials({
+        refresh_token: process.env.refresh_token
+      });
+
+      const accessToken = oauth2Client.getAccessToken((err, token) => {
+        if (err) {
+          return err;
+        }
+        return token;
+      });
+
       return nodemailer.createTransport({
         service: "Gmail",
         auth: {
           user: process.env.Gmail_user,
-          pass: process.env.Gmail_pass
+          clientId: process.env.client_id,
+          clientSecret: process.env.client_secret,
+          refreshToken: process.env.refresh_token,
+          accessToken
         }
       });
     } else {

@@ -27,12 +27,19 @@ viewRouter
 viewRouter
   .route("/users/confirm/:confirmCode")
   .get(authController.verifyUser, viewController.verifyUserPage);
+viewRouter.use(authController.isLoggedIn);
 viewRouter
   .route("/postJob")
   .get(
-    authController.isLoggedIn,
     authController.restrictUserTo("admin", "Employer", "superAdmin"),
     viewController.postJob
+  );
+
+viewRouter
+  .route("/admin")
+  .get(
+    authController.restrictUserTo("admin", "superadmin"),
+    viewController.dashboard
   );
 
 module.exports = viewRouter;

@@ -5,7 +5,7 @@
   "main": "server.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start:prod": "SET NODE_ENV=production& nodemon server.js",
+    "start:prod": "SET NODE_ENV=production&& nodemon server.js",
     "start": "nodemon server.js",
     "watch:js": "parcel watch regenerator-runtime/runtime.js ./public/Js_Files/index.js --out-dir ./public/Js_Files --out-file bundle.js --public-url ./",
     "build:js": "parcel build regenerator-runtime/runtime.js ./public/Js_Files/index.js --out-dir ./public/Js_Files --out-file bundle.js --public-url ./",
@@ -23,6 +23,7 @@
     "express": "^4.17.1",
     "express-mongo-sanitize": "^2.1.0",
     "express-rate-limit": "^5.2.6",
+    "googleapis": "^92.0.0",
     "gridfs-stream": "^1.1.1",
     "helmet": "^4.6.0",
     "hpp": "^0.2.3",
