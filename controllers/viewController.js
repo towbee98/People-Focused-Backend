@@ -4,7 +4,6 @@ const User = require("../models/userModel");
 const APIFEATURES = require("../utils/apiFeatures");
 const catchAsync = require("../utils/catchAsync");
 const AppError = require("../utils/appErrors");
-const { async } = require("regenerator-runtime");
 
 exports.homePage = (req, res) => {
   // Sets content security policy to allow access from other domain
@@ -158,4 +157,11 @@ exports.dashboard = catchAsync(async (req, res) => {
     .status(200)
     .header("Content-Security-Policy", "img-src 'self' data: https:")
     .render("admin");
+});
+
+exports.adminLogin = catchAsync(async (req, res) => {
+  res
+    .status(200)
+    .header("Content-Security-Policy", "img-src 'self' data:https")
+    .render("admin/admin-login");
 });

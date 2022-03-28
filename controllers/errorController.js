@@ -9,7 +9,10 @@ const handleCastErrorDB = (err) => {
 
 //Handles jwt errors
 const handleJWTError = (err) => {
-  return new AppError(`${err.message} , Please login again`, 401);
+  if (err.name === "TokenExpiredError") {
+    return new AppError(`${err.message} , Please login again`, 401);
+  }
+  return new AppError(`${err.message},Please login again`, 400);
 };
 
 //handles duplicate error
@@ -31,17 +34,24 @@ const handleValidationErrorDB = (err) => {
   const message = `Invalid Input data: ${errors.join(" and ")}`;
   return new AppError(message, 400);
 };
-const sendErrorDev = (err, res) => {
+const sendErrorDev = (err, req, res) => {
   //console.log(err);
-  res.status(err.statusCode).json({
-    status: err.statusCode,
-    error: err,
-    message: err.message,
-    stack: err.stack
-  });
+  if (req.url.startsWith("/api")) {
+    return res.status(err.statusCode).json({
+      status: err.statusCode,
+      error: err,
+      message: err.message,
+      stack: err.stack
+    });
+  }
+  console.log(err);
+  res
+    .status(500)
+    .header("Content-Security-Policy", "img-src 'self' data: https:")
+    .render("server-error");
 };
 
-const sendErrorProd = (err, res) => {
+const sendErrorProd = (err, req, res) => {
   //console.log(err.message);
   if (err.isOperational) {
     res.status(err.statusCode).json({
@@ -82,8 +92,8 @@ module.exports = (err, req, res, next) => {
     if (err.name === "JsonWebTokenError") {
       err = handleJWTError(err);
     }
-    sendErrorProd(err, res);
+    sendErrorProd(err, req, res);
   } else {
-    sendErrorDev(err, res);
+    sendErrorDev(err, req, res);
   }
 };

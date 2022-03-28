@@ -3209,7 +3209,11 @@ img {
     }
 
     /* Medium Devices, Desktops */
-    @media only screen and (max-width:992px) {}
+    @media only screen and (max-width:992px) {
+        .head-btn {
+            display: none;
+        }
+    }
 
     /* Small Devices, Tablets */
     @media only screen and (max-width:768px) {

@@ -3709,7 +3709,6 @@ if (document.forms.uploadJob) {
               experienceLevel = document.forms.uploadJob.experienceLevel.value;
               experienceLength = document.forms.uploadJob.experienceLength.value;
               jobDescription = document.forms.uploadJob.jobDescription.value;
-              console.log(SalaryBasis);
               jobDetails = {
                 title: jobTitle,
                 organisation: {
@@ -3749,10 +3748,10 @@ if (document.forms.uploadJob) {
                 "Experience Length": experienceLength,
                 "Job Description": jobDescription
               };
-              _context9.next = 32;
+              _context9.next = 31;
               return (0, _login.postJob)(jobDetails);
 
-            case 32:
+            case 31:
             case "end":
               return _context9.stop();
           }
@@ -3812,7 +3811,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "55439" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "57662" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};

@@ -167,7 +167,6 @@ if (document.forms.uploadJob) {
     const experienceLevel = document.forms.uploadJob.experienceLevel.value;
     const experienceLength = document.forms.uploadJob.experienceLength.value;
     const jobDescription = document.forms.uploadJob.jobDescription.value;
-    console.log(SalaryBasis);
     const jobDetails = {
       title: jobTitle,
       organisation: {

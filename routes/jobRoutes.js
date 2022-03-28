@@ -3,7 +3,7 @@ const express = require("express");
 const jobController = require("../controllers/jobController");
 const authController = require("../controllers/authController");
 const applicationController = require("../controllers/applicationController");
-
+const adminController = require("../controllers/adminController");
 const router = express.Router();
 
 // const upload = multer({ dest: "public/resumes" });
@@ -37,12 +37,12 @@ router
   .route("/:jobID")
   .get(jobController.getJob)
   .patch(
-    authController.protect,
+    adminController.protect,
     authController.restrictUserTo("admin", "Employer", "superAdmin"),
     jobController.updateJob
   )
   .delete(
-    authController.protect,
+    adminController.protect,
     authController.restrictUserTo("admin", "Employer", "superAdmin"),
     jobController.deleteJob
   );
@@ -59,7 +59,7 @@ router
 router
   .route("/:jobID/applications")
   .get(
-    authController.protect,
+    adminController.protect,
     authController.restrictUserTo("admin", "Employer", "superAdmin"),
     applicationController.getApplications
   );

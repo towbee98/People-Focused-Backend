@@ -36,7 +36,7 @@ exports.postAJob = catchAsync(async (req, res, next) => {
 // Update a particular job
 exports.updateJob = catchAsync(async (req, res, next) => {
   let job;
-  if (req.user.role !== "Employer") {
+  if (req.user.role != "Employer") {
     job = await Jobs.findByIdAndUpdate(req.params.jobID, req.body, {
       new: true,
       runValidators: true
@@ -86,11 +86,11 @@ exports.deleteJob = catchAsync(async (req, res, next) => {
 exports.getJobStats = catchAsync(async (req, res, next) => {
   const stats = await Jobs.aggregate([
     {
-      $match: { "Salary.min": { $gte: 70000 } }
+      $match: { "Salary.min": { $gte: 100000 } }
     },
     {
       $group: {
-        _id: { $toUpper: "$location" },
+        _id: { $toUpper: "$location.city" },
         // _id: "$title",
         numJobs: { $sum: 1 },
         highestPaidJob: { $max: "$Salary.max" },

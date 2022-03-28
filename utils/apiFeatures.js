@@ -43,7 +43,7 @@ class APIFEATURES {
       this.query = this.query.select(field);
     } else {
       this.query = this.query.select(
-        "title organisation.name location.Country location.State Skillset "
+        "title organisation.name location.Country location.city location.State Skillset "
       );
     }
     return this;
