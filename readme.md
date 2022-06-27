@@ -1,3 +1,15 @@
 # PeopleFocused Website
 
-This website is a fully functional hr site for latest jobs,
+## [LIVE-URL](https://people-focused.herokuapp.com)
+
+This is a job application platform where users can apply for jobs, post jobs ,post stories and read stories.The admin can get a list of those who applied for a job.
+This was built using expressjs for the backend, mongodb for the database, pug for the server side rendering of the frontend .
+Completed Features
+: Jobs page
+: Job Application page
+: Post jobs page
+: Blogs page
+Uncompleted feature
+: Admin page
+: Read blog page
+: post blog page
