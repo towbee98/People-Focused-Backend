@@ -38,12 +38,12 @@ viewRouter
     viewController.postJob
   );
 
-// viewRouter
-//   .route("/admin/login")
-//   .get(
-//     authController.restrictUserTo("admin", "superAdmin"),
-//     viewController.adminLogin
-//   );
+viewRouter
+  .route("/admin/login")
+  .get(
+    authController.restrictUserTo("admin", "superAdmin"),
+    viewController.adminLogin
+  );
 
 viewRouter
   .route("/admin/dashboard")

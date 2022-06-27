@@ -103,7 +103,7 @@ export const postJobHandler = async () => {
     await axios.get("/postJob");
     return location.assign(`${location.protocol}//${location.host}/postJob`);
   } catch (err) {
-    console.log(err);
+    // console.log(err);
     if (err.response) {
       return displayMessage("error", err.response.data.message);
     } else if (err.request) {
@@ -129,7 +129,7 @@ export const postJob = async (jobDetails) => {
     console.log(res);
     return displayMessage(res.data.status, "Job successfully posted.");
   } catch (err) {
-    console.log(err);
+    console.log(err.message);
     if (err.response) {
       console.log(err.response);
       return displayMessage("error", err.response.data.message);

@@ -135,6 +135,8 @@ exports.resetPassword = (Model) => {
       passwordResetToken: hashedToken,
       passwordResetExpires: { $gt: Date.now() }
     });
+    console.log(Date.now());
+
     // 2.) check if the user exists and if token is valid before assigning the new password
     if (!entity) {
       return next(

@@ -46,8 +46,6 @@ const userSchema = new mongoose.Schema({
     type: String,
     enum: ["jobSeeker", "Employer"],
     default: "jobSeeker"
-
-    // select: false,
   },
   passwordChangedAt: Date,
   passwordResetToken: String,
@@ -121,6 +119,7 @@ userSchema.methods.createPasswordResetToken = async function () {
     .digest("hex");
   // Make the password reset token valid for 10 mins
   this.passwordResetExpires = Date.now() + 10 * 60 * 1000;
+  console.log(Date.now() + 10 * 60 * 1000);
   return resetToken;
 };
 const User = mongoose.model("User", userSchema);

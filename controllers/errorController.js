@@ -36,7 +36,7 @@ const handleValidationErrorDB = (err) => {
 };
 const sendErrorDev = (err, req, res) => {
   //console.log(err);
-  if (req.url.startsWith("/api")) {
+  if (req.url.startsWith("/api") || err.isOperational) {
     return res.status(err.statusCode).json({
       status: err.statusCode,
       error: err,

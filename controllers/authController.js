@@ -46,7 +46,7 @@ exports.signUp = catchAsync(async (req, res, next) => {
 
 exports.restrictUserTo =
   (
-    ...roles //["admin", "jobSeeker", "Employer", "superAdmin"]
+    ...roles //["admin", "Employer", "superAdmin"]
   ) =>
   (req, res, next) => {
     if (
