@@ -14,6 +14,6 @@ Completed Features
 
 Features to add
 
-- [] Admin page
-- [] Read blog page
-- [] post blog page
+- [ ] Admin page
+- [ ] Read blog page
+- [ ] post blog page
