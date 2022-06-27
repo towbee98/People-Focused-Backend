@@ -7,13 +7,13 @@ This was built using expressjs for the backend, mongodb for the database, pug fo
 
 Completed Features
 
-: - [x] Jobs page
-: - [x] Job Application page
-: - [x] Post jobs page
-: - [x] Blogs page
+- [x] Jobs page
+- [x] Job Application page
+- [x] Post jobs page
+- [x] Blogs page
 
 Features to add
 
-: - [] Admin page
-: - [] Read blog page
-: - [] post blog page
+- [] Admin page
+- [] Read blog page
+- [] post blog page
