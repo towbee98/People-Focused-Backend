@@ -26,7 +26,7 @@ if (
   // This function changes the page based on user's click
   const changePage = (wantedPage) => {
     window.location.assign(
-      `http://localhost:3001/Jobs?page=${Number(wantedPage)}`
+      `${window.location.origin}/Jobs?page=${Number(wantedPage)}`
     );
   };
   // eslint-disable-next-line array-callback-return
