@@ -25,23 +25,26 @@ if (
 
   // This function changes the page based on user's click
   const changePage = (wantedPage) => {
+    console.log(wantedPage);
+    console.log(window.location.origin);
     window.location.assign(
-      `http://localhost:3001/Jobs?page=${Number(wantedPage)}`
+      `${window.location.origin}/Jobs?page=${Number(wantedPage)}`
     );
   };
   // eslint-disable-next-line array-callback-return
   // this refers to all the button pages in the list
-  // eslint-disable-next-line array-callback-return
+  // eslint-disable-next-line array-callback-returnh
   paginationBtns.map((el) => {
     el.addEventListener("click", async (event) => {
       try {
         event.preventDefault();
-        await changePage(el.textContent);
+        changePage(el.textContent);
       } catch (error) {
         console.log(error.response);
       }
     });
   });
+
   previousPageBtn.addEventListener("click", async (e) => {
     try {
       e.preventDefault();

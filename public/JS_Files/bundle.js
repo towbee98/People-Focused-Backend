@@ -3253,27 +3253,26 @@ var postJobHandler = /*#__PURE__*/function () {
           case 6:
             _context5.prev = 6;
             _context5.t0 = _context5["catch"](0);
-            console.log(_context5.t0);
 
             if (!_context5.t0.response) {
-              _context5.next = 13;
+              _context5.next = 12;
               break;
             }
 
             return _context5.abrupt("return", (0, _display.displayMessage)("error", _context5.t0.response.data.message));
 
-          case 13:
+          case 12:
             if (!_context5.t0.request) {
-              _context5.next = 15;
+              _context5.next = 14;
               break;
             }
 
             return _context5.abrupt("return", (0, _display.displayMessage)("error", _context5.t0.request.response));
 
-          case 15:
+          case 14:
             return _context5.abrupt("return", (0, _display.displayMessage)("error", _context5.t0.message));
 
-          case 16:
+          case 15:
           case "end":
             return _context5.stop();
         }
@@ -3334,7 +3333,7 @@ var postJob = /*#__PURE__*/function () {
           case 8:
             _context7.prev = 8;
             _context7.t0 = _context7["catch"](0);
-            console.log(_context7.t0);
+            console.log(_context7.t0.message);
 
             if (!_context7.t0.response) {
               _context7.next = 14;
@@ -3400,10 +3399,12 @@ if (document.querySelector(".previous-page") || document.querySelector(".next-pa
   var paginationBtns = [pageOne, pageTwo, pageThree]; // This function changes the page based on user's click
 
   var changePage = function changePage(wantedPage) {
+    console.log(wantedPage);
+    console.log(window.location.origin);
     window.location.assign("http://localhost:3001/Jobs?page=".concat(Number(wantedPage)));
   }; // eslint-disable-next-line array-callback-return
   // this refers to all the button pages in the list
-  // eslint-disable-next-line array-callback-return
+  // eslint-disable-next-line array-callback-returnh
 
 
   paginationBtns.map(function (el) {
@@ -3413,26 +3414,19 @@ if (document.querySelector(".previous-page") || document.querySelector(".next-pa
           while (1) {
             switch (_context.prev = _context.next) {
               case 0:
-                _context.prev = 0;
-                event.preventDefault();
-                _context.next = 4;
-                return changePage(el.textContent);
+                try {
+                  event.preventDefault();
+                  changePage(el.textContent);
+                } catch (error) {
+                  console.log(error.response);
+                }
 
-              case 4:
-                _context.next = 9;
-                break;
-
-              case 6:
-                _context.prev = 6;
-                _context.t0 = _context["catch"](0);
-                console.log(_context.t0.response);
-
-              case 9:
+              case 1:
               case "end":
                 return _context.stop();
             }
           }
-        }, _callee, null, [[0, 6]]);
+        }, _callee);
       }));
 
       return function (_x) {
@@ -3811,7 +3805,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "57662" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "63375" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};
