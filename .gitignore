@@ -2,3 +2,4 @@ node_modules
 applications.json
 .cache
 .parcel-cache
+config.env
