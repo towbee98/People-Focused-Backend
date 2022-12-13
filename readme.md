@@ -1,6 +1,6 @@
 # PeopleFocused Website
 
-## [LIVE-URL](https://people-focused.herokuapp.com)
+## [LIVE-URL](https://people-focused-backend-production.up.railway.app/)
 
 This is a job application platform where users can apply for jobs, post jobs ,post stories and read stories.The admin can get a list of those who applied for a job.
 This was built using expressjs for the backend, mongodb for the database, pug for the server side rendering of the frontend .
