@@ -75,16 +75,6 @@ exports.Apply = catchAsync(async (req, res, next) => {
   filteredBody.name = `${req.user.firstname} ${req.user.lastName}`;
   filteredBody.email = req.user.email;
 
-  // let application = await Application.findOne({
-  //   document: filteredBody.document,
-  // });
-  // //Check if application exists
-  // if (application) {
-  //   res.status(400).json({
-  //     status: "fail",
-  //     message: "Application already exists",
-  //   });
-  // } else {
   const application = await Application.create(filteredBody);
   res.status(200).json({
     status: "success",
