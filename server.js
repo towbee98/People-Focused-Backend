@@ -13,7 +13,7 @@ process.on("uncaughtException", (err) => {
 
 const DB = `${process.env.DATABASE}`
 
-console.log(DB);
+
 connectToDB(DB);
 const PORT = process.env.PORT || 3200;
 
