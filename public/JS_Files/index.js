@@ -1,5 +1,5 @@
-//import "core-js";
-import "regenerator-runtime/runtime";
+import "core-js";
+//import "regenerator-runtime/runtime";
 import {
   login,
   signUp,
@@ -74,7 +74,9 @@ if (document.querySelector(".apply")) {
 }
 
 if (document.forms.login) {
+  console.log(document.forms.login)
   document.forms[0][2].addEventListener("click", async (e) => {
+    console.log("Something occured")
     e.preventDefault();
     const email = document.forms.login.elements.email.value;
     const password = document.forms.login.elements.password.value;

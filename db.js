@@ -3,10 +3,8 @@ const mongoose = require("mongoose");
 connectToDB = async (DB) => {
   try {
     await mongoose.connect(DB, {
-      useNewUrlParser: true,
-      useCreateIndex: true,
       useUnifiedTopology: true,
-      useFindAndModify: false
+      
     });
     console.log("Database connected succesfully");
   } catch (err) {

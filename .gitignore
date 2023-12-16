@@ -1,5 +1,6 @@
 node_modules
 applications.json
 .cache
-.parcel-cache
+.parcel-cache/
 config.env
+.env

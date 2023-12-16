@@ -1,5 +1,6 @@
 import axios from "axios";
 import { displayMessage } from "./display";
+
 export const login = async (email, password) => {
   try {
     const res = await axios({

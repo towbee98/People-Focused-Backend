@@ -1,6 +1,7 @@
 require("regenerator-runtime/runtime");
 var $8FRzj$axios = require("axios");
 
+
 function $parcel$interopDefault(a) {
   return a && a.__esModule ? a.default : a;
 }
